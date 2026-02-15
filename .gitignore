@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+dist/
+build/
+*.egg-info/
+
+# Results
+results/runs/
+artifacts/
+*.csv
+
+# Data policy: NEVER commit raw screenshots
+data/raw/
+data/images/
+*.png
+*.jpg
+*.jpeg
+*.heic
