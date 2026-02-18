@@ -1,0 +1,47 @@
+{
+  "schema_version": "v0",
+  "description": "One labeled example for AXIOM-Mobile: a question-answer pair grounded in a screenshot stored outside the repo.",
+  "fields": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique identifier for this example (e.g., ex_001)."
+    },
+    "image_filename": {
+      "type": "string",
+      "required": true,
+      "description": "Filename of the screenshot in private storage (e.g., img_001.png). Do NOT commit images to git."
+    },
+    "question": {
+      "type": "string",
+      "required": true,
+      "description": "Natural language question answerable directly from visible screenshot content."
+    },
+    "answer": {
+      "type": "string",
+      "required": true,
+      "description": "Short, exact answer. Avoid explanations."
+    },
+    "difficulty": {
+      "type": "integer",
+      "required": false,
+      "allowed_values": [1, 2, 3],
+      "default": 1,
+      "description": "1=easy, 2=medium, 3=hard."
+    },
+    "notes": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Optional human note (e.g., app/screen context). Not used for training."
+    }
+  },
+  "example_jsonl_line": {
+    "id": "ex_001",
+    "image_filename": "img_001.png",
+    "question": "What is the battery percentage shown?",
+    "answer": "82%",
+    "difficulty": 1,
+    "notes": "iOS Control Center"
+  }
+}
