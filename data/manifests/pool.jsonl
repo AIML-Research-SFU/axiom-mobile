@@ -1,0 +1,7 @@
+{"id":"ex_001","image_filename":"img_001.png","question":"What is the Wi-Fi network name shown?","answer":"eduroam","difficulty":2,"notes":"macOS System Settings → Wi-Fi"}
+{"id":"ex_002","image_filename":"img_002.png","question":"Is Bluetooth on or off?","answer":"On","difficulty":1,"notes":"macOS System Settings → Bluetooth"}
+{"id":"ex_003","image_filename":"img_003.png","question":"Is Bluetooth on or off?","answer":"Off","difficulty":1,"notes":"macOS System Settings → Bluetooth"}
+{"id":"ex_004","image_filename":"img_004.png","question":"What is the battery level shown?","answer":"100%","difficulty":1,"notes":"macOS System Settings → Battery"}
+{"id":"ex_005","image_filename":"img_005.png","question":"What day and time are shown in the menu bar?","answer":"Sun Feb 22 12:27 AM","difficulty":2,"notes":"macOS menu bar date/time"}
+{"id":"ex_006","image_filename":"img_006.png","question":"What is the current temperature shown for Burnaby?","answer":"5°","difficulty":1,"notes":"macOS Weather app"}
+{"id":"ex_007","image_filename":"img_007.png","question":"What is the weather condition shown for Vancouver?","answer":"Rain","difficulty":1,"notes":"macOS Weather app"}
