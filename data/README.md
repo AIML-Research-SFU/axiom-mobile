@@ -27,6 +27,10 @@ Do NOT commit any screenshot files to git:
 Screenshots live in a shared private folder (e.g., Google Drive).  
 This repo only contains filenames like `img_001.png`.
 
+Enforcement:
+- Local pre-commit guard: run `bash scripts/install-hooks.sh` once per clone.
+- CI guard: PRs run `.github/workflows/guards.yml` and fail if image files are tracked.
+
 ### 2) Questions must be answerable by looking
 Your question must be answerable directly from visible content.
 Avoid interpretation and opinions.
