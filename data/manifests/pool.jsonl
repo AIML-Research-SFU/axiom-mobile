@@ -33,3 +33,17 @@
 {"id":"ex_036","image_filename":"img_036.png","question":"What visual mode is the map using?","answer":"Transit","difficulty":1,"notes":"iOS Apple Maps app"}
 {"id":"ex_037","image_filename":"img_037.png","question":"What page is the App Store on?","answer":"Apps","difficulty":1,"notes":"iOS App Store"}
 {"id":"ex_038","image_filename":"img_038.png","question":"What page is the App Store on?","answer":"Games","difficulty":1,"notes":"iOS App Store"}
+{"id":"ex_039","image_filename":"img_039.png","question":"Is Wi-Fi turned on?","answer":"Yes","difficulty":1,"notes":"iOS Wi-Fi settings toggle"}
+{"id":"ex_040","image_filename":"img_040.png","question":"Is Airplane Mode turned on?","answer":"No","difficulty":1,"notes":"iOS Airplane Mode settings"}
+{"id":"ex_041","image_filename":"img_041.png","question":"What battery percentage is shown?","answer":"46%","difficulty":1,"notes":"iOS status bar"}
+{"id":"ex_042","image_filename":"img_042.png","question":"What time is shown on the lock screen?","answer":"7:45","difficulty":1,"notes":"iOS lock screen"}
+{"id":"ex_043","image_filename":"img_043.png","question":"What city name is shown?","answer":"Vancouver","difficulty":1,"notes":"Weather app"}
+{"id":"ex_044","image_filename":"img_044.png","question":"What time is shown?","answer":"7:45 PM","difficulty":1,"notes":"Weather app header"}
+{"id":"ex_045","image_filename":"img_045.png","question":"What time is shown on the lock screen?","answer":"7:46","difficulty":1,"notes":"iOS lock screen"}
+{"id":"ex_046","image_filename":"img_046.png","question":"Is AirDrop receiving enabled?","answer":"No","difficulty":1,"notes":"Control Center AirDrop tile"}
+{"id":"ex_047","image_filename":"img_047.png","question":"What Wi-Fi network name is shown?","answer":"eduroam","difficulty":1,"notes":"Control Center Wi-Fi tile"}
+{"id":"ex_048","image_filename":"img_048.png","question":"Is Personal Hotspot on or off?","answer":"Off","difficulty":1,"notes":"iOS Control Center connectivity panel"}
+{"id":"ex_049","image_filename":"img_049.png","question":"Is Cellular Data on or off?","answer":"On","difficulty":1,"notes":"Control Center tile"}
+{"id":"ex_050","image_filename":"img_050.png","question":"What day of the week is shown?","answer":"Wednesday","difficulty":1,"notes":"Lock screen date"}
+{"id":"ex_051","image_filename":"img_051.png","question":"What battery percentage is shown?","answer":"46%","difficulty":1,"notes":"Status bar battery"}
+{"id":"ex_052","image_filename":"img_052.png","question":"What temperature is shown for Vancouver?","answer":"7°","difficulty":1,"notes":"Weather app"}
