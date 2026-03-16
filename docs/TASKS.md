@@ -34,7 +34,7 @@ Deliverables:
 ## Annie Boltwood (6 points)
 
 - `[x]` **Labeling batch (2 pts):** add examples `ex_025` to `ex_038` in `data/manifests/pool.jsonl`.
-- `[ ]` **Data quality tooling (3 pts):** add annotation QC helper script:
+- `[x]` **Data quality tooling (3 pts):** add annotation QC helper script:
   - `ml/scripts/annotation_qc.py`
   - Computes per-field completeness and duplicate checks
   - Outputs a short QC summary in terminal
@@ -60,7 +60,9 @@ Deliverables:
 ## Shared Team Tasks
 
 - `[ ]` Resolve peer-review comments before merge.
-- `[ ]` Run `python3 ml/scripts/inspect_dataset.py` after each labeling PR update.
+- `[x]` Add and document dataset QC scripts:
+  - `python3 ml/scripts/inspect_dataset.py`
+  - `python3 ml/scripts/annotation_qc.py`
 - `[x]` Freeze the first reviewed dataset checkpoint and rebalance splits into:
   - `pool.jsonl`: 37
   - `val.jsonl`: 5
@@ -72,7 +74,8 @@ Deliverables:
 
 - At least 50 examples exist across manifests with no duplicate IDs.
 - `ml/scripts/inspect_dataset.py` passes on merged `main`.
+- `ml/scripts/annotation_qc.py` passes on merged `main`.
 - New `ml/src/axiom/data/` module is present and importable.
-- CI runs automatically on PRs and validates dataset manifests.
+- CI runs automatically on PRs and validates dataset manifests + QC summary.
 - A reviewed screenshot set exists in `screenshots_v1/`.
 - The first frozen split is `pool=37`, `val=5`, `test=10`.

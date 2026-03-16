@@ -66,3 +66,40 @@ The JSONL must match those names exactly.
 - `data/manifests/test.jsonl` → test set manifest
 
 Do not store raw data in this repo.
+
+---
+
+## Review and Freeze Workflow
+
+### 1) Working screenshots stay in private storage
+Use the shared Drive working folder for screenshots under review:
+- `screenshots_v0/` → active working set
+- `screenshots_v1/` → reviewed frozen set
+- `review/` → screenshots that need fixes or discussion
+- `archive/` → replaced or rejected screenshots
+
+### 2) Every manifest row must match the screenshot exactly
+Before freezing an example, the reviewer must confirm:
+- the screenshot exists in Drive with the exact `image_filename`
+- the question is answerable directly from visible content
+- the answer matches what is shown on screen exactly
+- there is no private information that should be removed or cropped
+
+### 3) Run the repo QC scripts before freezing
+From the repo root, run:
+
+```bash
+python3 ml/scripts/inspect_dataset.py
+python3 ml/scripts/annotation_qc.py
+```
+
+`inspect_dataset.py` is the blocking structural validator.
+`annotation_qc.py` prints a QC summary for completeness, duplicate checks, and split stats.
+
+### 4) Freeze only approved screenshots
+After review passes:
+- keep the working copy in `screenshots_v0/`
+- copy the approved final image into `screenshots_v1/`
+- move superseded or unusable files into `archive/`
+
+This keeps the research dataset reproducible while preserving the working history.

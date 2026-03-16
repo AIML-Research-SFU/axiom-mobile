@@ -20,3 +20,6 @@ jobs:
 
       - name: Validate dataset manifests
         run: python3 ml/scripts/inspect_dataset.py
+
+      - name: Run annotation QC summary
+        run: python3 ml/scripts/annotation_qc.py
