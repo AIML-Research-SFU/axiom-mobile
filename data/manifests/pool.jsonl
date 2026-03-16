@@ -5,20 +5,20 @@
 {"id":"ex_005","image_filename":"img_005.png","question":"What time is shown on the lock screen?","answer":"3:13","difficulty":1,"notes":"iOS lock screen"}
 {"id":"ex_006","image_filename":"img_006.png","question":"What is the temperature shown for Burnaby?","answer":"3°","difficulty":1,"notes":"iOS Weather app"}
 {"id":"ex_007","image_filename":"img_007.png","question":"What weather condition is shown?","answer":"Rain","difficulty":1,"notes":"iOS Weather app"}
-{"id":"ex_011","image_filename":"img_011.png","question":"What is the battery percentage shown?","answer":"78%","difficulty":1,"notes":"iOS Control Center"}
+{"id":"ex_011","image_filename":"img_011.png","question":"What is the battery percentage shown?","answer":"91%","difficulty":1,"notes":"iOS Control Center"}
 {"id":"ex_012","image_filename":"img_012.png","question":"Is Wi-Fi on or off?","answer":"On","difficulty":1,"notes":"iOS Control Center"}
 {"id":"ex_013","image_filename":"img_013.png","question":"Is Wi-Fi on or off?","answer":"Off","difficulty":1,"notes":"iOS Control Center"}
 {"id":"ex_014","image_filename":"img_014.png","question":"Is Bluetooth on or off?","answer":"On","difficulty":1,"notes":"iOS Control Center"}
 {"id":"ex_015","image_filename":"img_015.png","question":"Is Bluetooth on or off?","answer":"Off","difficulty":1,"notes":"iOS Control Center"}
 {"id":"ex_016","image_filename":"img_016.png","question":"Is Airplane Mode on or off?","answer":"On","difficulty":1,"notes":"iOS Control Center"}
 {"id":"ex_017","image_filename":"img_017.png","question":"Is Airplane Mode on or off?","answer":"Off","difficulty":1,"notes":"iOS Control Center"}
-{"id":"ex_018","image_filename":"img_018.png","question":"What time is shown on the lock screen?","answer":"9:41","difficulty":1,"notes":"iOS Lock Screen"}
-{"id":"ex_019","image_filename":"img_019.png","question":"What date is shown on the lock screen?","answer":"Tuesday, February 25","difficulty":2,"notes":"iOS Lock Screen"}
-{"id":"ex_020","image_filename":"img_020.png","question":"What is the weather condition shown?","answer":"Cloudy","difficulty":1,"notes":"iOS Weather app"}
-{"id":"ex_021","image_filename":"img_021.png","question":"What temperature is shown?","answer":"6°","difficulty":1,"notes":"iOS Weather app"}
+{"id":"ex_018","image_filename":"img_018.png","question":"What time is shown on the lock screen?","answer":"9:02","difficulty":1,"notes":"iOS Lock Screen"}
+{"id":"ex_019","image_filename":"img_019.png","question":"What date is shown on the lock screen?","answer":"Sun Mar 15","difficulty":2,"notes":"iOS Lock Screen"}
+{"id":"ex_020","image_filename":"img_020.png","question":"What is the weather condition shown?","answer":"Rain","difficulty":1,"notes":"iOS Weather app"}
+{"id":"ex_021","image_filename":"img_021.png","question":"What temperature is shown?","answer":"2°","difficulty":1,"notes":"iOS Weather app"}
 {"id":"ex_022","image_filename":"img_022.png","question":"What is the Wi-Fi network name shown?","answer":"eduroam","difficulty":2,"notes":"iOS Settings → Wi-Fi"}
-{"id":"ex_023","image_filename":"img_023.png","question":"Is Low Power Mode on or off?","answer":"On","difficulty":2,"notes":"iOS Settings → Battery"}
-{"id":"ex_024","image_filename":"img_024.png","question":"Is Cellular Data on or off?","answer":"On","difficulty":2,"notes":"iOS Settings → Cellular"}
+{"id":"ex_023","image_filename":"img_023.png","question":"Is Low Power Mode on or off?","answer":"Off","difficulty":2,"notes":"iOS Settings → Battery"}
+{"id":"ex_024","image_filename":"img_024.png","question":"Is Cellular Data on or off?","answer":"Off","difficulty":2,"notes":"iOS Settings → Cellular"}
 {"id":"ex_025","image_filename":"img_025.png","question":"What mode is the calculator in?","answer":"Basic","difficulty":1,"notes":"iOS Calculator app"}
 {"id":"ex_026","image_filename":"img_026.png","question":"What mode is the calculator in?","answer":"Scientific","difficulty":1,"notes":"iOS Calculator app"}
 {"id":"ex_027","image_filename":"img_027.png","question":"What equation has been entered into the calculator?","answer":"48÷12+25.5","difficulty":2,"notes":"iOS Calculator app"}
