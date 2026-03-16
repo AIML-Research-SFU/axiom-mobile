@@ -26,6 +26,7 @@ This file tracks the 16-week project plan and marks what is complete based on th
 - `[x]` `ml/scripts/inspect_dataset.py` exists and validates required fields + split overlap.
 - `[x]` `python3 ml/scripts/inspect_dataset.py` runs successfully on current manifests.
 - `[x]` Shared private screenshot storage is now verifiable from Drive screenshots (`archive/`, `review/`, `screenshots_v0/`, `screenshots_v1/`).
+- `[x]` The reviewed screenshot set has been copied into `screenshots_v1/` and the first dataset freeze is organized in Drive.
 - `[ ]` Branch/PR workflow steps are not verifiable from local files alone.
 
 ## 16-Week Timeline (Planned vs Current State)
@@ -47,7 +48,8 @@ Deliverable status: `[~]` Partially complete.
 - `[x]` Splits are present (pool/val/test).
 - `[x]` Shared Google Drive folder structure exists for private screenshots (`archive/`, `review/`, `screenshots_v0/`, `screenshots_v1/`).
 - `[x]` Dataset has been expanded beyond the first 50-example checkpoint (52 total examples in manifests).
-- `[~]` `screenshots_v1/` exists but is not populated yet, so the finalized dataset freeze has not happened.
+- `[x]` The reviewed screenshots have been copied into `screenshots_v1/`.
+- `[x]` The first reviewed dataset split is frozen at `pool=37`, `val=5`, `test=10`.
 - `[ ]` Dataset v1 target (200+ screenshots, 500+ QA pairs) not reached yet.
 - `[ ]` Dual-annotator agreement workflow (Cohen's kappa >= 0.75) not implemented in repo.
 - `[ ]` Bounding box grounding metadata pipeline not implemented.
@@ -104,4 +106,5 @@ Deliverable status: `[ ]` Not started in current codebase.
 
 - `[x]` Expand manifests from 10 -> 50 examples while keeping question/answer quality constraints.
 - `[x]` Add a reusable Python dataset module under `ml/src/axiom/data/` (loader + validation + split stats).
+- `[x]` Freeze a balanced reviewed split for the first dataset checkpoint (`37/5/10` over 52 examples).
 - `[~]` Add baseline CI workflows for Python checks. Dataset validation exists, but placeholder iOS checks are still missing.
