@@ -95,7 +95,7 @@ Deliverable status: `[ ]` Not started in current codebase.
 ## Phase 5 (Weeks 13-14): On-Device Evaluation
 
 - `[x]` Benchmark mode in app implemented with configurable iterations, progress tracking, and session summary.
-- `[ ]` Instruments profiling runbook not present.
+- `[x]` Instruments profiling runbook: `docs/INSTRUMENTS_RUNBOOK.md` with reproducible protocol, pre-run checklist, output contract, and companion `_meta.json` session metadata export.
 - `[x]` CSV logging with deterministic schema and share/export implemented; captures placeholder results now, ready for real Core ML metrics.
 - `[ ]` Final quality + performance metric computation pipeline not present.
 

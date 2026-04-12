@@ -26,7 +26,8 @@ AXIOMMobile/
 ├── Models/
 │   ├── ModelCatalog.swift        Model metadata matching repo configs
 │   ├── InferenceResult.swift     Inference result value type
-│   └── BenchmarkRecord.swift     Structured benchmark log record
+│   ├── BenchmarkRecord.swift     Structured benchmark log record
+│   └── SessionMetadata.swift     Device/session metadata for reproducibility
 ├── Services/
 │   ├── InferenceService.swift    Protocol + placeholder implementation
 │   └── BenchmarkExporter.swift   CSV export to Documents directory
@@ -89,7 +90,28 @@ CSV files are written to the app's Documents directory with filenames like:
 axiom_benchmark_20260412T101500Z.csv
 ```
 
-The **Share** button (appears after export) sends the file via the system share sheet.
+A companion metadata JSON is exported alongside each CSV:
+
+```
+axiom_benchmark_20260412T101500Z_meta.json
+```
+
+The metadata file captures device and session context for reproducibility:
+
+| Field | Description |
+|-------|-------------|
+| `session_id` | Unique UUID per export |
+| `export_timestamp` | ISO 8601 export time |
+| `device_name` | `UIDevice.current.name` |
+| `device_model` | `UIDevice.current.model` (iPhone, iPad) |
+| `system_name` / `system_version` | OS name and version |
+| `app_version` / `app_build` | Bundle short version and build number |
+| `model_id` | Model used for the benchmark |
+| `is_placeholder` | Whether inference was simulated |
+| `benchmark_iterations` | Number of benchmark-mode runs |
+| `record_count` | Total records in the CSV |
+
+The **Share** button (appears after export) sends both the CSV and metadata JSON via the system share sheet.
 
 ### What is still placeholder
 

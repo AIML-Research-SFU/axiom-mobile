@@ -1,5 +1,6 @@
 import SwiftUI
 import PhotosUI
+import UIKit
 
 @Observable
 final class TestbedViewModel {
@@ -20,6 +21,7 @@ final class TestbedViewModel {
     var isBenchmarking = false
     private(set) var benchmarkRecords: [BenchmarkRecord] = []
     private(set) var lastExportURL: URL?
+    private(set) var lastMetadataURL: URL?
 
     private let inferenceService: any InferenceServiceProtocol = PlaceholderInferenceService()
 
@@ -120,15 +122,36 @@ final class TestbedViewModel {
 
     func exportCSV() {
         do {
-            lastExportURL = try BenchmarkExporter.writeCSV(benchmarkRecords)
+            let stamp = BenchmarkExporter.sessionStamp()
+            lastExportURL = try BenchmarkExporter.writeCSV(benchmarkRecords, stamp: stamp)
+
+            let device = UIDevice.current
+            let bundle = Bundle.main
+            let metadata = SessionMetadata(
+                sessionID: UUID().uuidString,
+                exportTimestamp: Date.now.formatted(.iso8601),
+                deviceName: device.name,
+                deviceModel: device.model,
+                systemName: device.systemName,
+                systemVersion: device.systemVersion,
+                appVersion: bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown",
+                appBuild: bundle.infoDictionary?["CFBundleVersion"] as? String ?? "unknown",
+                modelID: benchmarkModelID ?? "unknown",
+                isPlaceholder: benchmarkRecords.last?.isPlaceholder ?? true,
+                benchmarkIterations: benchmarkRecords.filter { $0.runKind == .benchmark }.count,
+                recordCount: benchmarkRecords.count
+            )
+            lastMetadataURL = try BenchmarkExporter.writeMetadata(metadata, stamp: stamp)
         } catch {
             lastExportURL = nil
+            lastMetadataURL = nil
         }
     }
 
     func clearBenchmark() {
         benchmarkRecords.removeAll()
         lastExportURL = nil
+        lastMetadataURL = nil
         benchmarkProgress = 0
     }
 

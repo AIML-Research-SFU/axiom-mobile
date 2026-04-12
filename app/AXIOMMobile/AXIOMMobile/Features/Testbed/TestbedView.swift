@@ -44,6 +44,7 @@ struct TestbedView: View {
                             modelID: viewModel.benchmarkModelID,
                             hasExported: viewModel.hasExported,
                             exportURL: viewModel.lastExportURL,
+                            metadataURL: viewModel.lastMetadataURL,
                             onExport: { viewModel.exportCSV() },
                             onClear: { viewModel.clearBenchmark() }
                         )

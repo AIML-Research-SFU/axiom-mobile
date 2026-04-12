@@ -8,8 +8,13 @@ struct BenchmarkSummaryCard: View {
     let modelID: String?
     let hasExported: Bool
     let exportURL: URL?
+    let metadataURL: URL?
     let onExport: () -> Void
     let onClear: () -> Void
+
+    private var shareItems: [URL] {
+        [exportURL, metadataURL].compactMap { $0 }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -35,8 +40,8 @@ struct BenchmarkSummaryCard: View {
                 }
                 .buttonStyle(.bordered)
 
-                if let url = exportURL {
-                    ShareLink(item: url) {
+                if !shareItems.isEmpty {
+                    ShareLink(items: shareItems) {
                         Label("Share", systemImage: "paperplane")
                     }
                     .buttonStyle(.bordered)
