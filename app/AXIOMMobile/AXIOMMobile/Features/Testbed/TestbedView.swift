@@ -17,6 +17,11 @@ struct TestbedView: View {
 
                     ModelPickerSection(selectedModel: $viewModel.selectedModel)
 
+                    BenchmarkConfigSection(
+                        enabled: $viewModel.benchmarkEnabled,
+                        iterations: $viewModel.benchmarkIterations
+                    )
+
                     runButton
 
                     if let result = viewModel.result {
@@ -29,6 +34,20 @@ struct TestbedView: View {
                         questionLength: viewModel.question.count,
                         result: viewModel.result
                     )
+
+                    if !viewModel.benchmarkRecords.isEmpty {
+                        BenchmarkSummaryCard(
+                            recordCount: viewModel.benchmarkRecordCount,
+                            averageLatencyMs: viewModel.benchmarkAverageLatencyMs,
+                            minLatencyMs: viewModel.benchmarkMinLatencyMs,
+                            maxLatencyMs: viewModel.benchmarkMaxLatencyMs,
+                            modelID: viewModel.benchmarkModelID,
+                            hasExported: viewModel.hasExported,
+                            exportURL: viewModel.lastExportURL,
+                            onExport: { viewModel.exportCSV() },
+                            onClear: { viewModel.clearBenchmark() }
+                        )
+                    }
                 }
                 .padding()
             }
@@ -41,29 +60,60 @@ struct TestbedView: View {
     }
 
     private var runButton: some View {
-        Button {
-            Task { await viewModel.run() }
-        } label: {
-            HStack(spacing: 8) {
-                if viewModel.isRunning {
-                    ProgressView()
-                        .tint(.white)
-                } else {
-                    Image(systemName: "play.fill")
+        VStack(spacing: 8) {
+            Button {
+                Task {
+                    if viewModel.benchmarkEnabled {
+                        await viewModel.runBenchmark()
+                    } else {
+                        await viewModel.run()
+                    }
                 }
-                Text("Run Inference")
-                    .fontWeight(.semibold)
+            } label: {
+                HStack(spacing: 8) {
+                    if viewModel.isRunning {
+                        ProgressView()
+                            .tint(.white)
+                    } else {
+                        Image(systemName: viewModel.benchmarkEnabled
+                              ? "timer"
+                              : "play.fill")
+                    }
+
+                    if viewModel.isBenchmarking {
+                        Text("Running \(viewModel.benchmarkProgress) of \(viewModel.benchmarkIterations)")
+                            .fontWeight(.semibold)
+                    } else if viewModel.benchmarkEnabled {
+                        Text("Run Benchmark (\(viewModel.benchmarkIterations) runs)")
+                            .fontWeight(.semibold)
+                    } else {
+                        Text("Run Inference")
+                            .fontWeight(.semibold)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .disabled(!viewModel.canRun)
+            .sensoryFeedback(.success, trigger: viewModel.isRunning) { oldValue, newValue in
+                oldValue && !newValue
+            }
+            .accessibilityLabel(
+                viewModel.benchmarkEnabled
+                    ? "Run benchmark with \(viewModel.selectedModel.displayName)"
+                    : "Run inference with \(viewModel.selectedModel.displayName)"
+            )
+
+            if viewModel.isBenchmarking {
+                ProgressView(
+                    value: Double(viewModel.benchmarkProgress),
+                    total: Double(viewModel.benchmarkIterations)
+                )
+                .tint(.accentColor)
+            }
         }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .disabled(!viewModel.canRun)
-        .sensoryFeedback(.success, trigger: viewModel.isRunning) { oldValue, newValue in
-            oldValue && !newValue
-        }
-        .accessibilityLabel("Run inference with \(viewModel.selectedModel.displayName)")
     }
 }
 

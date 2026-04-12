@@ -78,10 +78,10 @@ Deliverable status: `[~]` In progress (core ML pipeline items remain).
 - `[x]` Per-run JSON results + aggregate `summary.json` + `summary.csv` written to `results/selection_sweeps/`.
 - `[x]` Selection strategies documented in `docs/SELECTION_STRATEGIES.md` with proxy rationale and limitations.
 - `[x]` Learning curve generation script (`ml/scripts/generate_learning_curves.py`) produces aggregated JSON, CSV, and deterministic SVG plots; documented in `docs/LEARNING_CURVES.md`.
-- `[ ]` App model picker + CSV logging hooks not present.
+- `[x]` App benchmark mode with CSV logging hooks implemented; single-run and batch instrumentation with deterministic export format.
 - `[ ]` KG-guided strategy blocked — requires KG v1 infrastructure (Phase 1 dependency).
 
-Deliverable status: `[~]` In progress (core scaffold executable; learning curves, KG, and app hooks remain).
+Deliverable status: `[~]` In progress (KG-guided blocked on Phase 1 dependency; all other Phase 3 items complete).
 
 ## Phase 4 (Weeks 11-12): Compression and Core ML Conversion
 
@@ -94,12 +94,12 @@ Deliverable status: `[ ]` Not started in current codebase.
 
 ## Phase 5 (Weeks 13-14): On-Device Evaluation
 
-- `[ ]` Benchmark mode in app not implemented.
+- `[x]` Benchmark mode in app implemented with configurable iterations, progress tracking, and session summary.
 - `[ ]` Instruments profiling runbook not present.
-- `[ ]` Full device evaluation CSV logs not present.
+- `[x]` CSV logging with deterministic schema and share/export implemented; captures placeholder results now, ready for real Core ML metrics.
 - `[ ]` Final quality + performance metric computation pipeline not present.
 
-Deliverable status: `[ ]` Not started in current codebase.
+Deliverable status: `[~]` In progress (benchmark instrumentation complete; Instruments runbook and final metrics pipeline remain).
 
 ## Phase 6 (Weeks 15-16): Analysis and Publication
 

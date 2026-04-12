@@ -25,9 +25,11 @@ AXIOMMobile/
 ├── ContentView.swift             Root view (routes to TestbedView)
 ├── Models/
 │   ├── ModelCatalog.swift        Model metadata matching repo configs
-│   └── InferenceResult.swift     Inference result value type
+│   ├── InferenceResult.swift     Inference result value type
+│   └── BenchmarkRecord.swift     Structured benchmark log record
 ├── Services/
-│   └── InferenceService.swift    Protocol + placeholder implementation
+│   ├── InferenceService.swift    Protocol + placeholder implementation
+│   └── BenchmarkExporter.swift   CSV export to Documents directory
 └── Features/
     └── Testbed/
         ├── TestbedView.swift     Main testbed screen
@@ -37,14 +39,73 @@ AXIOMMobile/
             ├── QuestionInputSection.swift
             ├── ModelPickerSection.swift
             ├── AnswerCard.swift
-            └── DebugMetricsCard.swift
+            ├── DebugMetricsCard.swift
+            ├── BenchmarkConfigSection.swift
+            └── BenchmarkSummaryCard.swift
 ```
 
 ### Extending with real inference
 
-When Core ML models are available, create a new conformance to `InferenceServiceProtocol` (e.g., `CoreMLInferenceService`) and swap it into `TestbedViewModel`. The view layer requires no changes.
+When Core ML models are available, create a new conformance to `InferenceServiceProtocol` (e.g., `CoreMLInferenceService`) and swap it into `TestbedViewModel`. The view layer and benchmark infrastructure require no changes.
 
-### Requirements
+## Benchmark Mode (Phase 5 Instrumentation)
+
+The testbed includes a benchmark mode for repeated inference runs and structured logging.
+
+### How it works
+
+1. Toggle **Benchmark Mode** in the config section.
+2. Set the iteration count (1-50) with the stepper.
+3. Tap **Run Benchmark** — the app runs inference N times and logs each result.
+4. View aggregate statistics in the **Benchmark Summary** card (runs, avg/min/max latency, model ID, export status).
+5. Tap **Export CSV** to save results to the app's Documents directory.
+6. Use **Share** to send the CSV via AirDrop, email, or other share targets.
+7. Tap **Clear** to reset the session.
+
+Single-run inference (benchmark mode off) also logs records with `run_kind: single`.
+
+### CSV schema
+
+```csv
+timestamp,model_id,image_loaded,question_length,latency_ms,is_placeholder,run_kind,iteration_index
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `timestamp` | ISO 8601 | When the inference completed |
+| `model_id` | string | Model identifier from `ModelCatalog` |
+| `image_loaded` | bool | Whether a screenshot was loaded |
+| `question_length` | int | Character count of the question |
+| `latency_ms` | int | Inference latency in milliseconds |
+| `is_placeholder` | bool | Whether the result came from placeholder service |
+| `run_kind` | string | `single` or `benchmark` |
+| `iteration_index` | int | 0 for single runs; 0..N-1 for benchmark iterations |
+
+### Export location
+
+CSV files are written to the app's Documents directory with filenames like:
+
+```
+axiom_benchmark_20260412T101500Z.csv
+```
+
+The **Share** button (appears after export) sends the file via the system share sheet.
+
+### What is still placeholder
+
+All inference currently runs through `PlaceholderInferenceService`, which simulates latency (150ms for baseline, 600ms for VLM candidates) without real model computation. The benchmark infrastructure is real — when Core ML models are connected, the same logging and export flow captures actual on-device performance metrics.
+
+### Preparing for Core ML evaluation
+
+When real `.mlpackage` models are available:
+
+1. Create `CoreMLInferenceService` conforming to `InferenceServiceProtocol`.
+2. Swap it into `TestbedViewModel`.
+3. The benchmark mode, CSV logging, and export flow work unchanged.
+4. Logged latencies will reflect real on-device inference time.
+5. The `is_placeholder` field will flip to `false`, clearly distinguishing real from simulated results.
+
+## Requirements
 
 - Xcode 26.0+
 - iOS 26.0+
