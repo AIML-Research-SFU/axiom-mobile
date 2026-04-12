@@ -1,6 +1,6 @@
 # AXIOM-Mobile Timeline and Progress Tracker
 
-Last updated: 2026-03-15
+Last updated: 2026-04-12
 
 This file tracks the 16-week project plan and marks what is complete based on the current repository state.
 
@@ -40,7 +40,7 @@ This file tracks the 16-week project plan and marks what is complete based on th
 - `[~]` Repo skeleton exists (`app/`, `ml/`, `kg/`, `results/`) but many components are placeholders.
 - `[x]` CI workflows exist for repo guards, dataset validation, and annotation QC (`.github/workflows/guards.yml`, `.github/workflows/python-checks.yml`).
 
-Deliverable status: `[~]` Partially complete.
+Deliverable status: `[x]` Complete (all verifiable items done; skeleton will fill in over later phases).
 
 ## Phase 1 (Weeks 1-4): Dataset Curation
 
@@ -62,13 +62,14 @@ Deliverable status: `[~]` In progress.
 ## Phase 2 (Weeks 5-6): Model Selection and Baseline
 
 - `[x]` Initial model harness exists under `ml/src/axiom/models/` with a shared interface for `train()`, `predict()`, and `export_coreml()`.
-- `[x]` Candidate model configs exist under `ml/configs/models/` for Florence, LLaVA Mobile, Qwen-VL INT4, and the executable local baseline.
+- `[x]` Candidate model configs exist under `ml/configs/models/` for Florence, LLaVA Mobile, Qwen-VL INT4, and the executable local baseline (`question_lookup_v0`).
 - `[x]` Baseline experiment runner exists (`ml/scripts/run_baseline.py`) and writes reproducible metrics/artifacts to `results/baselines/`.
+- `[x]` Baseline results generated and committed (`results/baselines/question_lookup_v0_seed0/`); summary script and results note merged in PR #20.
 - `[x]` Model selection rubric is documented in `docs/MODEL_SELECTION.md`.
 - `[ ]` SwiftUI testbed shell not present in repo.
 - `[ ]` Core ML baseline conversion pipeline not present.
 
-Deliverable status: `[~]` In progress.
+Deliverable status: `[~]` In progress (core ML pipeline items remain).
 
 ## Phase 3 (Weeks 7-10): Selection Strategies and Training Pipeline
 
@@ -112,3 +113,11 @@ Deliverable status: `[ ]` Not started in current codebase.
 - `[x]` Freeze a balanced reviewed split for the first dataset checkpoint (`37/5/10` over 52 examples).
 - `[x]` Add baseline CI workflows for Python checks and dataset QC.
 - `[x]` Add Phase 2 scaffold for model selection, baseline execution, and result artifact writing.
+- `[x]` Run baseline experiment and commit results + summary analysis (PR #20).
+
+## Upcoming Work
+
+- `[ ]` Scale dataset to 200+ screenshots / 500+ QA pairs (Phase 1 completion).
+- `[ ]` Build SwiftUI testbed shell for on-device testing.
+- `[ ]` Implement selection strategies (RAND/UNC/DIV/KG) and sweep runner (Phase 3).
+- `[ ]` Core ML export pipeline + accuracy gate (Phase 4).
