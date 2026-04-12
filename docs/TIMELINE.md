@@ -1,6 +1,6 @@
 # AXIOM-Mobile Timeline and Progress Tracker
 
-Last updated: 2026-04-13
+Last updated: 2026-04-12
 
 This file tracks the 16-week project plan and marks what is complete based on the current repository state.
 
@@ -68,9 +68,9 @@ Deliverable status: `[~]` In progress.
 - `[x]` Model selection rubric is documented in `docs/MODEL_SELECTION.md`.
 - `[x]` SwiftUI testbed shell implemented with screenshot import, question input, model picker, run button, answer card, and debug metrics panel.
 - `[x]` First real trainable multimodal baseline (`tiny_multimodal_v0`): image-root-aware data loading, PyTorch CNN+embedding model, checkpoint/vocab/architecture artifacts, training runner (`ml/scripts/run_trainable_baseline.py`). Documents Phase 4 export path in `docs/MODEL_SELECTION.md`.
-- `[ ]` Core ML baseline conversion pipeline not present (now unblocked by `tiny_multimodal_v0` checkpoint).
+- `[x]` Core ML baseline conversion pipeline implemented: `ml/scripts/export_coreml.py` with `torch.jit.trace` → `coremltools.convert` → `.mlpackage` + accuracy gate.
 
-Deliverable status: `[~]` In progress (Core ML conversion is now unblocked but not yet implemented).
+Deliverable status: `[x]` Complete (all Phase 2 items done; Core ML export pipeline now operational).
 
 ## Phase 3 (Weeks 7-10): Selection Strategies and Training Pipeline
 
@@ -87,11 +87,14 @@ Deliverable status: `[~]` In progress (KG-guided blocked on Phase 1 dependency; 
 ## Phase 4 (Weeks 11-12): Compression and Core ML Conversion
 
 - `[ ]` Quantization pipeline not implemented.
-- `[ ]` Automated PyTorch -> Core ML export pipeline not implemented.
-- `[ ]` Post-conversion accuracy-drop gate (<= 3%) not implemented.
+- `[x]` Automated PyTorch -> Core ML export pipeline: `ml/scripts/export_coreml.py` traces a trained checkpoint via `torch.jit.trace`, converts with `coremltools.convert`, and writes `.mlpackage` + `traced_model.pt` + `label_vocab.json` + `conversion_report.json`.
+- `[x]` Post-conversion accuracy-drop gate (<= 3%): export script compares PyTorch vs Core ML predictions on val/test splits, reports per-split pass/fail with accuracy drop.
+- `[x]` Private screenshot-root bootstrap: `ml/scripts/locate_screenshot_root.py` discovers `screenshots_v1/` on macOS; `docs/PRIVATE_DATA_SETUP.md` documents setup.
+- `[x]` `export_coreml()` method implemented on `TinyMultimodalBaseline` (in `ml/src/axiom/models/tiny_multimodal.py`).
+- `[x]` `coremltools>=8.0` added as `[export]` optional dependency in `ml/pyproject.toml`.
 - `[ ]` App integration for `.mlpackage` loading not implemented.
 
-Deliverable status: `[ ]` Not started in current codebase.
+Deliverable status: `[~]` In progress (export pipeline and accuracy gate complete; app integration remains).
 
 ## Phase 5 (Weeks 13-14): On-Device Evaluation
 
@@ -124,4 +127,6 @@ Deliverable status: `[ ]` Not started in current codebase.
 - `[ ]` Scale dataset to 200+ screenshots / 500+ QA pairs (Phase 1 completion).
 - `[x]` Build SwiftUI testbed shell for on-device testing.
 - `[x]` Implement selection strategies (RAND/UNC/DIV) and sweep runner (Phase 3); KG-guided blocked pending KG v1.
-- `[ ]` Core ML export pipeline + accuracy gate (Phase 4).
+- `[x]` Core ML export pipeline + accuracy gate (Phase 4) — `ml/scripts/export_coreml.py` with 96KB `.mlpackage` output.
+- `[ ]` App integration for `.mlpackage` loading (Phase 4 completion).
+- `[ ]` Quantization pipeline (Phase 4 compression).

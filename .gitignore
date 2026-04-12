@@ -29,6 +29,9 @@ results/device_profiles/**/
 *.mlpackage
 *.mlmodel
 
+# Core ML export outputs
+results/coreml_exports/
+
 # Claude Code local settings
 .claude/settings.local.json
 

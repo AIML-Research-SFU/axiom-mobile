@@ -322,6 +322,73 @@ class TinyMultimodalBaseline(ReasoningModel):
             "architecture": str(meta_path),
         }
 
+    def export_coreml(self, output_dir: str | Path) -> dict[str, Any]:
+        """Export the trained model to Core ML (.mlpackage) format.
+
+        Uses torch.jit.trace → coremltools.convert pipeline.
+        Returns a dict of artifact paths and conversion metadata.
+        """
+        if not self._is_trained or self._net is None:
+            raise RuntimeError("Cannot export before training.")
+
+        import coremltools as ct
+
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        # Create example inputs for tracing
+        example_image = torch.randn(1, 3, IMAGE_SIZE, IMAGE_SIZE)
+        example_text = torch.randint(0, VOCAB_SIZE, (1, MAX_CHAR_LEN))
+
+        # Trace the model
+        self._net.eval()
+        with torch.no_grad():
+            traced = torch.jit.trace(self._net, (example_image, example_text))
+
+        # Convert to Core ML
+        mlmodel = ct.convert(
+            traced,
+            inputs=[
+                ct.ImageType(
+                    name="image",
+                    shape=(1, 3, IMAGE_SIZE, IMAGE_SIZE),
+                    scale=1.0 / 255.0,
+                    color_layout=ct.colorlayout.RGB,
+                ),
+                ct.TensorType(
+                    name="char_ids",
+                    shape=(1, MAX_CHAR_LEN),
+                    dtype=int,
+                ),
+            ],
+            outputs=[ct.TensorType(name="logits")],
+            minimum_deployment_target=ct.target.iOS16,
+        )
+
+        # Save .mlpackage
+        mlpackage_path = output_path / "TinyMultimodal.mlpackage"
+        mlmodel.save(str(mlpackage_path))
+
+        # Also save the traced TorchScript for reproducibility
+        traced_path = output_path / "traced_model.pt"
+        traced.save(str(traced_path))
+
+        # Save label vocab alongside the mlpackage for app-side decoding
+        vocab_path = output_path / "label_vocab.json"
+        vocab_path.write_text(
+            json.dumps(self._label_to_idx, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+        return {
+            "mlpackage": str(mlpackage_path),
+            "traced_model": str(traced_path),
+            "label_vocab": str(vocab_path),
+            "num_classes": len(self._label_to_idx),
+            "image_size": IMAGE_SIZE,
+            "max_char_len": MAX_CHAR_LEN,
+        }
+
     @classmethod
     def load_checkpoint(
         cls,

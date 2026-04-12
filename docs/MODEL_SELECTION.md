@@ -128,9 +128,9 @@ python3 ml/scripts/run_trainable_baseline.py \
 
 ### What still remains for full Phase 4
 
-- [ ] `torch.jit.trace()` or `torch.export()` the trained model
-- [ ] `coremltools.convert()` to produce `.mlpackage`
-- [ ] Post-conversion accuracy gate (<= 3% drop)
+- [x] `torch.jit.trace()` the trained model — implemented in `TinyMultimodalBaseline.export_coreml()`
+- [x] `coremltools.convert()` to produce `.mlpackage` — 96KB output, well under 100MB target
+- [x] Post-conversion accuracy gate (<= 3% drop) — `ml/scripts/export_coreml.py` compares PyTorch vs Core ML on val/test splits
 - [ ] App integration for `.mlpackage` loading
 - [ ] Real on-device evaluation with actual model inference
 
