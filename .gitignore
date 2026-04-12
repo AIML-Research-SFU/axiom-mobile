@@ -13,6 +13,10 @@ results/baselines/
 artifacts/
 *.csv
 
+# Xcode user-specific state (per-user editor layout, scheme order, etc.)
+xcuserdata/
+*.xcuserstate
+
 # Data policy: NEVER commit raw screenshots
 data/raw/
 data/images/

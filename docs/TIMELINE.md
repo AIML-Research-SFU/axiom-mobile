@@ -73,12 +73,15 @@ Deliverable status: `[~]` In progress (core ML pipeline items remain).
 
 ## Phase 3 (Weeks 7-10): Selection Strategies and Training Pipeline
 
-- `[ ]` Selection strategy interfaces (RAND/UNC/DIV/KG) not implemented.
-- `[ ]` Sweep runner (4 strategies x 6 budgets x 3 seeds) not implemented.
+- `[x]` Selection strategy interfaces (RAND/UNC/DIV/KG) implemented under `ml/src/axiom/selection/`.
+- `[x]` Sweep runner (`ml/scripts/run_selection_sweep.py`) executes 3 strategies x 6 budgets x 3 seeds over the current baseline; KG-guided is honestly blocked pending KG v1.
+- `[x]` Per-run JSON results + aggregate `summary.json` + `summary.csv` written to `results/selection_sweeps/`.
+- `[x]` Selection strategies documented in `docs/SELECTION_STRATEGIES.md` with proxy rationale and limitations.
 - `[ ]` Learning curve generation scripts/plots not present.
 - `[ ]` App model picker + CSV logging hooks not present.
+- `[ ]` KG-guided strategy blocked — requires KG v1 infrastructure (Phase 1 dependency).
 
-Deliverable status: `[ ]` Not started in current codebase.
+Deliverable status: `[~]` In progress (core scaffold executable; learning curves, KG, and app hooks remain).
 
 ## Phase 4 (Weeks 11-12): Compression and Core ML Conversion
 
@@ -119,5 +122,5 @@ Deliverable status: `[ ]` Not started in current codebase.
 
 - `[ ]` Scale dataset to 200+ screenshots / 500+ QA pairs (Phase 1 completion).
 - `[x]` Build SwiftUI testbed shell for on-device testing.
-- `[ ]` Implement selection strategies (RAND/UNC/DIV/KG) and sweep runner (Phase 3).
+- `[x]` Implement selection strategies (RAND/UNC/DIV) and sweep runner (Phase 3); KG-guided blocked pending KG v1.
 - `[ ]` Core ML export pipeline + accuracy gate (Phase 4).
