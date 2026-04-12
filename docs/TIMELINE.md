@@ -67,9 +67,10 @@ Deliverable status: `[~]` In progress.
 - `[x]` Baseline results generated and committed (`results/baselines/question_lookup_v0_seed0/`); summary script and results note merged in PR #20.
 - `[x]` Model selection rubric is documented in `docs/MODEL_SELECTION.md`.
 - `[x]` SwiftUI testbed shell implemented with screenshot import, question input, model picker, run button, answer card, and debug metrics panel.
-- `[ ]` Core ML baseline conversion pipeline not present.
+- `[x]` First real trainable multimodal baseline (`tiny_multimodal_v0`): image-root-aware data loading, PyTorch CNN+embedding model, checkpoint/vocab/architecture artifacts, training runner (`ml/scripts/run_trainable_baseline.py`). Documents Phase 4 export path in `docs/MODEL_SELECTION.md`.
+- `[ ]` Core ML baseline conversion pipeline not present (now unblocked by `tiny_multimodal_v0` checkpoint).
 
-Deliverable status: `[~]` In progress (core ML pipeline items remain).
+Deliverable status: `[~]` In progress (Core ML conversion is now unblocked but not yet implemented).
 
 ## Phase 3 (Weeks 7-10): Selection Strategies and Training Pipeline
 

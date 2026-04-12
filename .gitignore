@@ -9,6 +9,8 @@ build/
 # Results
 results/runs/
 results/baselines/
+results/trainable_baselines/
+results/trainable_fixtures/
 !results/README.md
 artifacts/
 *.csv
@@ -20,6 +22,12 @@ results/device_profiles/**/
 !results/device_profiles/analysis/
 !results/device_profiles/analysis/**
 *.trace
+
+# Model artifacts (checkpoints are large; only commit configs and code)
+*.pt
+*.pth
+*.mlpackage
+*.mlmodel
 
 # Claude Code local settings
 .claude/settings.local.json

@@ -1,0 +1,17 @@
+{
+  "model_id": "tiny_multimodal_v0",
+  "display_name": "Tiny Multimodal v0",
+  "family": "custom",
+  "backend": "pytorch",
+  "stage": "trainable_baseline",
+  "description": "First real trainable multimodal baseline. Small CNN image encoder + char-level text encoder + classification head. Designed to unblock Phase 4 Core ML conversion.",
+  "source": "custom (in-repo)",
+  "notes": "~50K params. 128x128 image input. Character-level text encoding. All ops are Core ML export-friendly (conv2d, relu, linear, embedding, adaptive_avg_pool2d).",
+  "executable": true,
+  "coreml_ready": false,
+  "params_millions": 0.05,
+  "expected_app_footprint_mb": 0.5,
+  "quantization": null,
+  "priority_rank": 1,
+  "supported_capabilities": ["image_qa", "classification"]
+}

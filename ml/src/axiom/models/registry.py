@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 from .question_lookup import QuestionLookupBaseline
 from .specs import ModelSpec
@@ -42,10 +43,17 @@ def resolve_model_spec(
 def instantiate_model(
     model_id: str,
     config_dir: str | Path | None = None,
+    **kwargs: Any,
 ):
     spec = resolve_model_spec(model_id, config_dir=config_dir)
+
     if spec.backend == "heuristic" and spec.model_id == "question_lookup_v0":
         return QuestionLookupBaseline(spec)
+
+    if spec.backend == "pytorch" and spec.model_id == "tiny_multimodal_v0":
+        from .tiny_multimodal import TinyMultimodalBaseline
+        return TinyMultimodalBaseline(spec, **kwargs)
+
     raise NotImplementedError(
         f"Model '{model_id}' is configured but not executable yet "
         f"(backend={spec.backend}, stage={spec.stage})."

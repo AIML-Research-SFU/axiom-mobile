@@ -76,6 +76,64 @@ The baseline candidate decision should be made using this rubric:
    - credible baseline for later selection-strategy comparisons
    - not so large that deployment becomes the only challenge
 
+## Trainable Multimodal Baseline
+
+As of 2026-04-12, the repo now has a second executable model:
+
+- `tiny_multimodal_v0`
+
+This is the first **real trainable multimodal model** in the repo. It is deliberately simple and small (~39K parameters), designed to unblock Phase 4 (Core ML conversion), not to be the final research model.
+
+### Architecture
+
+- **Image encoder:** 3-layer CNN (conv2d → relu × 3, adaptive_avg_pool2d) on 128×128 RGB input → 64-dim feature
+- **Text encoder:** character-level embedding (ASCII, 128-vocab) + mean pool → linear → 64-dim feature
+- **Fusion:** concatenation → 128-dim
+- **Head:** linear → relu → linear → answer classes
+
+### Why this model
+
+1. **Unblocks Phase 4:** Produces a real `.pt` checkpoint that can be traced/scripted for Core ML conversion
+2. **Export-friendly ops:** Only conv2d, relu, linear, embedding, adaptive_avg_pool2d — all have clean `coremltools` mappings
+3. **Fixed input sizes:** 128×128 image, 128-char text — no variable-length sequences
+4. **Small footprint:** ~160KB checkpoint, well under the 100MB target
+5. **Image-aware:** Actually processes screenshot pixels, unlike `question_lookup_v0`
+
+### What this model does NOT do
+
+- It is not a strong model — accuracy on 37 training examples will be low
+- It does not use pretrained weights or transfer learning
+- It does not implement attention, transformers, or any VLM architecture
+- It is not the final candidate for publication
+
+### How to run
+
+```bash
+# With private screenshots:
+python3 ml/scripts/run_trainable_baseline.py --image-root /path/to/screenshots_v1
+
+# With synthetic fixtures (for testing):
+python3 ml/scripts/run_trainable_baseline.py \
+    --image-root results/trainable_fixtures/images \
+    --manifest-dir results/trainable_fixtures/manifests \
+    --output-dir results/trainable_fixtures/run_output
+```
+
+### What becomes possible after this
+
+1. **Phase 4 Core ML conversion:** `torch.jit.trace()` the `TinyMultimodalNet` → `coremltools.convert()` → `.mlpackage`
+2. **App integration:** Load the `.mlpackage` in `CoreMLInferenceService`, replacing the placeholder
+3. **Real on-device profiling:** Benchmark actual model inference, not simulated latency
+4. **Model upgrade path:** Replace `TinyMultimodalNet` with a stronger architecture (e.g., LoRA fine-tuned VLM) while keeping the same training/export pipeline
+
+### What still remains for full Phase 4
+
+- [ ] `torch.jit.trace()` or `torch.export()` the trained model
+- [ ] `coremltools.convert()` to produce `.mlpackage`
+- [ ] Post-conversion accuracy gate (<= 3% drop)
+- [ ] App integration for `.mlpackage` loading
+- [ ] Real on-device evaluation with actual model inference
+
 ## Result Artifact Contract
 
 Every baseline run should write:

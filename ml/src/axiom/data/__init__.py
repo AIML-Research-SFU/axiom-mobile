@@ -10,3 +10,11 @@ __all__ = [
     "validate_rows",
     "validate_split_overlaps",
 ]
+
+# ImageLoader is conditionally available (requires torch + Pillow)
+try:
+    from .images import IMAGE_SIZE, ImageLoader, resolve_image_root
+
+    __all__ += ["IMAGE_SIZE", "ImageLoader", "resolve_image_root"]
+except ImportError:
+    pass
