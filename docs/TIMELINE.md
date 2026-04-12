@@ -66,7 +66,7 @@ Deliverable status: `[~]` In progress.
 - `[x]` Baseline experiment runner exists (`ml/scripts/run_baseline.py`) and writes reproducible metrics/artifacts to `results/baselines/`.
 - `[x]` Baseline results generated and committed (`results/baselines/question_lookup_v0_seed0/`); summary script and results note merged in PR #20.
 - `[x]` Model selection rubric is documented in `docs/MODEL_SELECTION.md`.
-- `[ ]` SwiftUI testbed shell not present in repo.
+- `[x]` SwiftUI testbed shell implemented with screenshot import, question input, model picker, run button, answer card, and debug metrics panel.
 - `[ ]` Core ML baseline conversion pipeline not present.
 
 Deliverable status: `[~]` In progress (core ML pipeline items remain).
@@ -118,6 +118,6 @@ Deliverable status: `[ ]` Not started in current codebase.
 ## Upcoming Work
 
 - `[ ]` Scale dataset to 200+ screenshots / 500+ QA pairs (Phase 1 completion).
-- `[ ]` Build SwiftUI testbed shell for on-device testing.
+- `[x]` Build SwiftUI testbed shell for on-device testing.
 - `[ ]` Implement selection strategies (RAND/UNC/DIV/KG) and sweep runner (Phase 3).
 - `[ ]` Core ML export pipeline + accuracy gate (Phase 4).
