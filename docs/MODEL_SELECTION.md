@@ -1,6 +1,6 @@
 # AXIOM-Mobile Model Selection and Baseline Scaffold
 
-Last updated: 2026-03-15
+Last updated: 2026-04-12
 
 ## Purpose
 
@@ -126,13 +126,17 @@ python3 ml/scripts/run_trainable_baseline.py \
 3. **Real on-device profiling:** Benchmark actual model inference, not simulated latency
 4. **Model upgrade path:** Replace `TinyMultimodalNet` with a stronger architecture (e.g., LoRA fine-tuned VLM) while keeping the same training/export pipeline
 
-### What still remains for full Phase 4
+### Phase 4 status
 
 - [x] `torch.jit.trace()` the trained model — implemented in `TinyMultimodalBaseline.export_coreml()`
 - [x] `coremltools.convert()` to produce `.mlpackage` — 96KB output, well under 100MB target
 - [x] Post-conversion accuracy gate (<= 3% drop) — `ml/scripts/export_coreml.py` compares PyTorch vs Core ML on val/test splits
-- [ ] App integration for `.mlpackage` loading
-- [ ] Real on-device evaluation with actual model inference
+- [x] Real-data training run — 37 pool / 5 val / 10 test on 52 real screenshots; 24 answer classes; train EM=16.2%, test EM=10%
+- [x] App integration — `CoreMLInferenceService` loads bundled `.mlpackage`, preprocesses image+text, runs real Core ML prediction
+- [x] Model catalog — `tiny_multimodal_v0` is first entry with `isCoreMLReady: true`
+- [x] Benchmark pipeline — `isPlaceholder=false` for real Core ML runs; CSV + `_meta.json` export works
+- [ ] Quantization — deferred (model is already 96KB)
+- [ ] Real on-device profiling — unblocked, not yet run
 
 ## Result Artifact Contract
 

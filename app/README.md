@@ -21,20 +21,24 @@ The app currently provides a **testbed shell** for exercising the screenshot QA 
 
 ```
 AXIOMMobile/
-├── AXIOMMobileApp.swift          App entry point
-├── ContentView.swift             Root view (routes to TestbedView)
+├── AXIOMMobileApp.swift            App entry point
+├── ContentView.swift               Root view (routes to TestbedView)
 ├── Models/
-│   ├── ModelCatalog.swift        Model metadata matching repo configs
-│   ├── InferenceResult.swift     Inference result value type
-│   ├── BenchmarkRecord.swift     Structured benchmark log record
-│   └── SessionMetadata.swift     Device/session metadata for reproducibility
+│   ├── ModelCatalog.swift          Model metadata matching repo configs
+│   ├── InferenceResult.swift       Inference result value type
+│   ├── BenchmarkRecord.swift       Structured benchmark log record
+│   └── SessionMetadata.swift       Device/session metadata for reproducibility
 ├── Services/
-│   ├── InferenceService.swift    Protocol + placeholder implementation
-│   └── BenchmarkExporter.swift   CSV export to Documents directory
+│   ├── InferenceService.swift      Protocol + placeholder implementation
+│   ├── CoreMLInferenceService.swift  Real Core ML inference for tiny_multimodal_v0
+│   └── BenchmarkExporter.swift     CSV export to Documents directory
+├── Resources/
+│   ├── TinyMultimodal.mlpackage    Exported Core ML model (96KB, 24 classes)
+│   └── tiny_multimodal_v0_labels.json  Label vocabulary (idx → answer mapping)
 └── Features/
     └── Testbed/
-        ├── TestbedView.swift     Main testbed screen
-        ├── TestbedViewModel.swift  @Observable view model
+        ├── TestbedView.swift       Main testbed screen
+        ├── TestbedViewModel.swift  @Observable view model (routes real vs placeholder)
         └── Views/
             ├── ScreenshotSection.swift
             ├── QuestionInputSection.swift
@@ -45,9 +49,41 @@ AXIOMMobile/
             └── BenchmarkSummaryCard.swift
 ```
 
-### Extending with real inference
+### Real Core ML inference
 
-When Core ML models are available, create a new conformance to `InferenceServiceProtocol` (e.g., `CoreMLInferenceService`) and swap it into `TestbedViewModel`. The view layer and benchmark infrastructure require no changes.
+The app now includes a real Core ML inference path for `tiny_multimodal_v0`:
+
+1. **`CoreMLInferenceService`** loads the bundled `TinyMultimodal.mlpackage` and `tiny_multimodal_v0_labels.json`.
+2. It preprocesses the screenshot (resize to 128×128, BGRA pixel buffer) and question (ASCII character-level encoding, padded to 128 chars).
+3. It runs Core ML prediction and decodes the argmax of the 24-class logit output into an answer string.
+4. `TestbedViewModel` routes to `CoreMLInferenceService` when `isCoreMLReady` is true, otherwise falls back to `PlaceholderInferenceService`.
+5. The `isPlaceholder` field is `false` for real Core ML runs, so benchmark exports accurately distinguish real from simulated inference.
+
+### Refreshing the model
+
+To update the bundled model after re-training/re-exporting:
+
+```bash
+# 1. Train on real data
+python3 ml/scripts/run_trainable_baseline.py --image-root /path/to/screenshots_v1
+
+# 2. Export to Core ML
+python3 ml/scripts/export_coreml.py \
+    --checkpoint-dir results/trainable_baselines/tiny_multimodal_v0_seed0/checkpoint \
+    --image-root /path/to/screenshots_v1
+
+# 3. Copy artifacts into app
+cp -R results/coreml_exports/tiny_multimodal_v0_seed0/TinyMultimodal.mlpackage \
+    app/AXIOMMobile/AXIOMMobile/Resources/TinyMultimodal.mlpackage
+cp results/coreml_exports/tiny_multimodal_v0_seed0/label_vocab.json \
+    app/AXIOMMobile/AXIOMMobile/Resources/tiny_multimodal_v0_labels.json
+
+# 4. Rebuild in Xcode
+```
+
+### Extending with additional models
+
+To add another Core ML model, create a new `InferenceServiceProtocol` conformance (or extend `CoreMLInferenceService` to dispatch by model ID), add the model entry to `ModelCatalog`, and set `isCoreMLReady: true`.
 
 ## Benchmark Mode (Phase 5 Instrumentation)
 
@@ -113,19 +149,17 @@ The metadata file captures device and session context for reproducibility:
 
 The **Share** button (appears after export) sends both the CSV and metadata JSON via the system share sheet.
 
-### What is still placeholder
+### Real vs placeholder inference
 
-All inference currently runs through `PlaceholderInferenceService`, which simulates latency (150ms for baseline, 600ms for VLM candidates) without real model computation. The benchmark infrastructure is real — when Core ML models are connected, the same logging and export flow captures actual on-device performance metrics.
+| Model | Service | `isPlaceholder` |
+|-------|---------|-----------------|
+| `tiny_multimodal_v0` | `CoreMLInferenceService` | `false` |
+| `question_lookup_v0` | `PlaceholderInferenceService` | `true` |
+| `florence_2_base` | `PlaceholderInferenceService` | `true` |
+| `llava_mobile` | `PlaceholderInferenceService` | `true` |
+| `qwen_vl_chat_int4` | `PlaceholderInferenceService` | `true` |
 
-### Preparing for Core ML evaluation
-
-When real `.mlpackage` models are available:
-
-1. Create `CoreMLInferenceService` conforming to `InferenceServiceProtocol`.
-2. Swap it into `TestbedViewModel`.
-3. The benchmark mode, CSV logging, and export flow work unchanged.
-4. Logged latencies will reflect real on-device inference time.
-5. The `is_placeholder` field will flip to `false`, clearly distinguishing real from simulated results.
+The routing is automatic: `TestbedViewModel` checks `selectedModel.isCoreMLReady` and dispatches to the appropriate service. Benchmark CSV exports and `_meta.json` accurately record which service was used via the `is_placeholder` field.
 
 ## Requirements
 

@@ -19,6 +19,15 @@ struct ModelInfo: Identifiable, Hashable {
 enum ModelCatalog {
     static let all: [ModelInfo] = [
         ModelInfo(
+            id: "tiny_multimodal_v0",
+            displayName: "Tiny Multimodal v0",
+            family: "custom",
+            stage: "trainable_baseline",
+            backend: "coreml",
+            isExecutable: true,
+            isCoreMLReady: true
+        ),
+        ModelInfo(
             id: "question_lookup_v0",
             displayName: "Question Lookup Baseline v0",
             family: "baseline",

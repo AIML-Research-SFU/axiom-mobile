@@ -23,7 +23,14 @@ final class TestbedViewModel {
     private(set) var lastExportURL: URL?
     private(set) var lastMetadataURL: URL?
 
-    private let inferenceService: any InferenceServiceProtocol = PlaceholderInferenceService()
+    private let placeholderService: any InferenceServiceProtocol = PlaceholderInferenceService()
+    private let coreMLService: any InferenceServiceProtocol = CoreMLInferenceService()
+
+    /// Routes to the real Core ML service for models that have a bundled
+    /// `.mlpackage`, and falls back to the placeholder for all others.
+    private var inferenceService: any InferenceServiceProtocol {
+        selectedModel.isCoreMLReady ? coreMLService : placeholderService
+    }
 
     // MARK: - Computed properties
 

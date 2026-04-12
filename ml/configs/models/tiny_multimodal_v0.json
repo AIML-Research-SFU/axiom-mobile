@@ -8,7 +8,7 @@
   "source": "custom (in-repo)",
   "notes": "~50K params. 128x128 image input. Character-level text encoding. All ops are Core ML export-friendly (conv2d, relu, linear, embedding, adaptive_avg_pool2d).",
   "executable": true,
-  "coreml_ready": false,
+  "coreml_ready": true,
   "params_millions": 0.05,
   "expected_app_footprint_mb": 0.5,
   "quantization": null,

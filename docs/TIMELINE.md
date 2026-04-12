@@ -92,9 +92,11 @@ Deliverable status: `[~]` In progress (KG-guided blocked on Phase 1 dependency; 
 - `[x]` Private screenshot-root bootstrap: `ml/scripts/locate_screenshot_root.py` discovers `screenshots_v1/` on macOS; `docs/PRIVATE_DATA_SETUP.md` documents setup.
 - `[x]` `export_coreml()` method implemented on `TinyMultimodalBaseline` (in `ml/src/axiom/models/tiny_multimodal.py`).
 - `[x]` `coremltools>=8.0` added as `[export]` optional dependency in `ml/pyproject.toml`.
-- `[ ]` App integration for `.mlpackage` loading not implemented.
+- `[x]` App integration for `.mlpackage` loading: `CoreMLInferenceService` loads bundled `TinyMultimodal.mlpackage` (96KB, 24 classes, trained on real 52-screenshot frozen dataset), preprocesses image+text, runs Core ML prediction, returns real `InferenceResult` with `isPlaceholder=false`. `TestbedViewModel` routes to real service when `isCoreMLReady` is true.
+- `[x]` Model catalog updated: `tiny_multimodal_v0` is the first entry with `isCoreMLReady: true`, `backend: "coreml"`.
+- `[x]` Benchmark pipeline distinguishes real vs placeholder inference via `isPlaceholder` field in CSV and `_meta.json`.
 
-Deliverable status: `[~]` In progress (export pipeline and accuracy gate complete; app integration remains).
+Deliverable status: `[x]` Complete (export pipeline, accuracy gate, and app integration all done; quantization deferred).
 
 ## Phase 5 (Weeks 13-14): On-Device Evaluation
 
@@ -103,7 +105,7 @@ Deliverable status: `[~]` In progress (export pipeline and accuracy gate complet
 - `[x]` CSV logging with deterministic schema and share/export implemented; captures placeholder results now, ready for real Core ML metrics.
 - `[x]` Device-profile ingestion and metric-summary pipeline: `ml/scripts/summarize_device_profiles.py` with typed schemas (`ml/src/axiom/results/device_profiles.py`), session folder contract, optional Instruments trace metrics sidecar, honest threshold evaluation, and analysis artifact outputs. Documented in `docs/DEVICE_PROFILES.md`.
 
-Deliverable status: `[~]` In progress (all Phase 5 instrumentation and analysis infrastructure complete; limited by placeholder inference and missing real Core ML model — no publishable device-performance conclusions yet).
+Deliverable status: `[~]` In progress (all Phase 5 instrumentation and analysis infrastructure complete; real Core ML model now available for `tiny_multimodal_v0` — first real on-device profiling is now unblocked).
 
 ## Phase 6 (Weeks 15-16): Analysis and Publication
 
@@ -128,5 +130,7 @@ Deliverable status: `[ ]` Not started in current codebase.
 - `[x]` Build SwiftUI testbed shell for on-device testing.
 - `[x]` Implement selection strategies (RAND/UNC/DIV) and sweep runner (Phase 3); KG-guided blocked pending KG v1.
 - `[x]` Core ML export pipeline + accuracy gate (Phase 4) — `ml/scripts/export_coreml.py` with 96KB `.mlpackage` output.
-- `[ ]` App integration for `.mlpackage` loading (Phase 4 completion).
-- `[ ]` Quantization pipeline (Phase 4 compression).
+- `[x]` App integration for `.mlpackage` loading (Phase 4 completion) — `CoreMLInferenceService` + bundled model in app.
+- `[ ]` Quantization pipeline (Phase 4 compression — deferred; model is already 96KB).
+- `[ ]` Real on-device profiling run with `tiny_multimodal_v0` (Phase 5).
+- `[ ]` Collect real benchmark data and run device-profile summarizer (Phase 5).
