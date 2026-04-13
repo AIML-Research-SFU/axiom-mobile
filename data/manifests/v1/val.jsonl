@@ -1,0 +1,5 @@
+{"id":"ex_008","image_filename":"img_008.png","question":"What is the temperature shown for Vancouver?","answer":"5°","difficulty":1,"notes":"iOS Weather app"}
+{"id":"ex_018","image_filename":"img_018.png","question":"What time is shown on the lock screen?","answer":"9:02","difficulty":1,"notes":"iOS Lock Screen"}
+{"id":"ex_028","image_filename":"img_028.png","question":"What is the equation result?","answer":"54","difficulty":1,"notes":"iOS Calculator app"}
+{"id":"ex_034","image_filename":"img_034.png","question":"What visual mode is the map using?","answer":"Explore","difficulty":1,"notes":"iOS Apple Maps app"}
+{"id":"ex_043","image_filename":"img_043.png","question":"What city name is shown?","answer":"Vancouver","difficulty":1,"notes":"Weather app"}

@@ -61,11 +61,36 @@ The JSONL must match those names exactly.
 ## Where files go
 
 - `data/schema/example.schema.json` → definition of one example
-- `data/manifests/pool.jsonl` → unlabeled pool candidates or training pool
-- `data/manifests/val.jsonl` → validation set manifest
-- `data/manifests/test.jsonl` → test set manifest
+- `data/manifests/pool.jsonl` → training pool (382 entries in v2)
+- `data/manifests/val.jsonl` → validation set manifest (30 entries in v2)
+- `data/manifests/test.jsonl` → test set manifest (40 entries in v2)
+- `data/manifests/v1/` → archived v1 manifests with SHA256 fingerprints
+- `data/manifests/v2_fingerprint.json` → SHA256 fingerprints for v2 manifests
 
 Do not store raw data in this repo.
+
+---
+
+## Dataset Versions
+
+### v2 (current) — 452 examples
+
+Deterministic freeze with stratified split rebalancing (seed=20260413).
+
+| Split | Count | Question Types |
+|-------|-------|---------------|
+| pool  | 382   | 20 types (time, battery%, charging, Apple Account, search bar, Wi-Fi, Bluetooth, etc.) |
+| val   | 30    | 9 types (includes rare: bluetooth, cellular, airplane, other) |
+| test  | 40    | 9 types (includes rare: calculator, maps, app_store, temperature) |
+
+Sources: 52 manual hand-labeled + 400 auto-generated exact-answer entries.
+
+Freeze script: `python3 ml/scripts/freeze_dataset_v2.py --execute --archive-v1`
+
+### v1 (archived) — 127 examples
+
+Original dataset with unbalanced splits (pool=112, val=5, test=10).
+Archived in `data/manifests/v1/` with fingerprints.
 
 ---
 

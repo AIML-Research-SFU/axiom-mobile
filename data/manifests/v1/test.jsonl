@@ -1,0 +1,10 @@
+{"id":"ex_009","image_filename":"img_009.png","question":"What color is the battery icon?","answer":"Yellow","difficulty":2,"notes":"iOS status bar"}
+{"id":"ex_010","image_filename":"img_010.png","question":"Is Cellular Data on or off?","answer":"On","difficulty":1,"notes":"iOS Cellular settings"}
+{"id":"ex_019","image_filename":"img_019.png","question":"What date is shown on the lock screen?","answer":"Sun Mar 15","difficulty":2,"notes":"iOS Lock Screen"}
+{"id":"ex_023","image_filename":"img_023.png","question":"Is Low Power Mode on or off?","answer":"Off","difficulty":2,"notes":"iOS Settings → Battery"}
+{"id":"ex_027","image_filename":"img_027.png","question":"What equation has been entered into the calculator?","answer":"48÷12+25.5","difficulty":2,"notes":"iOS Calculator app"}
+{"id":"ex_031","image_filename":"img_031.png","question":"What time is shown for Tokyo?","answer":"6:54AM","difficulty":1,"notes":"iOS Clock app → World Clock"}
+{"id":"ex_033","image_filename":"img_033.png","question":"What city is shown on the map?","answer":"Paris","difficulty":1,"notes":"iOS Apple Maps app"}
+{"id":"ex_038","image_filename":"img_038.png","question":"What page is the App Store on?","answer":"Games","difficulty":1,"notes":"iOS App Store"}
+{"id":"ex_046","image_filename":"img_046.png","question":"Is AirDrop receiving enabled?","answer":"No","difficulty":1,"notes":"Control Center AirDrop tile"}
+{"id":"ex_052","image_filename":"img_052.png","question":"What temperature is shown for Vancouver?","answer":"7°","difficulty":1,"notes":"Weather app"}
