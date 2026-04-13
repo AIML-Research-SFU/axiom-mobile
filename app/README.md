@@ -23,6 +23,18 @@ The app currently provides a **testbed shell** for exercising the screenshot QA 
 AXIOMMobile/
 ├── AXIOMMobileApp.swift            App entry point
 ├── ContentView.swift               Root view (routes to TestbedView)
+├── DesignSystem/                   Semantic design tokens + reusable components
+│   ├── AXColor.swift               Adaptive color roles (accent, background, glass, status)
+│   ├── AXSpacing.swift             4-pt grid spacing scale
+│   ├── AXShape.swift               Corner radii and stroke widths
+│   ├── AXTypography.swift          Semantic font roles (Dynamic Type)
+│   ├── AXMotion.swift              Animation presets (Reduce Motion aware)
+│   ├── AXElevation.swift           Shadow/depth tokens
+│   └── Components/
+│       ├── GlassCard.swift         Glass-material card container (3 hierarchy levels)
+│       ├── AXButtonStyle.swift     Primary, secondary, compact button styles
+│       ├── StatusBadge.swift       Status pill/chip (5 variants)
+│       └── SectionHeader.swift     Consistent icon + title section header
 ├── Models/
 │   ├── ModelCatalog.swift          Model metadata matching repo configs
 │   ├── InferenceResult.swift       Inference result value type
@@ -38,17 +50,23 @@ AXIOMMobile/
 │   └── tiny_multimodal_v0_labels.json  Label vocabulary (idx → answer mapping)
 └── Features/
     └── Testbed/
-        ├── TestbedView.swift       Main testbed screen
+        ├── TestbedView.swift       Main testbed screen (gradient background, design-system CTA)
         ├── TestbedViewModel.swift  @Observable view model (routes real vs placeholder)
         └── Views/
-            ├── ScreenshotSection.swift
-            ├── QuestionInputSection.swift
-            ├── ModelPickerSection.swift
-            ├── AnswerCard.swift
-            ├── DebugMetricsCard.swift
-            ├── BenchmarkConfigSection.swift
-            └── BenchmarkSummaryCard.swift
+            ├── ScreenshotSection.swift     Hero card with empty-state and image preview
+            ├── QuestionInputSection.swift  Glass-enclosed text field
+            ├── ModelPickerSection.swift    Model picker with status badge
+            ├── AnswerCard.swift            Elevated hero result card with latency badge
+            ├── DebugMetricsCard.swift      Collapsible subdued metrics card
+            ├── BenchmarkConfigSection.swift Compact benchmark toggle
+            └── BenchmarkSummaryCard.swift  Metric tiles with export actions
 ```
+
+### Design System
+
+The app includes a design-system layer (`DesignSystem/`) that provides semantic tokens for color, spacing, shape, typography, motion, and elevation. All feature views consume these tokens — no magic numbers or raw colors in view code.
+
+See `docs/DESIGN_SYSTEM.md` for full documentation of token categories, component usage rules, and accessibility behavior.
 
 ### Real Core ML inference
 
@@ -161,6 +179,27 @@ The **Share** button (appears after export) sends both the CSV and metadata JSON
 | `qwen_vl_chat_int4` | `PlaceholderInferenceService` | `true` |
 
 The routing is automatic: `TestbedViewModel` checks `selectedModel.isCoreMLReady` and dispatches to the appropriate service. Benchmark CSV exports and `_meta.json` accurately record which service was used via the `is_placeholder` field.
+
+## Demo Mode
+
+For presentation setup with a single inference, launch the app with `--demo-mode`:
+
+```bash
+# Via Simulator:
+xcrun simctl launch booted com.arieljtyson.AXIOMMobile --demo-mode
+
+# Via Xcode scheme:
+# Edit Scheme > Run > Arguments > Add "--demo-mode"
+```
+
+This automatically:
+1. Selects `tiny_multimodal_v0` (first Core ML-ready model)
+2. Loads a representative image via `BenchmarkInputProvider`
+3. Sets a canonical demo question ("What is shown on screen?")
+4. Runs **one** inference
+5. Leaves the UI in a demo-ready state showing the result
+
+Unlike `--auto-benchmark`, demo mode does not run multiple iterations or auto-export. It sets up the app for an interactive presentation starting point. See `docs/DEMO_FLOW.md` for the full rehearsable demo script.
 
 ## Auto-Benchmark Mode
 

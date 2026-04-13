@@ -6,15 +6,22 @@ struct TestbedView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: AXSpacing.sectionGap) {
+
+                    // MARK: - Input Zone (hero)
+
                     ScreenshotSection(
                         selectedItem: $viewModel.selectedPhotoItem,
                         image: viewModel.screenshotImage,
                         onClear: { viewModel.clearScreenshot() },
-                        onSaveAsBenchmarkInput: { viewModel.saveBenchmarkScreenshot() }
+                        onSaveAsBenchmarkInput: {
+                            viewModel.saveBenchmarkScreenshot()
+                        }
                     )
 
                     QuestionInputSection(question: $viewModel.question)
+
+                    // MARK: - Configuration
 
                     ModelPickerSection(selectedModel: $viewModel.selectedModel)
 
@@ -23,11 +30,25 @@ struct TestbedView: View {
                         iterations: $viewModel.benchmarkIterations
                     )
 
-                    runButton
+                    // MARK: - Primary Action
+
+                    primaryActionButton
+
+                    // MARK: - Output Zone
 
                     if let result = viewModel.result {
                         AnswerCard(result: result)
+                            .transition(
+                                .asymmetric(
+                                    insertion: .opacity.combined(
+                                        with: .scale(scale: 0.97)
+                                    ),
+                                    removal: .opacity
+                                )
+                            )
                     }
+
+                    // MARK: - Supporting Info
 
                     DebugMetricsCard(
                         selectedModel: viewModel.selectedModel,
@@ -39,7 +60,8 @@ struct TestbedView: View {
                     if !viewModel.benchmarkRecords.isEmpty {
                         BenchmarkSummaryCard(
                             recordCount: viewModel.benchmarkRecordCount,
-                            averageLatencyMs: viewModel.benchmarkAverageLatencyMs,
+                            averageLatencyMs: viewModel
+                                .benchmarkAverageLatencyMs,
                             minLatencyMs: viewModel.benchmarkMinLatencyMs,
                             maxLatencyMs: viewModel.benchmarkMaxLatencyMs,
                             modelID: viewModel.benchmarkModelID,
@@ -51,23 +73,31 @@ struct TestbedView: View {
                         )
                     }
                 }
-                .padding()
+                .padding(.horizontal, AXSpacing.pageMargin)
+                .padding(.bottom, AXSpacing.xxl)
             }
             .scrollIndicators(.hidden)
-            .navigationTitle("AXIOM Testbed")
+            .background { backgroundGradient }
+            .navigationTitle("AXIOM")
+            .toolbarTitleDisplayMode(.large)
             .onChange(of: viewModel.selectedPhotoItem) { _, _ in
                 Task { await viewModel.loadImage() }
             }
             .task {
                 if viewModel.isAutoBenchmarkRequested {
                     await viewModel.runAutoBenchmark()
+                } else if viewModel.isDemoModeRequested {
+                    await viewModel.runDemoMode()
                 }
             }
+            .axAnimation(AXMotion.gentle, value: viewModel.result != nil)
         }
     }
 
-    private var runButton: some View {
-        VStack(spacing: 8) {
+    // MARK: - Primary Action Button
+
+    private var primaryActionButton: some View {
+        VStack(spacing: AXSpacing.sm) {
             Button {
                 Task {
                     if viewModel.benchmarkEnabled {
@@ -77,34 +107,34 @@ struct TestbedView: View {
                     }
                 }
             } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: AXSpacing.sm) {
                     if viewModel.isRunning {
                         ProgressView()
                             .tint(.white)
                     } else {
-                        Image(systemName: viewModel.benchmarkEnabled
-                              ? "timer"
-                              : "play.fill")
+                        Image(
+                            systemName: viewModel.benchmarkEnabled
+                                ? "timer"
+                                : "play.fill"
+                        )
                     }
 
                     if viewModel.isBenchmarking {
-                        Text("Running \(viewModel.benchmarkProgress) of \(viewModel.benchmarkIterations)")
-                            .fontWeight(.semibold)
+                        Text(
+                            "Running \(viewModel.benchmarkProgress) of \(viewModel.benchmarkIterations)"
+                        )
                     } else if viewModel.benchmarkEnabled {
-                        Text("Run Benchmark (\(viewModel.benchmarkIterations) runs)")
-                            .fontWeight(.semibold)
+                        Text("Run Benchmark (\(viewModel.benchmarkIterations))")
                     } else {
                         Text("Run Inference")
-                            .fontWeight(.semibold)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+            .buttonStyle(AXPrimaryButtonStyle())
             .disabled(!viewModel.canRun)
-            .sensoryFeedback(.success, trigger: viewModel.isRunning) { oldValue, newValue in
+            .sensoryFeedback(.success, trigger: viewModel.isRunning) {
+                oldValue,
+                newValue in
                 oldValue && !newValue
             }
             .accessibilityLabel(
@@ -118,9 +148,25 @@ struct TestbedView: View {
                     value: Double(viewModel.benchmarkProgress),
                     total: Double(viewModel.benchmarkIterations)
                 )
-                .tint(.accentColor)
+                .tint(AXColor.accentPrimary)
+                .padding(.horizontal, AXSpacing.sm)
             }
         }
+    }
+
+    // MARK: - Background
+
+    private var backgroundGradient: some View {
+        LinearGradient(
+            colors: [
+                AXColor.backgroundGradientTop,
+                AXColor.backgroundBase,
+                AXColor.backgroundGradientBottom,
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
     }
 }
 

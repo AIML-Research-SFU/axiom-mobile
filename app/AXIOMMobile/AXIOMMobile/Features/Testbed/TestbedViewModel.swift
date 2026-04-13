@@ -1,5 +1,5 @@
-import SwiftUI
 import PhotosUI
+import SwiftUI
 import UIKit
 
 @Observable
@@ -23,8 +23,10 @@ final class TestbedViewModel {
     private(set) var lastExportURL: URL?
     private(set) var lastMetadataURL: URL?
 
-    private let placeholderService: any InferenceServiceProtocol = PlaceholderInferenceService()
-    private let coreMLService: any InferenceServiceProtocol = CoreMLInferenceService()
+    private let placeholderService: any InferenceServiceProtocol =
+        PlaceholderInferenceService()
+    private let coreMLService: any InferenceServiceProtocol =
+        CoreMLInferenceService()
 
     /// Routes to the real Core ML service for models that have a bundled
     /// `.mlpackage`, and falls back to the placeholder for all others.
@@ -35,7 +37,8 @@ final class TestbedViewModel {
     // MARK: - Computed properties
 
     var canRun: Bool {
-        !question.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isRunning
+        !question.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            && !isRunning
     }
 
     var imageStatusText: String {
@@ -73,8 +76,9 @@ final class TestbedViewModel {
 
     func loadImage() async {
         guard let item = selectedPhotoItem,
-              let data = try? await item.loadTransferable(type: Data.self),
-              let image = UIImage(data: data) else {
+            let data = try? await item.loadTransferable(type: Data.self),
+            let image = UIImage(data: data)
+        else {
             screenshotImage = nil
             return
         }
@@ -86,11 +90,13 @@ final class TestbedViewModel {
         isRunning = true
         defer { isRunning = false }
 
-        guard let newResult = try? await inferenceService.run(
-            model: selectedModel,
-            image: screenshotImage,
-            question: question
-        ) else { return }
+        guard
+            let newResult = try? await inferenceService.run(
+                model: selectedModel,
+                image: screenshotImage,
+                question: question
+            )
+        else { return }
 
         withAnimation(.smooth) {
             result = newResult
@@ -112,13 +118,19 @@ final class TestbedViewModel {
         for i in 0..<benchmarkIterations {
             if Task.isCancelled { break }
 
-            guard let newResult = try? await inferenceService.run(
-                model: selectedModel,
-                image: screenshotImage,
-                question: question
-            ) else { continue }
+            guard
+                let newResult = try? await inferenceService.run(
+                    model: selectedModel,
+                    image: screenshotImage,
+                    question: question
+                )
+            else { continue }
 
-            appendRecord(from: newResult, runKind: .benchmark, iterationIndex: i)
+            appendRecord(
+                from: newResult,
+                runKind: .benchmark,
+                iterationIndex: i
+            )
             benchmarkProgress = i + 1
 
             withAnimation(.smooth) {
@@ -130,7 +142,10 @@ final class TestbedViewModel {
     func exportCSV() {
         do {
             let stamp = BenchmarkExporter.sessionStamp()
-            lastExportURL = try BenchmarkExporter.writeCSV(benchmarkRecords, stamp: stamp)
+            lastExportURL = try BenchmarkExporter.writeCSV(
+                benchmarkRecords,
+                stamp: stamp
+            )
 
             let device = UIDevice.current
             let bundle = Bundle.main
@@ -141,14 +156,21 @@ final class TestbedViewModel {
                 deviceModel: device.model,
                 systemName: device.systemName,
                 systemVersion: device.systemVersion,
-                appVersion: bundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown",
-                appBuild: bundle.infoDictionary?["CFBundleVersion"] as? String ?? "unknown",
+                appVersion: bundle.infoDictionary?["CFBundleShortVersionString"]
+                    as? String ?? "unknown",
+                appBuild: bundle.infoDictionary?["CFBundleVersion"] as? String
+                    ?? "unknown",
                 modelID: benchmarkModelID ?? "unknown",
                 isPlaceholder: benchmarkRecords.last?.isPlaceholder ?? true,
-                benchmarkIterations: benchmarkRecords.filter { $0.runKind == .benchmark }.count,
+                benchmarkIterations: benchmarkRecords.filter {
+                    $0.runKind == .benchmark
+                }.count,
                 recordCount: benchmarkRecords.count
             )
-            lastMetadataURL = try BenchmarkExporter.writeMetadata(metadata, stamp: stamp)
+            lastMetadataURL = try BenchmarkExporter.writeMetadata(
+                metadata,
+                stamp: stamp
+            )
         } catch {
             lastExportURL = nil
             lastMetadataURL = nil
@@ -174,6 +196,11 @@ final class TestbedViewModel {
         ProcessInfo.processInfo.arguments.contains("--auto-benchmark")
     }
 
+    /// Whether the app was launched with `--demo-mode` for presentation setup.
+    var isDemoModeRequested: Bool {
+        ProcessInfo.processInfo.arguments.contains("--demo-mode")
+    }
+
     /// Runs a complete benchmark session automatically for profiling workflows.
     ///
     /// Uses `tiny_multimodal_v0` with a representative benchmark input:
@@ -185,7 +212,10 @@ final class TestbedViewModel {
     /// Exports CSV + `_meta.json` to the app's Documents directory on completion.
     func runAutoBenchmark() async {
         // Select the Core ML-ready model
-        guard let coreMLModel = ModelCatalog.all.first(where: { $0.isCoreMLReady }) else {
+        guard
+            let coreMLModel = ModelCatalog.all.first(where: { $0.isCoreMLReady }
+            )
+        else {
             return
         }
         selectedModel = coreMLModel
@@ -205,10 +235,37 @@ final class TestbedViewModel {
         exportCSV()
     }
 
-    /// Describes the image source used for the last auto-benchmark run.
+    /// Describes the image source used for the last auto-benchmark or demo run.
     /// Either `"persisted"` (real screenshot from Documents) or
     /// `"synthetic"` (deterministic test pattern).
     private(set) var autoBenchmarkImageSource: String?
+
+    // MARK: - Demo Mode
+
+    /// Runs a single-shot demo inference for presentation setup.
+    ///
+    /// Selects `tiny_multimodal_v0`, loads a representative image via
+    /// `BenchmarkInputProvider`, sets a canonical question, and runs
+    /// **one** inference. Leaves the UI in a predictable demo-ready state
+    /// showing the result — unlike `runAutoBenchmark()` which runs 50
+    /// iterations and auto-exports.
+    func runDemoMode() async {
+        guard
+            let coreMLModel = ModelCatalog.all.first(where: { $0.isCoreMLReady }
+            )
+        else {
+            return
+        }
+        selectedModel = coreMLModel
+        question = BenchmarkInputProvider.defaultQuestion
+        benchmarkEnabled = false
+
+        let (image, source) = BenchmarkInputProvider.loadScreenshot()
+        screenshotImage = image
+        autoBenchmarkImageSource = source
+
+        await run()
+    }
 
     /// Saves the currently loaded screenshot as the persisted benchmark input.
     ///

@@ -6,29 +6,68 @@ struct DebugMetricsCard: View {
     let questionLength: Int
     let result: InferenceResult?
 
+    @State private var isExpanded = false
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Label("Debug", systemImage: "ant")
-                .font(.headline)
+        GlassCard(.subdued) {
+            VStack(alignment: .leading, spacing: AXSpacing.sm) {
+                Button {
+                    withAnimation(AXMotion.standard) {
+                        isExpanded.toggle()
+                    }
+                } label: {
+                    HStack {
+                        SectionHeader(
+                            "Debug",
+                            icon: "ant",
+                            tint: AXColor.textTertiary
+                        )
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(AXColor.textTertiary)
+                            .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint(
+                    isExpanded
+                        ? "Collapse debug details" : "Expand debug details"
+                )
 
-            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
-                MetricRow(label: "Model ID", value: selectedModel.id)
-                MetricRow(label: "Status", value: selectedModel.statusLabel)
-                MetricRow(label: "Image", value: imageStatus)
-                MetricRow(label: "Question", value: "\(questionLength) characters")
-
-                if let result {
-                    let ms = Int(result.latencySeconds * 1000)
-                    MetricRow(label: "Latency", value: "\(ms) ms")
-                    MetricRow(label: "Result Type", value: result.isPlaceholder ? "Placeholder" : "Live")
+                if isExpanded {
+                    metricsGrid
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                 }
             }
         }
-        .padding()
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
-        .accessibilityElement(children: .combine)
+    }
+
+    private var metricsGrid: some View {
+        Grid(
+            alignment: .leading,
+            horizontalSpacing: AXSpacing.md,
+            verticalSpacing: AXSpacing.sm
+        ) {
+            MetricRow(label: "Model ID", value: selectedModel.id)
+            MetricRow(label: "Status", value: selectedModel.statusLabel)
+            MetricRow(label: "Image", value: imageStatus)
+            MetricRow(label: "Question", value: "\(questionLength) characters")
+
+            if let result {
+                let ms = Int(result.latencySeconds * 1000)
+                MetricRow(label: "Latency", value: "\(ms) ms")
+                MetricRow(
+                    label: "Inference",
+                    value: result.isPlaceholder ? "Placeholder" : "Live"
+                )
+            }
+        }
     }
 }
+
+// MARK: - Metric Row
 
 private struct MetricRow: View {
     let label: String
@@ -37,11 +76,12 @@ private struct MetricRow: View {
     var body: some View {
         GridRow {
             Text(label)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(AXFont.caption)
+                .foregroundStyle(AXColor.textTertiary)
                 .gridColumnAlignment(.leading)
             Text(value)
-                .font(.caption.monospaced())
+                .font(AXFont.mono)
+                .foregroundStyle(AXColor.textSecondary)
                 .gridColumnAlignment(.leading)
         }
     }

@@ -17,65 +17,94 @@ struct BenchmarkSummaryCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Label("Benchmark Summary", systemImage: "chart.bar")
-                .font(.headline)
-
-            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
-                SummaryRow(label: "Runs", value: "\(recordCount)")
-                SummaryRow(label: "Avg Latency", value: "\(Int(averageLatencyMs)) ms")
-                SummaryRow(label: "Min Latency", value: "\(minLatencyMs) ms")
-                SummaryRow(label: "Max Latency", value: "\(maxLatencyMs) ms")
-                if let modelID {
-                    SummaryRow(label: "Model", value: modelID)
-                }
-                SummaryRow(label: "Exported", value: hasExported ? "Yes" : "No")
-            }
-
-            HStack(spacing: 12) {
-                Button {
-                    onExport()
-                } label: {
-                    Label("Export CSV", systemImage: "square.and.arrow.up")
-                }
-                .buttonStyle(.bordered)
-
-                if !shareItems.isEmpty {
-                    ShareLink(items: shareItems) {
-                        Label("Share", systemImage: "paperplane")
-                    }
-                    .buttonStyle(.bordered)
+        GlassCard {
+            VStack(alignment: .leading, spacing: AXSpacing.md) {
+                HStack {
+                    SectionHeader(
+                        "Benchmark Results",
+                        icon: "chart.bar",
+                        tint: AXColor.statusInfo
+                    )
+                    Spacer()
+                    StatusBadge(
+                        "\(recordCount) runs",
+                        variant: .info,
+                        icon: "number"
+                    )
                 }
 
-                Spacer()
+                metricsGrid
 
-                Button(role: .destructive) {
-                    onClear()
-                } label: {
-                    Label("Clear", systemImage: "trash")
-                }
-                .buttonStyle(.bordered)
+                actionRow
             }
         }
-        .padding()
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         .accessibilityElement(children: .combine)
     }
-}
 
-private struct SummaryRow: View {
-    let label: String
-    let value: String
+    // MARK: - Metrics
 
-    var body: some View {
-        GridRow {
+    private var metricsGrid: some View {
+        HStack(spacing: AXSpacing.md) {
+            metricTile(
+                label: "Avg",
+                value: "\(Int(averageLatencyMs))",
+                unit: "ms"
+            )
+            metricTile(label: "Min", value: "\(minLatencyMs)", unit: "ms")
+            metricTile(label: "Max", value: "\(maxLatencyMs)", unit: "ms")
+        }
+    }
+
+    private func metricTile(label: String, value: String, unit: String)
+        -> some View
+    {
+        VStack(spacing: AXSpacing.xs) {
             Text(label)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .gridColumnAlignment(.leading)
-            Text(value)
-                .font(.caption.monospaced())
-                .gridColumnAlignment(.leading)
+                .font(AXFont.badge)
+                .foregroundStyle(AXColor.textTertiary)
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
+                Text(value)
+                    .font(.title3.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(AXColor.textPrimary)
+                Text(unit)
+                    .font(AXFont.badge)
+                    .foregroundStyle(AXColor.textTertiary)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, AXSpacing.sm)
+        .background {
+            RoundedRectangle(cornerRadius: AXRadius.sm)
+                .fill(AXColor.glassFill)
+        }
+    }
+
+    // MARK: - Actions
+
+    private var actionRow: some View {
+        HStack(spacing: AXSpacing.sm) {
+            Button {
+                onExport()
+            } label: {
+                Label("Export", systemImage: "square.and.arrow.up")
+            }
+            .buttonStyle(AXSecondaryButtonStyle(tintColor: AXColor.statusInfo))
+
+            if !shareItems.isEmpty {
+                ShareLink(items: shareItems) {
+                    Label("Share", systemImage: "paperplane")
+                }
+                .buttonStyle(AXSecondaryButtonStyle())
+            }
+
+            Spacer()
+
+            Button(role: .destructive) {
+                onClear()
+            } label: {
+                Label("Clear", systemImage: "trash")
+            }
+            .buttonStyle(AXCompactButtonStyle(role: .destructive))
         }
     }
 }

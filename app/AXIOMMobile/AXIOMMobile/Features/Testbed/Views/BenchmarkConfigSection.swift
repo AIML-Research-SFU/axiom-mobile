@@ -5,25 +5,40 @@ struct BenchmarkConfigSection: View {
     @Binding var iterations: Int
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Toggle(isOn: $enabled) {
-                Label("Benchmark Mode", systemImage: "timer")
-                    .font(.headline)
-            }
-
-            if enabled {
-                Stepper(value: $iterations, in: 1...50) {
-                    Text("Iterations: \(iterations)")
-                        .font(.subheadline)
+        GlassCard(.subdued) {
+            VStack(alignment: .leading, spacing: AXSpacing.md) {
+                Toggle(isOn: $enabled) {
+                    SectionHeader(
+                        "Benchmark",
+                        icon: "timer",
+                        tint: AXColor.statusWarning
+                    )
                 }
+                .tint(AXColor.accentPrimary)
 
-                Text("Runs inference repeatedly and logs latency statistics for export.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                if enabled {
+                    VStack(alignment: .leading, spacing: AXSpacing.sm) {
+                        Stepper(value: $iterations, in: 1...50) {
+                            HStack(spacing: AXSpacing.xs) {
+                                Text("Iterations")
+                                    .font(AXFont.caption)
+                                    .foregroundStyle(AXColor.textSecondary)
+                                Text("\(iterations)")
+                                    .font(AXFont.mono)
+                                    .foregroundStyle(AXColor.textPrimary)
+                            }
+                        }
+
+                        Text(
+                            "Runs inference repeatedly and logs latency statistics."
+                        )
+                        .font(AXFont.caption)
+                        .foregroundStyle(AXColor.textTertiary)
+                    }
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                }
             }
         }
-        .padding()
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
-        .animation(.smooth, value: enabled)
+        .axAnimation(AXMotion.standard, value: enabled)
     }
 }

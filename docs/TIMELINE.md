@@ -119,11 +119,21 @@ Deliverable status: `[~]` In progress (benchmark input hardened, xctrace workflo
 
 ## Phase 6 (Weeks 15-16): Analysis and Publication
 
-- `[ ]` Statistical analysis package (power-law fits, paired tests, Pareto analysis) not present.
-- `[ ]` Paper draft file(s) not present in repo.
-- `[ ]` Demo flow integration and final presentation assets not present.
+- `[x]` Statistical analysis package: `ml/src/axiom/analysis/` with typed schemas (`schemas.py`) and stdlib-only statistical helpers (`stats.py`). Bootstrap CIs, paired bootstrap comparisons, power-law fitting with degenerate-data guards.
+- `[x]` Analysis runner: `ml/scripts/run_statistical_analysis.py` ingests baselines, sweeps, CoreML exports, and device profiles. Writes JSON, CSV, Markdown, and SVG to `results/analysis/phase6_v0/`.
+- `[x]` Honest status vocabulary: every result carries an explicit status (complete, partial, blocked, insufficient_data, simulator_only, physical_device_required, skipped, degenerate).
+- `[x]` Simulator vs physical-device separation enforced in all device-profile analysis.
+- `[x]` Documentation: `docs/STATISTICAL_ANALYSIS.md` covers methods, inputs, outputs, status vocabulary, and extension points.
+- `[x]` Paper draft v1: `paper/PAPER_DRAFT_v1.md` — full research paper skeleton grounded in current repo results, with honest limitations throughout.
+- `[x]` Paper asset generator: `ml/scripts/build_paper_assets.py` produces deterministic SVG, CSV, and Markdown assets from analysis outputs.
+- `[x]` Demo flow script: `docs/DEMO_FLOW.md` — rehearsable 3-minute demo with interactive, auto-benchmark, and demo-mode paths.
+- `[x]` Demo mode in app: `--demo-mode` launch argument sets up a single-shot inference with `tiny_multimodal_v0` for presentation-ready state.
+- `[x]` Design system v0: `DesignSystem/` layer with semantic color, spacing, shape, typography, motion, and elevation tokens. Reusable components: `GlassCard`, `AXPrimaryButtonStyle`, `AXSecondaryButtonStyle`, `StatusBadge`, `SectionHeader`. All feature views refactored to consume tokens. Documented in `docs/DESIGN_SYSTEM.md`.
+- `[x]` Testbed UI redesign: gradient background, glass cards with hierarchy levels, prominent CTA, status badges, collapsible debug section, dashed empty states, metric tiles in benchmark summary.
+- `[ ]` Paper revision with physical-device data (blocked on iPhone connection).
+- `[ ]` Final presentation / slide deck.
 
-Deliverable status: `[ ]` Not started in current codebase.
+Deliverable status: `[~]` In progress (paper draft v1, demo flow, and asset generator complete; physical-device data and final revision remain).
 
 ## Next Practical Milestones
 
@@ -148,4 +158,6 @@ Deliverable status: `[ ]` Not started in current codebase.
 - `[x]` xctrace profiling workflow validated on Simulator (Time Profiler + Allocations).
 - `[~]` Physical-device profiling run on iPhone hardware (Phase 5) — all tooling ready, blocked on USB device connection.
 - `[ ]` Physical-device Instruments traces: Time Profiler, Allocations, Energy Log (Phase 5).
-- `[ ]` Phase 6: Statistical analysis, paper draft, demo flow.
+- `[x]` Phase 6: Statistical analysis package — bootstrap CIs, paired comparisons, power-law fits, Pareto views, reproducible outputs.
+- `[x]` Phase 6: Paper draft v1 + demo flow + asset generator + `--demo-mode` launch argument.
+- `[ ]` Phase 6: Paper revision with physical-device data, final presentation.

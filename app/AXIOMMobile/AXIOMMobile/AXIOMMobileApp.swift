@@ -1,10 +1,3 @@
-//
-//  AXIOMMobileApp.swift
-//  AXIOMMobile
-//
-//  Created by Ariel Tyson on 12/4/26.
-//
-
 import SwiftUI
 
 @main

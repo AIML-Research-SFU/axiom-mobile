@@ -1,0 +1,584 @@
+{
+  "analysis_id": "phase6_v0",
+  "comparisons": {
+    "baseline_comparison": {
+      "heuristic_baseline": {
+        "model_id": "question_lookup_v0",
+        "pool_em": 0.7297,
+        "test_em": 0.1,
+        "val_em": 0.0
+      },
+      "notes": [
+        "Both models achieve 10% test EM (1/10 correct) and 0% val EM.",
+        "The heuristic baseline's high pool EM (73%) reflects memorization, not generalization.",
+        "Paired comparison is not applicable: different model architectures with a single run each."
+      ],
+      "pool_em_diff": -0.5676,
+      "reason": "Single-seed comparison. Heuristic baseline memorizes pool answers (high pool EM) but does not generalize (low test EM). Trainable baseline also has low test EM on this small dataset. No statistical significance test is meaningful with 1 run per model.",
+      "status": "complete",
+      "test_em_diff": 0.0,
+      "trainable_baseline": {
+        "model_id": "tiny_multimodal_v0",
+        "params": 0.05,
+        "pool_em": 0.1622,
+        "test_em": 0.1,
+        "val_em": 0.0
+      }
+    },
+    "notes": [],
+    "pairwise_comparisons": [
+      {
+        "budget": 37,
+        "ci_level": 0.95,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_diff": 0.0,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 3,
+        "reason": "Only 3 pairs; paired bootstrap may be unreliable.",
+        "status": "partial",
+        "strategy_a": "diversity",
+        "strategy_b": "random"
+      },
+      {
+        "budget": 37,
+        "ci_level": 0.95,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_diff": 0.0,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 3,
+        "reason": "Only 3 pairs; paired bootstrap may be unreliable.",
+        "status": "partial",
+        "strategy_a": "diversity",
+        "strategy_b": "uncertainty"
+      },
+      {
+        "budget": 37,
+        "ci_level": 0.95,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0,
+        "mean_diff": 0.0,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 3,
+        "reason": "Only 3 pairs; paired bootstrap may be unreliable.",
+        "status": "partial",
+        "strategy_a": "random",
+        "strategy_b": "uncertainty"
+      }
+    ],
+    "reason": "3 pairwise comparisons at budget=37 with 3 strategies. Small sample sizes (3 seeds); bootstrap CIs are provided but may be unreliable.",
+    "status": "partial"
+  },
+  "created_at_utc": "2026-04-13T04:12:04Z",
+  "device_profiles": {
+    "energy_reason": "Energy Log requires physical device. Instruments reports relative levels (0-20 scale), not battery %/hr. Not available from Simulator.",
+    "energy_status": "physical_device_required",
+    "memory_reason": "No physical-device Instruments Allocations trace captured yet.",
+    "memory_status": "physical_device_required",
+    "notes": [
+      "All latency data is from Simulator only. These validate the instrumentation pipeline but are NOT publishable on-device evidence."
+    ],
+    "physical_device": [],
+    "reason": "2 simulator session(s), 0 physical-device session(s).",
+    "simulator": [
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "simulator",
+        "max_ms": 498,
+        "mean_ms": 220.2,
+        "min_ms": 185,
+        "model_id": "tiny_multimodal_v0",
+        "n_sessions": 1,
+        "n_total_records": 20,
+        "p50_ms": 199.5,
+        "p95_ms": 304.2,
+        "reason": "Simulator latency \u2014 not valid for on-device performance conclusions. No NPU, no real thermal behavior.",
+        "status": "simulator_only",
+        "threshold_evaluations": [
+          {
+            "measured_value": "199.5 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "304.2 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      },
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "simulator",
+        "max_ms": 282,
+        "mean_ms": 103.3,
+        "min_ms": 91,
+        "model_id": "tiny_multimodal_v0",
+        "n_sessions": 1,
+        "n_total_records": 50,
+        "p50_ms": 98.0,
+        "p95_ms": 112.8,
+        "reason": "Simulator latency \u2014 not valid for on-device performance conclusions. No NPU, no real thermal behavior.",
+        "status": "simulator_only",
+        "threshold_evaluations": [
+          {
+            "measured_value": "98.0 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "112.8 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      }
+    ],
+    "status": "simulator_only"
+  },
+  "learning_curves": {
+    "dataset_info": {
+      "fingerprint": {
+        "combined_sha256": "bcd03f5e07337b475b28fea85ca01b0a3bb05db3e2dd3657554834ef5231446f",
+        "split_sha256": {
+          "pool": "3c0cdf8dee3aa3f490c703fd1d1be5815b5351e3d0a3d39140ac171101c3b069",
+          "test": "08ce04944cda6a707ce4cdce3f723d33cfa884a05820af44e1c4fdbc91971b48",
+          "val": "6274769fa8fb0b137fe00aa167a404b726d96a1c6a8e45e2dae9e0835b2a16dd"
+        }
+      },
+      "pool_size": 37,
+      "test_size": 10,
+      "val_size": 5
+    },
+    "notes": [
+      "Strategy 'diversity': all validation EM values are 0.0. This is expected with the heuristic baseline on a small dataset where val examples don't overlap with memorized mappings.",
+      "Strategy 'random': all validation EM values are 0.0. This is expected with the heuristic baseline on a small dataset where val examples don't overlap with memorized mappings.",
+      "Strategy 'uncertainty': all validation EM values are 0.0. This is expected with the heuristic baseline on a small dataset where val examples don't overlap with memorized mappings.",
+      "Skipped strategies: kg_guided. See selection sweep docs for reasons."
+    ],
+    "reason": "3 strategies analyzed across 6 budgets. Dataset is small (pool=37, test=10, val=5); results validate the pipeline but are not publication-ready.",
+    "status": "partial",
+    "strategies": [
+      {
+        "budgets": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          37
+        ],
+        "power_law_fit": {
+          "a": 0.05184,
+          "b": 0.200722,
+          "n_points": 6,
+          "r_squared": 0.172268,
+          "reason": "Power-law fit on 6 points. R^2=0.1723 (log-space).",
+          "residuals_mean": 0.023774,
+          "status": "complete"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "diversity",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.066667,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.066667,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.2,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.133333,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.2,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.133333,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.066667,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.1,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.1,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          }
+        ],
+        "test_em_means": [
+          0.066667,
+          0.066667,
+          0.133333,
+          0.133333,
+          0.066667,
+          0.1
+        ],
+        "val_em_means": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "budgets": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          37
+        ],
+        "power_law_fit": {
+          "a": 0.054845,
+          "b": 0.078378,
+          "n_points": 6,
+          "r_squared": 0.019213,
+          "reason": "Power-law fit on 6 points. R^2=0.0192 (log-space).",
+          "residuals_mean": 0.017518,
+          "status": "complete"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "random",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.2,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.1,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.033333,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.066667,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.066667,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.066667,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.1,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.1,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          }
+        ],
+        "test_em_means": [
+          0.1,
+          0.033333,
+          0.066667,
+          0.066667,
+          0.066667,
+          0.1
+        ],
+        "val_em_means": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "budgets": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          37
+        ],
+        "power_law_fit": {
+          "n_points": 6,
+          "reason": "Only 1 non-zero y values out of 6; power-law fit is meaningless on a degenerate curve.",
+          "status": "degenerate"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "uncertainty",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.0,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.0,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.0,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.0,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.0,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.1,
+            "ci_upper": 0.1,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 3,
+            "point_estimate": 0.1,
+            "reason": "Only 3 observations; bootstrap CI may be unreliable.",
+            "status": "partial"
+          }
+        ],
+        "test_em_means": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ],
+        "val_em_means": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "overall_notes": [
+    "All device profiling is simulator-only. Physical-device evidence is required before publishing performance conclusions.",
+    "Learning-curve analysis is based on a small dataset (52 examples) with a heuristic lookup baseline. Results validate the pipeline but are not yet publication-ready.",
+    "This analysis package is designed to absorb future physical-device data and larger-dataset runs with no code changes."
+  ],
+  "overall_status": "partial",
+  "pareto": {
+    "notes": [
+      "All latency data is from Simulator. Pareto conclusions are preliminary and not publishable."
+    ],
+    "points": [
+      {
+        "artifact_size_mb": 0.1,
+        "is_pareto_optimal": true,
+        "latency_environment": "unavailable",
+        "latency_p50_ms": null,
+        "model_id": "question_lookup_v0",
+        "quality_metric": "test_em",
+        "quality_value": 0.1,
+        "reason": "No latency data available.",
+        "status": "partial"
+      },
+      {
+        "artifact_size_mb": 0.5,
+        "is_pareto_optimal": true,
+        "latency_environment": "simulator",
+        "latency_p50_ms": 199.5,
+        "model_id": "tiny_multimodal_v0",
+        "quality_metric": "test_em",
+        "quality_value": 0.1,
+        "reason": "",
+        "status": "simulator_only"
+      }
+    ],
+    "reason": "2 model(s) in Pareto view.",
+    "status": "partial"
+  },
+  "version": "0.1.0"
+}

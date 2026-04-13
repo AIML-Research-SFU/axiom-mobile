@@ -237,6 +237,7 @@ axiom-mobile/
 │   ├── src/axiom/
 │   │   ├── data/
 │   │   ├── selection/
+│   │   ├── analysis/         # Phase 6 statistical analysis (bootstrap, power-law, Pareto)
 │   │   ├── training/
 │   │   ├── eval/
 │   │   └── export/
@@ -244,7 +245,8 @@ axiom-mobile/
 ├── kg/                       # Compact KG (JSON/SQLite) embedded in app
 ├── data/                     # Manifests + schema (no raw screenshots)
 ├── results/                  # Run outputs (gitignored except README)
-├── docs/                     # Spec, milestones, paper outline
+├── paper/                    # Paper draft, generated assets
+├── docs/                     # Spec, milestones, analysis docs, demo flow
 └── README.md
 ```
 
