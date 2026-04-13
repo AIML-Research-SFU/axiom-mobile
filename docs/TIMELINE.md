@@ -1,6 +1,6 @@
 # AXIOM-Mobile Timeline and Progress Tracker
 
-Last updated: 2026-04-14
+Last updated: 2026-04-13
 
 This file tracks the 16-week project plan and marks what is complete based on the current repository state.
 
@@ -22,7 +22,7 @@ This file tracks the 16-week project plan and marks what is complete based on th
 ### Mahim (Step 2: toy dataset + split + inspector)
 
 - `[x]` `data/manifests/pool.jsonl`, `val.jsonl`, and `test.jsonl` are populated.
-- `[x]` Initial toy dataset milestone was completed; current manifests now contain 127 total examples (52 manual + 75 auto-generated exact-answer).
+- `[x]` Dataset v2 freeze: 452 total examples (pool=382, val=30, test=40) with stratified splits covering 20 question types. v1 archived.
 - `[x]` `ml/scripts/inspect_dataset.py` exists and validates required fields + split overlap.
 - `[x]` `python3 ml/scripts/inspect_dataset.py` runs successfully on current manifests.
 - `[x]` Shared private screenshot storage is now verifiable from Drive screenshots (`archive/`, `review/`, `screenshots_v0/`, `screenshots_v1/`).
@@ -53,10 +53,11 @@ Deliverable status: `[x]` Complete (all verifiable items done; skeleton will fil
 - `[x]` The first reviewed dataset split is frozen at `pool=37`, `val=5`, `test=10`.
 - `[x]` Annotation QC helper script exists and runs successfully on the frozen split.
 - `[x]` Simulator-based screenshot automation harness: `scripts/capture_screenshots.sh` (simctl orchestrator, v0.2.0), `scripts/capture_scenarios.json` (20 deterministic scenarios), `ml/scripts/index_generated_screenshots.py` (candidate indexer with auto-promotion), `AXIOMMobileUITests` XCUITest target for fine-grained navigation. Documented in `docs/SCREENSHOT_AUTOMATION.md`.
-- `[x]` Exact-answer scenario system: `scripts/generate_exact_scenarios.py` produces deterministic scenarios where every QA pair has a visually verified exact answer. Answers grounded in status bar state (time, battery%), charging indicator, Apple Account sign-in state, and Maps search bar text. 75 exact entries auto-promoted in batch `exact_v2_batch002`.
+- `[x]` Exact-answer scenario system: `scripts/generate_exact_scenarios.py` produces deterministic scenarios where every QA pair has a visually verified exact answer. Answers grounded in status bar state (time, battery%), charging indicator, Apple Account sign-in state, and Maps search bar text.
 - `[x]` Promotion workflow with `auto_exact` / `needs_review` / `needs_labeling` classification. Auto-promote appends exact entries directly to pool.jsonl with rename mapping for private screenshot storage.
 - `[x]` iOS 26 Settings layout discovery: Settings main screen no longer shows connectivity toggles (Airplane, Wi-Fi, Bluetooth). Scenario generator only emits questions about visually verified content.
-- `[~]` Dataset v1 target (200+ screenshots, 500+ QA pairs) not reached yet. Current: 127 QA pairs from 72 unique screenshots (52 manual + 20 auto-generated).
+- `[x]` **Dataset v2 freeze** (2026-04-13): 452 total examples (pool=382, val=30, test=40) with deterministic stratified split (seed=20260413). 400 auto-exact entries from 100 screenshots (batch `exact_v3_batch001`, 50 status bar variants x 2 apps). v1 manifests archived to `data/manifests/v1/` with SHA256 fingerprints. Freeze script: `ml/scripts/freeze_dataset_v2.py`.
+- `[x]` Dataset target exceeded: 452 QA pairs from 152 unique source screenshots (52 manual + 100 auto-generated). Val/test now cover 9 question types each, including rare manual types (calculator, maps, bluetooth, etc.).
 - `[ ]` Dual-annotator agreement workflow (Cohen's kappa >= 0.75) not implemented in repo.
 - `[ ]` Bounding box grounding metadata pipeline not implemented.
 - `[ ]` KG v1 (~1000 entities + API + app loader) not implemented yet.
@@ -170,7 +171,8 @@ Deliverable status: `[x]` Complete.
 - `[x]` Phase 6: Paper assets regenerated with physical-device data (4 sessions, Pareto view with real latency).
 - `[x]` Phase 6: Input-contract UX guardrail for out-of-domain inputs.
 - `[x]` Phase 6: Final presentation / slide deck — `presentation/SLIDE_DECK_v1.md`, speaker notes, generated assets, paper v2.
-- `[x]` Exact-answer dataset scaling pipeline: scenario generator, status bar variants, visually-verified promotion, 75 auto-exact entries promoted in one batch.
-- `[ ]` Retrain model with expanded answer/task coverage (new label vocabulary needed: 24 → ~40+ classes).
+- `[x]` Exact-answer dataset scaling pipeline: scenario generator (v0.3.0, 50 variants), status bar variants, visually-verified promotion, 400 auto-exact entries promoted in batch `exact_v3_batch001`.
+- `[x]` Dataset v2 freeze with deterministic stratified splits and SHA256 fingerprints. v1 manifests archived.
+- `[ ]` Retrain model with expanded answer/task coverage (new label vocabulary needed: 24 → ~134 unique answers).
 - `[ ]` Extend XCUITest for Settings sub-pages (General, Accessibility, etc.) and Maps navigation.
 - `[ ]` Add dual-annotator agreement workflow (Cohen's kappa >= 0.75).

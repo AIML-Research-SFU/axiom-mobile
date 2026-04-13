@@ -4,11 +4,14 @@ Simulator-based screenshot capture harness for scaling the AXIOM-Mobile dataset 
 
 ## Current Status
 
-- **Dataset**: 127 total examples (pool=112, val=5, test=10)
-- **Auto-generated**: 75 exact-answer examples from 20 screenshots (batch `exact_v2_batch002`)
+- **Dataset v2**: 452 total examples (pool=382, val=30, test=40) — deterministic freeze with stratified splits
+- **Auto-generated**: 400 exact-answer examples from 100 screenshots (batch `exact_v3_batch001`)
+- **Manual examples**: 52 original hand-labeled entries preserved from v1
 - **Available apps on iOS 26 simulator**: Settings, Maps only (Calculator, Clock, Weather, App Store not installed)
 - **Exact-answer coverage**: status bar (time, battery%), charging indicator, Apple Account state, Maps search bar text
+- **Status bar variants**: 50 unique time/battery/state combinations for visual diversity
 - **iOS 26 note**: Settings main screen no longer shows Airplane Mode, Wi-Fi, or Bluetooth toggles (moved to sub-pages)
+- **Dataset versioning**: v1 manifests archived in `data/manifests/v1/` with SHA256 fingerprints
 
 ## Why Simulator Automation
 
@@ -16,8 +19,9 @@ The dataset consists of iOS system app screenshots. Automating capture removes t
 
 - **Deterministic status bar** via `xcrun simctl status_bar` (fixed time, battery, signal)
 - **Repeatable scenarios** with exact answers where state is controlled
-- **Batch generation** of 20+ screenshots per run with 75+ QA pairs
+- **Batch generation** of 100 screenshots per run with 400 QA pairs (50 status bar variants x 2 apps)
 - **Auto-promotion** of deterministic entries directly to pool.jsonl
+- **Dataset versioning** with SHA256 fingerprints and archived prior splits
 
 What is NOT automated:
 - Final answer labeling for non-deterministic content (human review required)
@@ -197,10 +201,15 @@ python3 scripts/generate_exact_scenarios.py          # generate
 python3 scripts/generate_exact_scenarios.py --dry-run # preview
 ```
 
-Current scenario set (v0.2.1):
-- **15 Settings main variants** × 4 QA pairs = 60 exact entries
-- **5 Maps default variants** × 3 QA pairs = 15 exact entries
-- **Total: 75 exact QA pairs from 20 screenshots**
+Current scenario set (v0.3.0):
+- **50 Settings main variants** x 4 QA pairs = 200 exact entries
+- **50 Maps default variants** x 4 QA pairs = 200 exact entries
+- **Total: 400 exact QA pairs from 100 screenshots**
+
+Previous scenario set (v0.2.1):
+- 15 Settings main variants x 4 QA pairs = 60 exact entries
+- 5 Maps default variants x 3 QA pairs = 15 exact entries
+- Total: 75 exact QA pairs from 20 screenshots
 
 ### Adding New Scenarios
 
