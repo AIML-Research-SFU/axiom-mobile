@@ -4,6 +4,7 @@ import TipKit
 struct TestbedView: View {
     @State private var viewModel = TestbedViewModel()
     @State private var sectionsAppeared = false
+    @FocusState private var isQuestionFocused: Bool
 
     private let researchContextTip = ResearchContextTip()
 
@@ -29,9 +30,12 @@ struct TestbedView: View {
                     )
                     .axStaggeredAppearance(index: 0, isVisible: sectionsAppeared)
 
-                    QuestionInputSection(question: $viewModel.question)
-                        .axStaggeredAppearance(
-                            index: 1, isVisible: sectionsAppeared)
+                    QuestionInputSection(
+                        question: $viewModel.question,
+                        isFocused: $isQuestionFocused
+                    )
+                    .axStaggeredAppearance(
+                        index: 1, isVisible: sectionsAppeared)
 
                     // MARK: - Configuration
 
@@ -99,10 +103,21 @@ struct TestbedView: View {
                 .padding(.bottom, AXSpacing.xxl)
                 .axResponsiveContainer()
             }
+            .scrollDismissesKeyboard(.interactively)
             .scrollIndicators(.hidden)
             .background { backgroundGradient }
             .navigationTitle("AXIOM")
             .toolbarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        isQuestionFocused = false
+                    }
+                    .font(AXFont.button)
+                    .tint(AXColor.accentPrimary)
+                }
+            }
             .onChange(of: viewModel.selectedPhotoItem) { _, _ in
                 Task { await viewModel.loadImage() }
             }
@@ -144,6 +159,7 @@ struct TestbedView: View {
     private var primaryActionButton: some View {
         VStack(spacing: AXSpacing.sm) {
             Button {
+                isQuestionFocused = false
                 Task {
                     if viewModel.benchmarkEnabled {
                         await viewModel.runBenchmark()
