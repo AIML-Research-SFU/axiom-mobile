@@ -52,6 +52,7 @@ Deliverable status: `[x]` Complete (all verifiable items done; skeleton will fil
 - `[x]` The reviewed screenshots have been copied into `screenshots_v1/`.
 - `[x]` The first reviewed dataset split is frozen at `pool=37`, `val=5`, `test=10`.
 - `[x]` Annotation QC helper script exists and runs successfully on the frozen split.
+- `[x]` Simulator-based screenshot automation harness: `scripts/capture_screenshots.sh` (simctl orchestrator), `scripts/capture_scenarios.json` (14 scenario definitions), `ml/scripts/index_generated_screenshots.py` (candidate manifest generator), `AXIOMMobileUITests` XCUITest target for fine-grained navigation. Documented in `docs/SCREENSHOT_AUTOMATION.md`. First batch: 10 captures, 14 QA candidates.
 - `[ ]` Dataset v1 target (200+ screenshots, 500+ QA pairs) not reached yet.
 - `[ ]` Dual-annotator agreement workflow (Cohen's kappa >= 0.75) not implemented in repo.
 - `[ ]` Bounding box grounding metadata pipeline not implemented.

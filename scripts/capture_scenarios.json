@@ -1,0 +1,193 @@
+{
+  "_version": "0.1.0",
+  "_description": "Scenario definitions for simulator-based screenshot capture. Each scenario maps to one or more screenshots with pre-defined Q&A templates for review.",
+
+  "status_bar": {
+    "_doc": "Applied globally via `xcrun simctl status_bar` before capture begins.",
+    "time": "9:41",
+    "battery_state": "charged",
+    "battery_level": 100,
+    "wifi_bars": 3,
+    "cellular_bars": 4,
+    "cellular_mode": "active",
+    "operator_name": "Carrier"
+  },
+
+  "scenarios": [
+    {
+      "id": "settings_main",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": null,
+      "wait_seconds": 2,
+      "screen_family": "settings",
+      "description": "Settings app main screen",
+      "qa_templates": [
+        {"question": "Is Airplane Mode on or off?", "answer_hint": "Check Airplane Mode toggle", "difficulty": 1},
+        {"question": "Is Wi-Fi on or off?", "answer_hint": "Check Wi-Fi row subtitle", "difficulty": 1},
+        {"question": "Is Bluetooth on or off?", "answer_hint": "Check Bluetooth row subtitle", "difficulty": 1}
+      ],
+      "notes": "iOS Settings main screen"
+    },
+    {
+      "id": "settings_wifi",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:WIFI",
+      "wait_seconds": 2,
+      "screen_family": "settings_wifi",
+      "description": "Settings > Wi-Fi screen",
+      "qa_templates": [
+        {"question": "Is Wi-Fi on or off?", "answer_hint": "Check Wi-Fi toggle state", "difficulty": 1},
+        {"question": "What is the Wi-Fi network name shown?", "answer_hint": "Read connected network name", "difficulty": 1}
+      ],
+      "notes": "iOS Settings → Wi-Fi"
+    },
+    {
+      "id": "settings_bluetooth",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:Bluetooth",
+      "wait_seconds": 2,
+      "screen_family": "settings_bluetooth",
+      "description": "Settings > Bluetooth screen",
+      "qa_templates": [
+        {"question": "Is Bluetooth on or off?", "answer_hint": "Check Bluetooth toggle state", "difficulty": 1}
+      ],
+      "notes": "iOS Bluetooth settings"
+    },
+    {
+      "id": "settings_cellular",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:MOBILE_DATA_SETTINGS_ID",
+      "wait_seconds": 2,
+      "screen_family": "settings_cellular",
+      "description": "Settings > Cellular screen",
+      "qa_templates": [
+        {"question": "Is Cellular Data on or off?", "answer_hint": "Check Cellular Data toggle", "difficulty": 1}
+      ],
+      "notes": "iOS Settings → Cellular"
+    },
+    {
+      "id": "settings_battery",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:BATTERY_USAGE",
+      "wait_seconds": 2,
+      "screen_family": "settings_battery",
+      "description": "Settings > Battery screen",
+      "qa_templates": [
+        {"question": "Is Low Power Mode on or off?", "answer_hint": "Check Low Power Mode toggle", "difficulty": 2},
+        {"question": "What battery percentage is shown?", "answer_hint": "Read battery level", "difficulty": 1}
+      ],
+      "notes": "iOS Settings → Battery"
+    },
+    {
+      "id": "settings_general",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:General",
+      "wait_seconds": 2,
+      "screen_family": "settings_general",
+      "description": "Settings > General screen",
+      "qa_templates": [
+        {"question": "What settings page is shown?", "answer_hint": "Should show General", "difficulty": 1}
+      ],
+      "notes": "iOS Settings → General"
+    },
+    {
+      "id": "settings_display",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:DISPLAY",
+      "wait_seconds": 2,
+      "screen_family": "settings_display",
+      "description": "Settings > Display & Brightness",
+      "qa_templates": [
+        {"question": "What settings page is shown?", "answer_hint": "Should show Display & Brightness", "difficulty": 1}
+      ],
+      "notes": "iOS Settings → Display & Brightness"
+    },
+    {
+      "id": "calculator_basic",
+      "app_bundle": "com.apple.calculator",
+      "deep_link": null,
+      "wait_seconds": 2,
+      "screen_family": "calculator",
+      "description": "Calculator app in basic/portrait mode",
+      "qa_templates": [
+        {"question": "What mode is the calculator in?", "answer_hint": "Basic (portrait)", "difficulty": 1}
+      ],
+      "notes": "iOS Calculator app"
+    },
+    {
+      "id": "clock_alarm",
+      "app_bundle": "com.apple.mobiletimer",
+      "deep_link": null,
+      "wait_seconds": 2,
+      "screen_family": "clock",
+      "description": "Clock app (default tab)",
+      "qa_templates": [
+        {"question": "What time is shown?", "answer_hint": "Read displayed time", "difficulty": 1},
+        {"question": "How many alarms are set?", "answer_hint": "Count alarm entries", "difficulty": 2}
+      ],
+      "notes": "iOS Clock app"
+    },
+    {
+      "id": "maps_default",
+      "app_bundle": "com.apple.Maps",
+      "deep_link": null,
+      "wait_seconds": 3,
+      "screen_family": "maps",
+      "description": "Maps app default view",
+      "qa_templates": [
+        {"question": "What visual mode is the map using?", "answer_hint": "Explore/Satellite/Transit", "difficulty": 1}
+      ],
+      "notes": "iOS Apple Maps app"
+    },
+    {
+      "id": "weather_default",
+      "app_bundle": "com.apple.weather",
+      "deep_link": null,
+      "wait_seconds": 3,
+      "screen_family": "weather",
+      "description": "Weather app default view",
+      "qa_templates": [
+        {"question": "What weather condition is shown?", "answer_hint": "Read weather condition", "difficulty": 1},
+        {"question": "What temperature is shown?", "answer_hint": "Read temperature value", "difficulty": 1},
+        {"question": "What city name is shown?", "answer_hint": "Read city name", "difficulty": 1}
+      ],
+      "notes": "iOS Weather app"
+    },
+    {
+      "id": "appstore_today",
+      "app_bundle": "com.apple.AppStore",
+      "deep_link": null,
+      "wait_seconds": 3,
+      "screen_family": "appstore",
+      "description": "App Store default tab",
+      "qa_templates": [
+        {"question": "What page is the App Store on?", "answer_hint": "Today/Games/Apps/Arcade/Search", "difficulty": 1}
+      ],
+      "notes": "iOS App Store"
+    },
+    {
+      "id": "settings_airplane_on",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:AIRPLANE_MODE",
+      "wait_seconds": 2,
+      "screen_family": "settings",
+      "description": "Settings with Airplane Mode visible",
+      "qa_templates": [
+        {"question": "Is Airplane Mode on or off?", "answer_hint": "Check Airplane Mode toggle state", "difficulty": 1}
+      ],
+      "notes": "iOS Airplane Mode settings"
+    },
+    {
+      "id": "settings_hotspot",
+      "app_bundle": "com.apple.Preferences",
+      "deep_link": "App-prefs:INTERNET_TETHERING",
+      "wait_seconds": 2,
+      "screen_family": "settings_hotspot",
+      "description": "Settings > Personal Hotspot",
+      "qa_templates": [
+        {"question": "Is Personal Hotspot on or off?", "answer_hint": "Check hotspot toggle state", "difficulty": 1}
+      ],
+      "notes": "iOS Settings → Personal Hotspot"
+    }
+  ]
+}

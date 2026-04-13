@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		AFB01D072F8C00000099A6D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFB01BF62F8B99950099A6D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFB01BFD2F8B99950099A6D4;
+			remoteInfo = AXIOMMobile;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AFB01BFE2F8B99950099A6D4 /* AXIOMMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AXIOMMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB01D012F8C00000099A6D4 /* AXIOMMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AXIOMMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = AXIOMMobile;
 			sourceTree = "<group>";
 		};
+		AFB01D022F8C00000099A6D4 /* AXIOMMobileUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AXIOMMobileUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AFB01BFB2F8B99950099A6D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB01D042F8C00000099A6D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				AFB01C002F8B99950099A6D4 /* AXIOMMobile */,
+				AFB01D022F8C00000099A6D4 /* AXIOMMobileUITests */,
 				AFB01BFF2F8B99950099A6D4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				AFB01BFE2F8B99950099A6D4 /* AXIOMMobile.app */,
+				AFB01D012F8C00000099A6D4 /* AXIOMMobileUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,27 @@
 			productReference = AFB01BFE2F8B99950099A6D4 /* AXIOMMobile.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AFB01D062F8C00000099A6D4 /* AXIOMMobileUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFB01D0B2F8C00000099A6D4 /* Build configuration list for PBXNativeTarget "AXIOMMobileUITests" */;
+			buildPhases = (
+				AFB01D032F8C00000099A6D4 /* Sources */,
+				AFB01D042F8C00000099A6D4 /* Frameworks */,
+				AFB01D052F8C00000099A6D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFB01D082F8C00000099A6D4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AFB01D022F8C00000099A6D4 /* AXIOMMobileUITests */,
+			);
+			name = AXIOMMobileUITests;
+			productName = AXIOMMobileUITests;
+			productReference = AFB01D012F8C00000099A6D4 /* AXIOMMobileUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +128,10 @@
 				TargetAttributes = {
 					AFB01BFD2F8B99950099A6D4 = {
 						CreatedOnToolsVersion = 26.4;
+					};
+					AFB01D062F8C00000099A6D4 = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = AFB01BFD2F8B99950099A6D4;
 					};
 				};
 			};
@@ -100,12 +150,20 @@
 			projectRoot = "";
 			targets = (
 				AFB01BFD2F8B99950099A6D4 /* AXIOMMobile */,
+				AFB01D062F8C00000099A6D4 /* AXIOMMobileUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AFB01BFC2F8B99950099A6D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFB01D052F8C00000099A6D4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +180,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AFB01D032F8C00000099A6D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFB01D082F8C00000099A6D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFB01BFD2F8B99950099A6D4 /* AXIOMMobile */;
+			targetProxy = AFB01D072F8C00000099A6D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AFB01C072F8B99960099A6D4 /* Debug */ = {
@@ -310,6 +383,46 @@
 			};
 			name = Release;
 		};
+		AFB01D092F8C00000099A6D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MPMKAF986;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arieljtyson.AXIOMMobileUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AXIOMMobile;
+			};
+			name = Debug;
+		};
+		AFB01D0A2F8C00000099A6D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2MPMKAF986;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arieljtyson.AXIOMMobileUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AXIOMMobile;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -327,6 +440,15 @@
 			buildConfigurations = (
 				AFB01C0A2F8B99960099A6D4 /* Debug */,
 				AFB01C0B2F8B99960099A6D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFB01D0B2F8C00000099A6D4 /* Build configuration list for PBXNativeTarget "AXIOMMobileUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFB01D092F8C00000099A6D4 /* Debug */,
+				AFB01D0A2F8C00000099A6D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

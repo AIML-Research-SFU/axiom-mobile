@@ -47,3 +47,6 @@ data/images/
 *.jpeg
 *.heic
 *.webp
+
+# Generated screenshot candidates (local staging — reviewed entries go to pool/val/test)
+data/manifests/generated_candidates.jsonl
