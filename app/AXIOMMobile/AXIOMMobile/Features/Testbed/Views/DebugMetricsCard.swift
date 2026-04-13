@@ -62,6 +62,15 @@ struct DebugMetricsCard: View {
                     label: "Inference",
                     value: result.isPlaceholder ? "Placeholder" : "Live"
                 )
+                if let confidence = result.confidence {
+                    MetricRow(
+                        label: "Confidence",
+                        value: String(format: "%.1f%%", confidence * 100)
+                    )
+                }
+                if result.isLowConfidence {
+                    MetricRow(label: "Status", value: "Low confidence")
+                }
             }
         }
     }

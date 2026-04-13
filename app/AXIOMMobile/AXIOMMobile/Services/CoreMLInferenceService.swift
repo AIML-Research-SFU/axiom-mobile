@@ -45,19 +45,21 @@ struct CoreMLInferenceService: InferenceServiceProtocol {
         // Run inference
         let output = try await coreMLModel.prediction(from: input)
 
-        // Decode output logits → answer label
-        let answer = decodeOutput(output, labelVocab: labelVocab)
+        // Decode output logits → answer label + confidence
+        let prediction = decodeOutput(output, labelVocab: labelVocab)
 
         let elapsed = ContinuousClock.now - start
         let seconds = Double(elapsed.components.seconds)
             + Double(elapsed.components.attoseconds) / 1_000_000_000_000_000_000
 
         return InferenceResult(
-            answer: answer,
+            answer: prediction.label,
             modelID: model.id,
             latencySeconds: seconds,
             timestamp: .now,
-            isPlaceholder: false
+            isPlaceholder: false,
+            confidence: prediction.confidence,
+            numClasses: prediction.numClasses
         )
     }
 
@@ -181,27 +183,60 @@ struct CoreMLInferenceService: InferenceServiceProtocol {
 
     // MARK: - Output Decoding
 
-    private func decodeOutput(_ output: MLFeatureProvider, labelVocab: [Int: String]) -> String {
+    /// Decoded prediction with confidence signal.
+    private struct Prediction {
+        let label: String
+        let confidence: Double
+        let numClasses: Int
+    }
+
+    /// Decodes logits into a label, softmax confidence, and class count.
+    ///
+    /// Softmax is computed in a numerically stable way (subtract max before exp)
+    /// to produce a proper probability distribution over the 24-class vocabulary.
+    private func decodeOutput(_ output: MLFeatureProvider, labelVocab: [Int: String]) -> Prediction {
         guard let logitsValue = output.featureValue(for: "logits"),
               let logits = logitsValue.multiArrayValue else {
-            return "Error: no logits output"
+            return Prediction(label: "Error: no logits output", confidence: 0, numClasses: 0)
         }
 
-        // Find argmax across the class dimension
         // Shape is [1, num_classes]
         let numClasses = logits.shape.last?.intValue ?? 0
+        guard numClasses > 0 else {
+            return Prediction(label: "Error: empty logits", confidence: 0, numClasses: 0)
+        }
+
+        // Extract raw logits and find argmax
+        var rawLogits = [Float](repeating: 0, count: numClasses)
         var maxIdx = 0
         var maxVal = Float(-Float.greatestFiniteMagnitude)
 
         for i in 0..<numClasses {
             let val = logits[[0, NSNumber(value: i)] as [NSNumber]].floatValue
+            rawLogits[i] = val
             if val > maxVal {
                 maxVal = val
                 maxIdx = i
             }
         }
 
-        return labelVocab[maxIdx] ?? "class_\(maxIdx)"
+        // Numerically stable softmax: subtract max, then exp and normalize
+        var expValues = [Float](repeating: 0, count: numClasses)
+        var expSum: Float = 0
+        for i in 0..<numClasses {
+            let e = exp(rawLogits[i] - maxVal)
+            expValues[i] = e
+            expSum += e
+        }
+
+        let topConfidence = Double(expValues[maxIdx] / expSum)
+        let label = labelVocab[maxIdx] ?? "class_\(maxIdx)"
+
+        return Prediction(
+            label: label,
+            confidence: topConfidence,
+            numClasses: numClasses
+        )
     }
 
     // MARK: - Helpers

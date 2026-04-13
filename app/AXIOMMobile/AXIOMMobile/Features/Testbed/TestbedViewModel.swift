@@ -300,7 +300,8 @@ final class TestbedViewModel {
             latencyMs: Int(result.latencySeconds * 1000),
             isPlaceholder: result.isPlaceholder,
             runKind: runKind,
-            iterationIndex: iterationIndex
+            iterationIndex: iterationIndex,
+            confidence: result.confidence
         )
         benchmarkRecords.append(record)
     }

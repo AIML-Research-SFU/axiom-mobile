@@ -3,6 +3,7 @@ import SwiftUI
 struct QuestionInputSection: View {
     @Binding var question: String
     var isFocused: FocusState<Bool>.Binding
+    var selectedModelID: String = ""
 
     var body: some View {
         GlassCard {
@@ -10,7 +11,7 @@ struct QuestionInputSection: View {
                 SectionHeader("Question", icon: "text.bubble")
 
                 TextField(
-                    "e.g. What app is shown in this screenshot?",
+                    "e.g. Is Bluetooth on or off?",
                     text: $question,
                     axis: .vertical
                 )
@@ -33,7 +34,31 @@ struct QuestionInputSection: View {
                         )
                 }
                 .axAnimation(AXMotion.quick, value: isFocused.wrappedValue)
+
+                if selectedModelID == "tiny_multimodal_v0" {
+                    supportedQuestionsHint
+                }
             }
         }
+    }
+
+    // MARK: - Supported Questions Hint
+
+    private var supportedQuestionsHint: some View {
+        VStack(alignment: .leading, spacing: AXSpacing.xs) {
+            Text("Supported question types")
+                .font(AXFont.caption.weight(.medium))
+                .foregroundStyle(AXColor.textSecondary)
+
+            Text(
+                "Is [setting] on or off? \u{00b7} What battery %? \u{00b7} What time is shown? \u{00b7} What temperature? \u{00b7} What Wi-Fi network?"
+            )
+            .font(AXFont.caption)
+            .foregroundStyle(AXColor.textTertiary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityLabel(
+            "Supported questions: toggle state, battery percentage, time, temperature, Wi-Fi network name"
+        )
     }
 }

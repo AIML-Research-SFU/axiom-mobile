@@ -32,7 +32,8 @@ struct TestbedView: View {
 
                     QuestionInputSection(
                         question: $viewModel.question,
-                        isFocused: $isQuestionFocused
+                        isFocused: $isQuestionFocused,
+                        selectedModelID: viewModel.selectedModel.id
                     )
                     .axStaggeredAppearance(
                         index: 1, isVisible: sectionsAppeared)
