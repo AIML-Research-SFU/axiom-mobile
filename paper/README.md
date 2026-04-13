@@ -7,6 +7,7 @@ Last updated: 2026-04-13
 | File | Description |
 |------|-------------|
 | `PAPER_DRAFT_v1.md` | First-pass research paper skeleton grounded in current repo results |
+| `PAPER_DRAFT_v2.md` | Revision with physical-device latency evidence from AT-X (iPhone 15 Pro Max) |
 | `assets/generated/` | Machine-generated figures, tables, and snapshots (do not hand-edit) |
 
 ## Generated Assets
@@ -34,13 +35,13 @@ The draft is numbered (`v1`, `v2`, ...) to track major revisions. Create a new v
 
 This is a **first-pass draft** grounded in current repo outputs:
 - All results are from the current 52-example dataset with a heuristic lookup + tiny multimodal baseline
-- All latency data is simulator-only — physical-device evidence is still pending
+- Physical-device latency evidence now available (iPhone 15 Pro Max: p50=14.0ms, p95=26.2ms); energy and memory still pending
 - The 70% EM target is not met (~10% test EM)
 - The draft explicitly marks these limitations throughout
 
 ## Next steps
 
-1. Acquire physical-device profiling data (blocked on iPhone connection)
-2. Revise draft with real device results
+1. ~~Acquire physical-device profiling data~~ (DONE -- 2 sessions on AT-X, iPhone 15 Pro Max)
+2. ~~Revise draft with real device results~~ (DONE -- PAPER_DRAFT_v2.md)
 3. Scale dataset and retrain with a stronger model
 4. Final formatting for target venue (6-8 page format per SPEC.md)

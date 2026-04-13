@@ -245,7 +245,8 @@ axiom-mobile/
 ├── kg/                       # Compact KG (JSON/SQLite) embedded in app
 ├── data/                     # Manifests + schema (no raw screenshots)
 ├── results/                  # Run outputs (gitignored except README)
-├── paper/                    # Paper draft, generated assets
+├── paper/                    # Paper drafts (v1, v2), generated assets
+├── presentation/             # Slide deck, speaker notes, generated assets
 ├── docs/                     # Spec, milestones, analysis docs, demo flow
 └── README.md
 ```

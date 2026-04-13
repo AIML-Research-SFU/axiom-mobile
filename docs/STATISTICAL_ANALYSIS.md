@@ -18,7 +18,7 @@ The Phase 6 statistical analysis package ingests all experiment artifacts produc
 
 **What this package does NOT prove today:**
 
-1. No physical-device latency evidence (all data is from iOS Simulator)
+1. Physical-device latency evidence now exists (2 sessions on iPhone 15 Pro Max, p50=14.0ms), but energy and memory data remain unavailable
 2. No statistical significance claims (3 seeds, tiny test/val sets)
 3. No quality conclusions (70% EM target not met; ~10% test EM)
 4. No energy/memory conclusions (require physical-device Instruments traces)
@@ -125,7 +125,7 @@ This is a core design principle: **simulator and physical-device data are never 
 
 - Device-profile sessions are classified by checking for `"sim"` in the session directory name.
 - Simulator latency validates the instrumentation pipeline but is NOT publishable on-device evidence.
-- Physical-device sessions would require: real iPhone connected via USB, Release build, `BenchmarkInputProvider` with real or synthetic screenshot input, Instruments traces (Time Profiler, Allocations, Energy Log).
+- Physical-device sessions have been captured on AT-X (iPhone 15 Pro Max, A17 Pro): 2 sessions, 50 iterations each, with real Core ML inference and Time Profiler trace. Energy (Energy Log) and memory (Allocations) Instruments traces are still outstanding.
 
 The analysis report labels every latency measurement with its environment. The Pareto analysis includes latency environment as a visible column.
 
@@ -176,7 +176,7 @@ As of 2026-04-13, the analysis reflects:
 - **Budgets:** 5, 10, 15, 20, 25, 37
 - **Seeds:** 3 per strategy-budget
 - **Models:** question_lookup_v0 (heuristic), tiny_multimodal_v0 (trainable, 40K params, 96KB CoreML)
-- **Device profiles:** 2 simulator sessions, 0 physical-device sessions
+- **Device profiles:** 2 simulator sessions, 2 physical-device sessions (iPhone 15 Pro Max, A17 Pro)
 - **Overall status:** `partial`
 
 Key findings:

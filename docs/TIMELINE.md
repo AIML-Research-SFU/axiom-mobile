@@ -133,9 +133,9 @@ Deliverable status: `[x]` Complete (physical-device profiling done on AT-X with 
 - `[x]` Design system v1 polish: custom app icon (1024×1024 programmatic + export script), branded launch screen, haptic feedback tokens (`AXHaptics`) mapped to 9 interaction points, staggered card entrance animations (`AXTransition`), iPad responsive layout (`AXLayout.axResponsiveContainer()`), light mode contrast refinement, TipKit onboarding (4 contextual tips).
 - `[x]` Paper assets regenerated with physical-device data: device_profile_summary.csv (4 sessions), results_snapshot.md, Pareto view with real latency (14.0ms on A17 Pro).
 - `[x]` Input-contract UX guardrail: domain hint in ScreenshotSection ("Import a mobile app screenshot"), AnswerCard footer explaining 24-class fixed vocabulary for tiny_multimodal_v0. Addresses out-of-domain input confusion without model changes.
-- `[ ]` Final presentation / slide deck.
+- `[x]` Final presentation / slide deck: `presentation/SLIDE_DECK_v1.md` (18-slide Marp deck), `SPEAKER_NOTES.md`, `README.md`, and `ml/scripts/build_presentation_assets.py` deterministic asset generator. Paper advanced to `PAPER_DRAFT_v2.md` with physical-device latency data.
 
-Deliverable status: `[~]` In progress (physical-device data, paper assets, and UX guardrail complete; final presentation remains).
+Deliverable status: `[x]` Complete.
 
 ## Next Practical Milestones
 
@@ -165,4 +165,4 @@ Deliverable status: `[~]` In progress (physical-device data, paper assets, and U
 - `[x]` Phase 6: Design system v1 — app icon, launch screen, haptic refinement, staggered transitions, iPad layout, light mode polish, TipKit onboarding.
 - `[x]` Phase 6: Paper assets regenerated with physical-device data (4 sessions, Pareto view with real latency).
 - `[x]` Phase 6: Input-contract UX guardrail for out-of-domain inputs.
-- `[ ]` Phase 6: Final presentation / slide deck.
+- `[x]` Phase 6: Final presentation / slide deck — `presentation/SLIDE_DECK_v1.md`, speaker notes, generated assets, paper v2.

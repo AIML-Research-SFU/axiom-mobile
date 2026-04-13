@@ -135,12 +135,13 @@ If no real screenshot is available in the Photos library:
 - "The pipeline works end-to-end: data curation, training, Core ML export, on-device inference, benchmarking, and statistical analysis."
 - "The model is 96KB -- well under the 100MB constraint."
 - "Simulator latency p50 is about 98ms in Release build."
+- "Physical-device latency on iPhone 15 Pro Max (A17 Pro) is p50=14.0ms -- about 7x faster than simulator and well within the 400ms threshold."
 - "We compare three selection strategies with bootstrap confidence intervals."
 - "The analysis package explicitly marks every result with its status -- simulator-only, partial, or blocked."
 
 ### What NOT to claim
 - Do NOT say the model is accurate ("it achieves ~10% test EM, far below the 70% target")
-- Do NOT present simulator latency as on-device performance
+- Do NOT present simulator latency as on-device performance (real on-device numbers now exist: p50=14.0ms on iPhone 15 Pro Max -- use those instead)
 - Do NOT claim statistical significance from 3-seed comparisons
 - Do NOT say any selection strategy is better than another (all converge to identical EM)
 - Do NOT claim energy or memory results exist (physical device required)
@@ -149,7 +150,7 @@ If no real screenshot is available in the Photos library:
 
 If asked about the distinction:
 
-> "iOS Simulator runs on the Mac CPU -- it doesn't have the Neural Processing Unit or real thermal management that iPhones have. A model that takes 98ms on Simulator might take 50ms or 200ms on real hardware depending on the NPU path. We've built all the tooling to measure on real hardware -- Instruments profiling runbook, auto-benchmark mode, structured session export. We just need the iPhone connected to get publishable numbers."
+> "iOS Simulator runs on the Mac CPU -- it doesn't have the Neural Processing Unit or real thermal management that iPhones have. We've now profiled on a real iPhone 15 Pro Max and see p50=14ms versus 98ms on Simulator -- about 7x faster on real hardware. The Simulator is useful for pipeline validation, but the physical-device numbers are what we report. Energy and memory Instruments traces are still outstanding."
 
 ## Demo Checklist
 

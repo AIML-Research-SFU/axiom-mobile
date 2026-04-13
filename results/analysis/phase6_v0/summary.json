@@ -73,7 +73,7 @@
     "reason": "3 pairwise comparisons at budget=37 with 3 strategies. Small sample sizes (3 seeds); bootstrap CIs are provided but may be unreliable.",
     "status": "partial"
   },
-  "created_at_utc": "2026-04-13T06:35:14Z",
+  "created_at_utc": "2026-04-13T06:42:34Z",
   "device_profiles": {
     "energy_reason": "Energy Log requires physical device. Instruments reports relative levels (0-20 scale), not battery %/hr. Not available from Simulator.",
     "energy_status": "physical_device_required",

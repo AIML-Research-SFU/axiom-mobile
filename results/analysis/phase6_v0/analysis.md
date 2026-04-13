@@ -1,6 +1,6 @@
 # AXIOM-Mobile Phase 6 Statistical Analysis Report
 
-Generated: 2026-04-13T06:35:14Z
+Generated: 2026-04-13T06:42:34Z
 Version: 0.1.0
 Overall status: **partial**
 
@@ -119,10 +119,10 @@ Dataset: pool=37, val=5, test=10
 | tiny_multimodal_v0 | 0.1000 | 14.0 | physical_device | 0.5 | Yes |
 
 
-## What This Report Does NOT Prove
+## Caveats and Limitations
 
-1. **No physical-device latency evidence.** All latency data is from iOS Simulator. Simulator has no NPU, no real thermal behavior, no meaningful energy data.
+1. **Physical-device latency measured.** 2 physical-device session(s) captured. Simulator data is retained for pipeline-validation context but is not used for conclusions.
 2. **No statistical significance claims.** With 3 seeds and tiny test/val sets, bootstrap CIs are provided for honesty but should not be over-interpreted.
 3. **No quality conclusions.** The 70% EM target from the research proposal is not met. The current heuristic baseline and tiny multimodal model both achieve ~10% test EM.
-4. **No energy/memory conclusions.** These require physical-device Instruments traces (Energy Log, Allocations).
+4. **No energy conclusions.** Energy Log data requires physical-device Instruments traces not yet captured.
 
