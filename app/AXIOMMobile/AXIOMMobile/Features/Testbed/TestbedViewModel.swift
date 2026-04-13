@@ -167,6 +167,33 @@ final class TestbedViewModel {
         screenshotImage = nil
     }
 
+    // MARK: - Auto-Benchmark
+
+    /// Whether the app was launched with `--auto-benchmark` for headless profiling.
+    var isAutoBenchmarkRequested: Bool {
+        ProcessInfo.processInfo.arguments.contains("--auto-benchmark")
+    }
+
+    /// Runs a complete benchmark session automatically for profiling workflows.
+    /// Uses `tiny_multimodal_v0` with a fixed question and no image (blank input).
+    /// Exports CSV + `_meta.json` to the app's Documents directory on completion.
+    func runAutoBenchmark() async {
+        // Select the Core ML-ready model
+        guard let coreMLModel = ModelCatalog.all.first(where: { $0.isCoreMLReady }) else {
+            return
+        }
+        selectedModel = coreMLModel
+        question = "What is shown on screen?"
+        benchmarkEnabled = true
+        benchmarkIterations = 20
+
+        // Run the benchmark
+        await runBenchmark()
+
+        // Auto-export results
+        exportCSV()
+    }
+
     // MARK: - Private
 
     private func appendRecord(

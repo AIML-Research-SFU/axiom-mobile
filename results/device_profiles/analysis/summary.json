@@ -1,0 +1,85 @@
+{
+  "created_at_utc": "2026-04-12T21:21:36Z",
+  "devices_seen": [
+    "iPhone (26.4)"
+  ],
+  "models_seen": [
+    "tiny_multimodal_v0"
+  ],
+  "overall_notes": [],
+  "placeholder_session_count": 0,
+  "real_session_count": 1,
+  "session_count": 1,
+  "sessions": [
+    {
+      "app_build": "1",
+      "app_version": "1.0",
+      "benchmark_records": 20,
+      "device_model": "iPhone",
+      "device_name": "iPhone 17 Pro",
+      "export_timestamp": "2026-04-12T21:20:27Z",
+      "has_trace_metrics": false,
+      "is_placeholder": false,
+      "latency": {
+        "count": 20,
+        "max_ms": 498,
+        "mean_ms": 220.2,
+        "min_ms": 185,
+        "p50_ms": 199.5,
+        "p95_ms": 304.2
+      },
+      "model_id": "tiny_multimodal_v0",
+      "session_dir": "iphone17pro-sim_tiny_multimodal_v0_20260412T212027Z",
+      "session_id": "7B63E41A-3B6E-45F7-A2D2-F167B97ECB9C",
+      "single_records": 0,
+      "system_version": "26.4",
+      "thresholds": [
+        {
+          "measured_value": "199.5 ms",
+          "metric_name": "latency_p50",
+          "reason": "p50 latency meets threshold.",
+          "status": "pass",
+          "threshold": "<= 400 ms"
+        },
+        {
+          "measured_value": "304.2 ms",
+          "metric_name": "latency_p95",
+          "reason": "p95 latency meets threshold.",
+          "status": "pass",
+          "threshold": "<= 600 ms"
+        },
+        {
+          "measured_value": null,
+          "metric_name": "peak_memory",
+          "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+          "status": "unavailable",
+          "threshold": "< 500 MB"
+        },
+        {
+          "measured_value": null,
+          "metric_name": "energy",
+          "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+          "status": "unavailable",
+          "threshold": "< 5.0% battery/hr"
+        },
+        {
+          "measured_value": null,
+          "metric_name": "exact_match",
+          "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+          "status": "unavailable",
+          "threshold": ">= 70% EM"
+        },
+        {
+          "measured_value": null,
+          "metric_name": "model_size",
+          "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+          "status": "unavailable",
+          "threshold": "< 100 MB"
+        }
+      ],
+      "total_records": 20,
+      "trace_metrics": {},
+      "warnings": []
+    }
+  ]
+}

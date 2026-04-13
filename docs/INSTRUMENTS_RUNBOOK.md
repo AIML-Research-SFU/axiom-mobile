@@ -12,16 +12,13 @@ This runbook defines a reproducible protocol for profiling AXIOM-Mobile on physi
 - CPU utilization, memory footprint, and energy impact (from Instruments traces)
 - Session-level device metadata (from the app's companion `_meta.json` export)
 
-**What is still placeholder:**
+**Current status (as of 2026-04-12):**
 
-- All inference currently runs through `PlaceholderInferenceService`, which simulates latency (150ms baseline, 600ms VLM) without real model computation.
-- Profiling data collected now validates the instrumentation pipeline, not model performance.
-- The `is_placeholder` field in both CSV and metadata exports is `true` for all current runs.
-
-**Which future milestones will use this runbook unchanged:**
-
-- Phase 4: After Core ML conversion, swap `PlaceholderInferenceService` for `CoreMLInferenceService`. The benchmark mode, CSV export, metadata export, and this profiling protocol all work unchanged.
-- Phase 5 completion: Real on-device evaluation produces publishable latency/energy/memory data using exactly these steps.
+- `tiny_multimodal_v0` now runs through `CoreMLInferenceService` with real Core ML inference (`is_placeholder: false`).
+- First real profiling session captured on iPhone 17 Pro Simulator: p50=199.5ms, p95=304.2ms (both PASS thresholds).
+- Simulator results validate the full pipeline but are **not publishable** (no NPU, no real thermal/energy behavior).
+- Physical-device profiling is unblocked and is the next step for publishable results.
+- The `--auto-benchmark` launch argument enables headless profiling without manual UI interaction.
 
 ## 2. Supported Environments
 
@@ -80,12 +77,11 @@ Run each model ID that is currently executable:
 
 | Model ID | Backend | Status |
 |----------|---------|--------|
+| `tiny_multimodal_v0` | Core ML | **Real inference** — first priority for profiling |
 | `question_lookup_v0` | heuristic | Executable (placeholder latency) |
 | `florence_2_base` | transformers | Config only — skip until Core ML ready |
 | `llava_mobile` | transformers | Config only — skip until Core ML ready |
 | `qwen_vl_chat_int4` | transformers | Config only — skip until Core ML ready |
-
-When real Core ML models are available, run all models that show `isCoreMLReady: true` in `ModelCatalog`.
 
 ### Run sequence
 
@@ -274,13 +270,12 @@ This validates session folders, computes latency stats and threshold evaluations
 
 6. **Device name privacy**: On iOS 16+, `UIDevice.current.name` returns the generic model name ("iPhone") unless the app has the device-name entitlement. The `device_model` field in metadata distinguishes iPhone vs iPad, but the exact hardware model (e.g., "iPhone 14 Pro") should be noted manually in `notes.md`.
 
-### When this runbook becomes fully operational
+### When this runbook produces publishable results
 
-This runbook produces publishable results when:
-
-- [ ] A real Core ML model (`.mlpackage`) is integrated via `CoreMLInferenceService`
-- [ ] `is_placeholder` flips to `false` in CSV and metadata exports
+- [x] A real Core ML model (`.mlpackage`) is integrated via `CoreMLInferenceService` — `tiny_multimodal_v0` (96KB, 24 classes)
+- [x] `is_placeholder` flips to `false` in CSV and metadata exports — confirmed in simulator session
+- [x] Auto-benchmark mode (`--auto-benchmark`) enables repeatable headless profiling
 - [ ] Profiling is run on the target hardware (iPhone 14 Pro + M2 MacBook)
-- [ ] At least 50 iterations per model per device are collected
+- [ ] At least 50 iterations per model per device are collected (simulator session used 20)
 - [ ] Energy Log traces confirm < 5% battery drain per hour
 - [ ] Allocations traces confirm < 500MB peak memory

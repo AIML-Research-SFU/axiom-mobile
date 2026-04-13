@@ -1,0 +1,2 @@
+session_id,session_dir,export_timestamp,device_model,system_version,model_id,is_placeholder,total_records,benchmark_records,latency_min_ms,latency_max_ms,latency_mean_ms,latency_p50_ms,latency_p95_ms,peak_memory_mb,has_trace_metrics
+7B63E41A-3B6E-45F7-A2D2-F167B97ECB9C,iphone17pro-sim_tiny_multimodal_v0_20260412T212027Z,2026-04-12T21:20:27Z,iPhone,26.4,tiny_multimodal_v0,False,20,20,185,498,220.2,199.5,304.2,,False

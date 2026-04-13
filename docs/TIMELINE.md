@@ -105,7 +105,14 @@ Deliverable status: `[x]` Complete (export pipeline, accuracy gate, and app inte
 - `[x]` CSV logging with deterministic schema and share/export implemented; captures placeholder results now, ready for real Core ML metrics.
 - `[x]` Device-profile ingestion and metric-summary pipeline: `ml/scripts/summarize_device_profiles.py` with typed schemas (`ml/src/axiom/results/device_profiles.py`), session folder contract, optional Instruments trace metrics sidecar, honest threshold evaluation, and analysis artifact outputs. Documented in `docs/DEVICE_PROFILES.md`.
 
-Deliverable status: `[~]` In progress (all Phase 5 instrumentation and analysis infrastructure complete; real Core ML model now available for `tiny_multimodal_v0` — first real on-device profiling is now unblocked).
+- `[x]` First real profiling session captured: `tiny_multimodal_v0` on iPhone 17 Pro Simulator (iOS 26.4), 20 iterations, real Core ML inference (`is_placeholder: false`). Latency p50=199.5ms (PASS), p95=304.2ms (PASS).
+- `[x]` Session staging script: `ml/scripts/stage_device_profile_session.py` copies app exports into `results/device_profiles/` following the documented session contract.
+- `[x]` Auto-benchmark launch argument: `--auto-benchmark` triggers a headless benchmark session for repeatable profiling workflows.
+- `[x]` Summarizer exercised on real session data: per-session JSON, aggregate `summary.json`, `summary.csv`, `summary.md` written to `results/device_profiles/analysis/`.
+- `[ ]` Physical-device profiling session (not yet run — simulator only so far).
+- `[ ]` Instruments traces (Time Profiler, Allocations, Energy Log) not yet captured.
+
+Deliverable status: `[~]` In progress (first real profiling session captured on Simulator with real Core ML inference; physical-device profiling and Instruments traces remain).
 
 ## Phase 6 (Weeks 15-16): Analysis and Publication
 
@@ -132,5 +139,7 @@ Deliverable status: `[ ]` Not started in current codebase.
 - `[x]` Core ML export pipeline + accuracy gate (Phase 4) — `ml/scripts/export_coreml.py` with 96KB `.mlpackage` output.
 - `[x]` App integration for `.mlpackage` loading (Phase 4 completion) — `CoreMLInferenceService` + bundled model in app.
 - `[ ]` Quantization pipeline (Phase 4 compression — deferred; model is already 96KB).
-- `[ ]` Real on-device profiling run with `tiny_multimodal_v0` (Phase 5).
-- `[ ]` Collect real benchmark data and run device-profile summarizer (Phase 5).
+- `[x]` Real profiling session on Simulator with `tiny_multimodal_v0` (Phase 5) — p50=199.5ms, p95=304.2ms, both PASS.
+- `[x]` Device-profile summarizer exercised on real session data (Phase 5).
+- `[ ]` Physical-device profiling run on iPhone hardware (Phase 5 — publishable results).
+- `[ ]` Instruments traces: Time Profiler, Allocations, Energy Log (Phase 5).

@@ -6,9 +6,9 @@ Last updated: 2026-04-12
 
 This pipeline consumes exported app benchmark sessions (CSV + `_meta.json`), optionally merges manual Instruments trace metrics, computes stable per-session and aggregate performance summaries, and writes reusable analysis artifacts.
 
-**Current state:** All inference runs through `PlaceholderInferenceService`, which simulates latency without real model computation. Sessions are explicitly marked `is_placeholder: true` and the pipeline flags them as not valid for publishable device-performance conclusions.
+**Current state (as of 2026-04-12):** `tiny_multimodal_v0` now runs through `CoreMLInferenceService` with real Core ML inference. Sessions from this model are marked `is_placeholder: false` and the pipeline evaluates latency thresholds as real pass/fail. First session captured on iPhone 17 Pro Simulator: p50=199.5ms (PASS), p95=304.2ms (PASS). Simulator results validate the pipeline but are not publishable — physical-device sessions are needed for final conclusions.
 
-**When this becomes real:** After Phase 4 (Core ML conversion), real inference sessions will produce `is_placeholder: false` and the same pipeline will generate publishable summaries unchanged.
+Other models (`question_lookup_v0`, VLM candidates) still use `PlaceholderInferenceService` and are marked `is_placeholder: true`.
 
 ## Session Folder Contract
 

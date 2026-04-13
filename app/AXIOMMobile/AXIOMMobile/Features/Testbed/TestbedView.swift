@@ -57,6 +57,11 @@ struct TestbedView: View {
             .onChange(of: viewModel.selectedPhotoItem) { _, _ in
                 Task { await viewModel.loadImage() }
             }
+            .task {
+                if viewModel.isAutoBenchmarkRequested {
+                    await viewModel.runAutoBenchmark()
+                }
+            }
         }
     }
 

@@ -161,6 +161,32 @@ The **Share** button (appears after export) sends both the CSV and metadata JSON
 
 The routing is automatic: `TestbedViewModel` checks `selectedModel.isCoreMLReady` and dispatches to the appropriate service. Benchmark CSV exports and `_meta.json` accurately record which service was used via the `is_placeholder` field.
 
+## Auto-Benchmark Mode
+
+For repeatable profiling without manual UI interaction, launch the app with the `--auto-benchmark` argument:
+
+```bash
+# Via Simulator:
+xcrun simctl launch booted com.arieljtyson.AXIOMMobile --auto-benchmark
+
+# Via Xcode scheme:
+# Edit Scheme > Run > Arguments > Add "--auto-benchmark"
+```
+
+This automatically:
+1. Selects `tiny_multimodal_v0` (first Core ML-ready model)
+2. Sets a fixed question ("What is shown on screen?")
+3. Runs 20 benchmark iterations with real Core ML inference
+4. Exports CSV + `_meta.json` to the app's Documents directory
+
+To stage the results into the repo:
+
+```bash
+python3 ml/scripts/stage_device_profile_session.py \
+    --from-simulator \
+    --device-name "iphone17pro-sim"
+```
+
 ## Requirements
 
 - Xcode 26.0+
