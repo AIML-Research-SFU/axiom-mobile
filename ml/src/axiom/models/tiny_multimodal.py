@@ -130,6 +130,11 @@ class TinyMultimodalBaseline(ReasoningModel):
         self._is_trained = False
         self._image_root = image_root
 
+    def _build_net(self, num_classes: int) -> nn.Module:
+        """Construct the network. Overridden by subclasses to swap architecture
+        while reusing train()/save_checkpoint()/load_checkpoint()/predict_one()."""
+        return TinyMultimodalNet(num_classes)
+
     def _ensure_image_loader(self) -> ImageLoader:
         if self._image_loader is None:
             if self._image_root is None:
@@ -208,14 +213,18 @@ class TinyMultimodalBaseline(ReasoningModel):
                 f"Need at least 2 distinct answers for classification, got {num_classes}."
             )
 
-        # Initialize network
-        self._net = TinyMultimodalNet(num_classes)
+        # Initialize network (subclasses override _build_net to swap architecture
+        # while reusing this training loop, vocab building, and checkpointing)
+        self._net = self._build_net(num_classes)
 
         # Prepare training data
         images, char_ids, labels = self._prepare_batch(train_rows)
 
         # Simple training loop — SGD, cross-entropy, configurable epochs
-        optimizer = torch.optim.SGD(self._net.parameters(), lr=0.01, momentum=0.9)
+        # Filter to trainable params only: no-op for TinyMultimodalNet (everything
+        # trainable), but essential for subclasses with a frozen pretrained backbone.
+        trainable_params = [p for p in self._net.parameters() if p.requires_grad]
+        optimizer = torch.optim.SGD(trainable_params, lr=0.01, momentum=0.9)
 
         if class_weighted:
             # Inverse-frequency weights capped at 10× to avoid extreme gradients
@@ -272,6 +281,7 @@ class TinyMultimodalBaseline(ReasoningModel):
             train_acc = (train_preds == labels).float().mean().item()
 
         param_count = sum(p.numel() for p in self._net.parameters())
+        trainable_param_count = sum(p.numel() for p in self._net.parameters() if p.requires_grad)
 
         return {
             "train_examples": len(train_rows),
@@ -283,6 +293,7 @@ class TinyMultimodalBaseline(ReasoningModel):
             "final_loss": epoch_losses[-1] if epoch_losses else 0.0,
             "train_accuracy": round(train_acc, 4),
             "parameter_count": param_count,
+            "trainable_parameter_count": trainable_param_count,
             "image_size": IMAGE_SIZE,
             "max_char_len": MAX_CHAR_LEN,
             "epoch_losses": epoch_losses,
@@ -435,7 +446,7 @@ class TinyMultimodalBaseline(ReasoningModel):
         model = cls(spec, image_root=image_root)
         model._label_to_idx = label_to_idx
         model._idx_to_label = {int(i): a for a, i in label_to_idx.items()}
-        model._net = TinyMultimodalNet(num_classes=meta["num_classes"])
+        model._net = model._build_net(num_classes=meta["num_classes"])
         model._net.load_state_dict(
             torch.load(checkpoint_path / "model.pt", weights_only=True)
         )

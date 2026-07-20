@@ -207,6 +207,162 @@ v1 is the default model in the app. The `CoreMLInferenceService` dispatches by m
 
 Model-specific behavior (confidence threshold, class count, supported question types) is driven by metadata sidecars (`{model_id}_metadata.json`) bundled in app Resources, so adding future model versions requires no Swift code changes.
 
+## AXIOM-LoRA v1 (Phase 8: Pretrained Backbone + LoRA)
+
+As of 2026-07-20, the repo has a third executable model:
+
+- `axiom_lora_v1`
+
+This replaces the from-scratch image encoder used by `tiny_multimodal_v0/v1`
+with a real pretrained vision backbone, and applies LoRA to it -- the
+methodology the original README promised ("LoRA (PEFT) fine-tuning") but
+which was never implemented until now.
+
+### What was attempted first, and why it's not what shipped
+
+The original plan was a pretrained **text** tower (a small HuggingFace
+transformer) fine-tuned with LoRA via `peft`, on the theory that this most
+directly matches the README's stated approach. This was actually attempted,
+not just considered:
+
+1. `prajjwal1/bert-tiny` -- failed to load: its tokenizer repo predates the
+   installed `transformers` (5.14.1)'s serialization format and can't be
+   converted even with `sentencepiece` installed.
+2. `sentence-transformers/all-MiniLM-L6-v2` -- tokenizer loaded fine, LoRA
+   applied fine via `peft`, `torch.jit.trace` succeeded, but
+   `coremltools.convert` failed inside the embeddings/position-id ops:
+   `TypeError: only 0-dimensional arrays can be converted to Python
+   scalars`.
+3. To isolate the cause, the same model was traced and converted **without**
+   LoRA. It failed identically -- proving the break is in the base
+   pretrained transformer's traced graph (likely `transformers`' newer
+   masking/position-id codegen vs. what coremltools 9.0's PyTorch frontend
+   can lower), not anything LoRA-specific.
+
+This was a pre-registered risk in the roadmap ("if the transformer text
+tower doesn't convert cleanly, fall back..."), so hitting it and falling
+back is the plan working as intended, not a failure to hide.
+
+### What shipped instead
+
+- **Image encoder:** `torchvision.models.mobilenet_v3_small` (ImageNet
+  IMAGENET1K_V1 weights), entirely frozen, with a genuine LoRA adapter
+  (rank=8, alpha=16, zero-initialized `up` projection per the standard LoRA
+  convention) on the final 1x1 conv (96->576 channels) -- the one place in
+  this architecture where "LoRA-adapting a pretrained layer" is actually
+  meaningful, since everything else is trained from scratch anyway. Verified
+  via direct inspection of `torchvision`'s backbone (not assumed) before
+  wiring it up. BatchNorm inside the frozen backbone is held in `.eval()`
+  mode permanently (even during `net.train()`) so its running statistics
+  don't drift from tiny (~16-example) fine-tuning batches.
+- **Text encoder:** unchanged from `tiny_multimodal_v0/v1` -- the same
+  character-level embedding + linear projection. Not "LoRA-adapted",
+  because there's nothing pretrained there to adapt; the char encoder was
+  never the bottleneck (questions are a small set of fixed templates).
+- **Fusion + classifier:** same shape as `tiny_multimodal` (concat -> linear
+  -> relu -> linear), so the rest of the pipeline (training loop, vocab
+  building, checkpoint format) is reused via subclassing
+  (`AxiomLoraBaseline(TinyMultimodalBaseline)`, overriding only
+  `_build_net()` and `export_coreml()`), not duplicated.
+
+### A real gap this surfaced: image availability
+
+Training needs the actual screenshot pixels, not just the manifests. The
+452 examples committed before Phase 7 (52 manual + 400 v0.3.0 auto-exact)
+were never synced to this machine -- Google Drive isn't set up here (same
+gap flagged after Phase 7). Rather than train on just the 299 new v0.4.0
+images (a small, low-diversity slice, and most of the frozen val/test split
+wouldn't even resolve), the 100 v0.3.0 base scenarios were **recaptured
+fresh** via the same deterministic simulator generator into a
+**machine-local-only** directory
+(`~/Datasets/axiom-mobile/local_base_recapture/`, `local_phase8_images/`,
+`local_phase8_manifests/` -- none of this is committed or touches
+`data/manifests/`), combined with the 60 delta scenarios, to get a
+699-QA-pair, 158-answer-class local training set. This is **not** the
+committed dataset v3 split -- it's missing the 52 manually-captured
+examples and uses different image filenames/IDs, so results below aren't a
+byte-for-byte comparison to `tiny_multimodal_v1`'s reported numbers.
+Retraining on the real committed v3 split is a follow-up once the Drive
+sync gap is closed (same blocker noted after Phase 7).
+
+### Results (local Phase 8 dataset: pool=629, val=30, test=40, 40 epochs, class-weighted CE)
+
+| Metric | tiny_multimodal_v1 (committed v2, from scratch) | axiom_lora_v1 (local phase8 set, pretrained+LoRA) |
+|--------|---|---|
+| Pool EM | 30.9% | 32.0% |
+| Val EM | 26.7% | 23.3% |
+| Test EM | 27.5% | 30.0% |
+| Total params | ~47K | ~1.01M (927K frozen backbone + ~78K trainable) |
+| Core ML size | 96 KB | 2.04 MB |
+| Core ML accuracy drop | 0% | 0% |
+
+**Honest read: this is roughly on par with v1, not a clear win.** Test EM is
+a few points higher, val EM a few points lower -- within noise range for
+30-40 example eval splits, and not a like-for-like comparison given the
+different (local-only) dataset. The pretrained ImageNet backbone does not
+obviously transfer well to "read the exact digits in a status bar" the way
+it would to natural object recognition -- ImageNet pretraining optimizes
+for texture/shape/object features, not precise small-text reading, and only
+the final conv layer's LoRA adapter plus a linear head are actually
+learning task-specific features here. This is a real, useful negative-ish
+result, not a setback to obscure: it suggests the quality gap identified in
+`paper/PAPER_DRAFT_v3.md` may need more than a swapped vision backbone --
+worth testing with more trainable capacity (e.g. unfreezing more of the
+backbone, or a higher LoRA rank) once training on the real, larger,
+committed dataset is possible.
+
+### Core ML export
+
+`ml/scripts/export_coreml_lora.py` (parallel to `export_coreml.py`, not a
+generalization of it -- matches the existing one-script-per-architecture
+convention). Accuracy gate **PASSED** with **0% drop** on both val and test.
+Package size **2.04 MB**, comfortably under the 100MB target.
+
+### Latency
+
+Only a macOS-host CoreML inference timing was run as a proxy
+(`mlmodel.predict()` in a loop, p50=0.17ms) -- **this is not on-device iOS
+latency** and should not be reported as such. Full integration (bundling
+`AxiomLora.mlpackage` into the app, wiring `CoreMLInferenceService`, adding
+a model-metadata sidecar, running `--auto-benchmark` on Simulator and then
+physical device) was not done in this pass and is the clear next step
+before this model's latency can be honestly compared to v0/v1's measured
+14.0-14.5ms on iPhone 15 Pro Max.
+
+### How to reproduce
+
+```bash
+# Recapture base scenarios locally (only needed if data/manifests/ images
+# aren't available on your machine -- if you have the synced Drive folder,
+# just point --image-root at it and use data/manifests/ directly instead).
+./scripts/capture_screenshots.sh --scenarios scripts/capture_scenarios.json \
+    --output ~/Datasets/axiom-mobile/local_base_recapture --batch-id local_base_recapture001
+
+# Train
+python3 ml/scripts/run_trainable_baseline.py \
+    --model-id axiom_lora_v1 \
+    --image-root ~/Datasets/axiom-mobile/local_phase8_images \
+    --manifest-dir ~/Datasets/axiom-mobile/local_phase8_manifests \
+    --epochs 40 --class-weighted
+
+# Export + accuracy gate
+python3 ml/scripts/export_coreml_lora.py \
+    --checkpoint-dir results/trainable_baselines/axiom_lora_v1_seed0_local/checkpoint \
+    --image-root ~/Datasets/axiom-mobile/local_phase8_images \
+    --manifest-dir ~/Datasets/axiom-mobile/local_phase8_manifests
+```
+
+### Phase 8 status
+
+- [x] De-risk spike: pretrained MobileNetV3-Small traces and converts cleanly via coremltools
+- [x] De-risk spike: pretrained transformer + LoRA text tower attempted, failed at coremltools conversion (isolated to base transformer, not LoRA), fallback used per pre-registered plan
+- [x] `axiom_lora_v1`: pretrained MobileNetV3-Small (frozen) + genuine LoRA adapter (rank=8) on final conv + unchanged char-level text encoder
+- [x] Trained on a 699-QA-pair local reproduction of the auto-generated majority of dataset v3 (Drive sync gap blocks training on the literal committed split)
+- [x] Core ML export: accuracy gate passed, 0% drop, 2.04MB package
+- [ ] On-device (Simulator or physical) latency benchmarking -- needs app integration, not done this pass
+- [ ] Retrain on the real committed dataset v3 split once Drive sync is available
+- [ ] Quality result is a wash vs v1, not a win -- worth investigating unfreezing more backbone / higher LoRA rank once real-data training is possible
+
 ## Result Artifact Contract
 
 Every baseline run should write:

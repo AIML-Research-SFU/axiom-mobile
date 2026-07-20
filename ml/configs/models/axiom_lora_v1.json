@@ -1,0 +1,17 @@
+{
+  "model_id": "axiom_lora_v1",
+  "display_name": "AXIOM-LoRA v1",
+  "family": "custom",
+  "backend": "pytorch",
+  "stage": "trainable_baseline",
+  "description": "Phase 8 model: pretrained MobileNetV3-Small (ImageNet, frozen) image backbone with a LoRA low-rank adapter on the final conv, char-level text encoder (unchanged from tiny_multimodal), concatenation fusion, classification head. Replaces the from-scratch CNN in tiny_multimodal_v0/v1 with a real pretrained vision prior.",
+  "source": "custom (in-repo), backbone from torchvision (ImageNet-pretrained)",
+  "notes": "Pretrained-transformer+LoRA text tower was attempted first and is NOT used: tracing a LoRA-adapted HuggingFace transformer (bert-tiny, then all-MiniLM-L6-v2) through coremltools 9.0 failed at the embeddings/position-id conversion step, reproduced with LoRA removed too (failure is in the base transformer's traced graph, not LoRA-specific). Fell back to the proven char-level text encoder per the roadmap's pre-registered fallback. LoRA (rank=8, alpha=16) is applied to the vision backbone's final 1x1 conv (96->576 channels) instead -- the one genuinely pretrained component in this architecture. Backbone otherwise entirely frozen (including BatchNorm running stats, held in eval mode during training).",
+  "executable": true,
+  "coreml_ready": true,
+  "params_millions": 1.01,
+  "expected_app_footprint_mb": 2.04,
+  "quantization": null,
+  "priority_rank": 1,
+  "supported_capabilities": ["image_qa", "classification", "pretrained_backbone", "lora_adapter"]
+}
