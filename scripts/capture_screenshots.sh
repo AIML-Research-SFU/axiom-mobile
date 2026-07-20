@@ -141,13 +141,14 @@ apply_scenario_status_bar() {
         return 0
     fi
 
-    local sb_time sb_level sb_state
+    local sb_time sb_level sb_state sb_cellular_bars
     sb_time=$(echo "$scenario_json" | jq -r '.status_bar_override.time // "9:41"')
     sb_level=$(echo "$scenario_json" | jq -r '.status_bar_override.battery_level // 100')
     sb_state=$(echo "$scenario_json" | jq -r '.status_bar_override.battery_state // "charged"')
+    sb_cellular_bars=$(echo "$scenario_json" | jq -r '.status_bar_override.cellular_bars // 4')
 
-    apply_status_bar_values "$sb_time" "$sb_level" "$sb_state"
-    echo "    [sb] time=$sb_time battery=$sb_level% ($sb_state)"
+    apply_status_bar_values "$sb_time" "$sb_level" "$sb_state" 3 "$sb_cellular_bars"
+    echo "    [sb] time=$sb_time battery=$sb_level% ($sb_state) cellular_bars=$sb_cellular_bars"
 }
 
 clear_status_bar() {

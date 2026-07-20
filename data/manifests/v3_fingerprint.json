@@ -1,0 +1,14 @@
+{
+  "version": "v3",
+  "seed": 20260719,
+  "split_sizes": {
+    "pool": 681,
+    "val": 30,
+    "test": 40
+  },
+  "sha256": {
+    "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+    "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0",
+    "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8"
+  }
+}

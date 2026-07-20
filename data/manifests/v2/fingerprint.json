@@ -1,0 +1,8 @@
+{
+  "version": "v2",
+  "sha256": {
+    "pool": "a0591489a15cf892c59fa7516f1402f7bd02a5d9f3739015345e927636080261",
+    "val": "89d621216a2ebeff8fb15a815a2829aa64e376f44c245dcac6ed7c1031b49ba3",
+    "test": "ff20d5b4011c8c901bb6a1459f9ce7faa4d7aff15bd9510e8b1c1cee70620692"
+  }
+}

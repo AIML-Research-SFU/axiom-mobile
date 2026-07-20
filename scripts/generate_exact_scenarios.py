@@ -87,6 +87,51 @@ VARIANTS: list[tuple[str, str, int, str]] = [
 # How many variants to use for Maps (all variants in v0.3.0)
 MAPS_VARIANT_COUNT = len(VARIANTS)
 
+# ── v0.4.0 delta: cellular-signal-bars variants ───────────────────────
+# (id, time, battery_level, battery_state, cellular_bars)
+#
+# Visually confirmed on iPhone 17 Pro / iOS 26.4 simulator: `--cellularBars`
+# renders a distinguishable filled-bar-count icon (1 bar vs 4 bars is
+# unambiguous at a glance). `--wifiBars` and `--operatorName` were checked
+# the same way and rejected: the wifi icon does not render a visually
+# distinguishable bar count at this resolution, and the carrier-name text
+# is not shown at all on this device (covered by the Dynamic Island area),
+# so neither is a visually-verifiable exact answer. Only cellular_bars is
+# added here, per the "only emit exact answers when visually verified"
+# rule this generator already follows for everything else.
+NEW_VARIANTS: list[tuple[str, str, int, str, int]] = [
+    ("sb51", "6:20",  55,  "discharging", 1),
+    ("sb52", "9:05",  88,  "discharging", 2),
+    ("sb53", "2:40",  12,  "discharging", 3),
+    ("sb54", "11:55", 100, "charged",     4),
+    ("sb55", "4:15",  67,  "discharging", 1),
+    ("sb56", "7:30",  45,  "charging",    2),
+    ("sb57", "1:50",  93,  "discharging", 3),
+    ("sb58", "10:10", 28,  "discharging", 4),
+    ("sb59", "5:25",  71,  "discharging", 1),
+    ("sb60", "8:45",  39,  "discharging", 2),
+    ("sb61", "12:05", 84,  "discharging", 3),
+    ("sb62", "3:20",  16,  "discharging", 4),
+    ("sb63", "6:55",  60,  "charging",    1),
+    ("sb64", "9:40",  95,  "charged",     2),
+    ("sb65", "2:15",  24,  "discharging", 3),
+    ("sb66", "11:00", 77,  "discharging", 4),
+    ("sb67", "4:50",  9,   "discharging", 1),
+    ("sb68", "7:05",  52,  "discharging", 2),
+    ("sb69", "1:20",  63,  "discharging", 3),
+    ("sb70", "10:35", 91,  "discharging", 4),
+    ("sb71", "5:00",  18,  "discharging", 1),
+    ("sb72", "8:20",  47,  "charging",    2),
+    ("sb73", "12:40", 100, "charged",     3),
+    ("sb74", "3:05",  35,  "discharging", 4),
+    ("sb75", "6:10",  79,  "discharging", 1),
+    ("sb76", "9:25",  6,   "discharging", 2),
+    ("sb77", "2:45",  58,  "discharging", 3),
+    ("sb78", "11:35", 83,  "discharging", 4),
+    ("sb79", "4:30",  41,  "discharging", 1),
+    ("sb80", "7:50",  96,  "charged",     2),
+]
+
 # ── Default status bar (applied when no per-scenario override) ────────
 DEFAULT_STATUS_BAR = {
     "_doc": "Applied globally via `xcrun simctl status_bar` before capture begins.",
@@ -101,7 +146,7 @@ DEFAULT_STATUS_BAR = {
 
 
 def _make_settings_scenario(
-    var_id: str, time: str, battery: int, state: str
+    var_id: str, time: str, battery: int, state: str, cellular_bars: int | None = None
 ) -> dict:
     """Generate a Settings main screen scenario with exact answers.
 
@@ -116,8 +161,49 @@ def _make_settings_scenario(
       - Bluetooth toggle / status
 
     Only emits questions about content that is actually visible.
+
+    `cellular_bars`, when provided (v0.4.0 delta), sets the cellular signal
+    icon via `--cellularBars` and adds a matching exact-answer question.
+    Visually confirmed distinguishable (1 vs 4 bars); wifi_bars and
+    operator_name were checked the same way and are not used because they
+    are not reliably readable on this device's status bar.
     """
     charging = "Yes" if state in ("charged", "charging") else "No"
+
+    status_bar_override = {
+        "time": time,
+        "battery_level": battery,
+        "battery_state": state,
+    }
+    qa_pairs = [
+        {
+            "question": "What time is shown?",
+            "answer": time,
+            "difficulty": 1,
+        },
+        {
+            "question": "What battery percentage is shown?",
+            "answer": f"{battery}%",
+            "difficulty": 1,
+        },
+        {
+            "question": "Is the battery charging?",
+            "answer": charging,
+            "difficulty": 1,
+        },
+        {
+            "question": "Is the user signed into Apple Account?",
+            "answer": "No",
+            "difficulty": 1,
+        },
+    ]
+    if cellular_bars is not None:
+        status_bar_override["cellular_bars"] = cellular_bars
+        qa_pairs.append({
+            "question": "How many cellular signal bars are shown?",
+            "answer": str(cellular_bars),
+            "difficulty": 2,
+        })
 
     return {
         "id": f"settings_main_{var_id}",
@@ -127,35 +213,12 @@ def _make_settings_scenario(
         "screen_family": "settings",
         "description": (
             f"Settings main — {var_id} "
-            f"(time={time}, battery={battery}%, {state})"
+            f"(time={time}, battery={battery}%, {state}"
+            + (f", cellular_bars={cellular_bars}" if cellular_bars is not None else "")
+            + ")"
         ),
-        "status_bar_override": {
-            "time": time,
-            "battery_level": battery,
-            "battery_state": state,
-        },
-        "qa_pairs": [
-            {
-                "question": "What time is shown?",
-                "answer": time,
-                "difficulty": 1,
-            },
-            {
-                "question": "What battery percentage is shown?",
-                "answer": f"{battery}%",
-                "difficulty": 1,
-            },
-            {
-                "question": "Is the battery charging?",
-                "answer": charging,
-                "difficulty": 1,
-            },
-            {
-                "question": "Is the user signed into Apple Account?",
-                "answer": "No",
-                "difficulty": 1,
-            },
-        ],
+        "status_bar_override": status_bar_override,
+        "qa_pairs": qa_pairs,
         "notes": (
             f"Settings main — iOS 26 layout, "
             f"status bar {var_id}"
@@ -164,7 +227,7 @@ def _make_settings_scenario(
 
 
 def _make_maps_scenario(
-    var_id: str, time: str, battery: int, state: str
+    var_id: str, time: str, battery: int, state: str, cellular_bars: int | None = None
 ) -> dict:
     """Generate a Maps default view scenario with exact answers.
 
@@ -175,8 +238,46 @@ def _make_maps_scenario(
       - "Places >" section with Home, Work, Add
 
     Only status-bar-controlled and visually verified answers are emitted.
+
+    `cellular_bars`, when provided (v0.4.0 delta), mirrors the Settings
+    scenario: visually confirmed distinguishable signal-bar icon.
     """
     charging = "Yes" if state in ("charged", "charging") else "No"
+
+    status_bar_override = {
+        "time": time,
+        "battery_level": battery,
+        "battery_state": state,
+    }
+    qa_pairs = [
+        {
+            "question": "What time is shown?",
+            "answer": time,
+            "difficulty": 1,
+        },
+        {
+            "question": "What battery percentage is shown?",
+            "answer": f"{battery}%",
+            "difficulty": 1,
+        },
+        {
+            "question": "Is the battery charging?",
+            "answer": charging,
+            "difficulty": 1,
+        },
+        {
+            "question": "What text is shown in the search bar?",
+            "answer": "Apple Maps",
+            "difficulty": 1,
+        },
+    ]
+    if cellular_bars is not None:
+        status_bar_override["cellular_bars"] = cellular_bars
+        qa_pairs.append({
+            "question": "How many cellular signal bars are shown?",
+            "answer": str(cellular_bars),
+            "difficulty": 2,
+        })
 
     return {
         "id": f"maps_default_{var_id}",
@@ -186,69 +287,97 @@ def _make_maps_scenario(
         "screen_family": "maps",
         "description": (
             f"Maps default — {var_id} "
-            f"(time={time}, battery={battery}%, {state})"
+            f"(time={time}, battery={battery}%, {state}"
+            + (f", cellular_bars={cellular_bars}" if cellular_bars is not None else "")
+            + ")"
         ),
-        "status_bar_override": {
-            "time": time,
-            "battery_level": battery,
-            "battery_state": state,
-        },
-        "qa_pairs": [
-            {
-                "question": "What time is shown?",
-                "answer": time,
-                "difficulty": 1,
-            },
-            {
-                "question": "What battery percentage is shown?",
-                "answer": f"{battery}%",
-                "difficulty": 1,
-            },
-            {
-                "question": "Is the battery charging?",
-                "answer": charging,
-                "difficulty": 1,
-            },
-            {
-                "question": "What text is shown in the search bar?",
-                "answer": "Apple Maps",
-                "difficulty": 1,
-            },
-        ],
+        "status_bar_override": status_bar_override,
+        "qa_pairs": qa_pairs,
         "notes": f"Maps default view — status bar {var_id}",
     }
 
 
-def generate() -> dict:
-    """Generate the full scenarios dictionary."""
-    scenarios: list[dict] = []
+def _base_scenarios() -> list[dict]:
+    """The original v0.3.0 scenario set (50 variants x 2 apps, 4 QA each).
 
-    # Settings main with all variants
+    Already captured and promoted into pool.jsonl as batch
+    `exact_v3_batch001`. Kept unchanged so re-running the generator does
+    not silently alter previously-promoted scenario definitions.
+    """
+    scenarios: list[dict] = []
     for var_id, time, battery, state in VARIANTS:
         scenarios.append(_make_settings_scenario(var_id, time, battery, state))
-
-    # Maps with first N variants
     for var_id, time, battery, state in VARIANTS[:MAPS_VARIANT_COUNT]:
         scenarios.append(_make_maps_scenario(var_id, time, battery, state))
+    return scenarios
 
+
+def _delta_scenarios() -> list[dict]:
+    """The v0.4.0 delta: 30 new variants x 2 apps, 5 QA each (adds
+    cellular_bars). Not yet captured or promoted — this is the set that
+    should be passed to capture_screenshots.sh via --scenarios so the
+    already-promoted base set is not re-captured/re-promoted as
+    duplicates.
+    """
+    scenarios: list[dict] = []
+    for var_id, time, battery, state, cellular_bars in NEW_VARIANTS:
+        scenarios.append(
+            _make_settings_scenario(var_id, time, battery, state, cellular_bars)
+        )
+    for var_id, time, battery, state, cellular_bars in NEW_VARIANTS:
+        scenarios.append(
+            _make_maps_scenario(var_id, time, battery, state, cellular_bars)
+        )
+    return scenarios
+
+
+def generate(delta_only: bool = False) -> dict:
+    """Generate the scenarios dictionary.
+
+    delta_only=False (default): full canonical set (base + delta) — for
+        documentation/reference. Do NOT capture this wholesale; it
+        includes the already-promoted base scenarios.
+    delta_only=True: only the new v0.4.0 scenarios — this is what
+        capture_screenshots.sh should actually be pointed at.
+    """
+    scenarios = _delta_scenarios() if delta_only else (_base_scenarios() + _delta_scenarios())
     total_qa = sum(len(s["qa_pairs"]) for s in scenarios)
 
-    return {
-        "_version": "0.3.0",
-        "_description": (
-            "Exact-answer scenario definitions for deterministic dataset "
-            "generation (v0.3.0 — 50 status bar variants, full Maps coverage). "
-            "Generated by scripts/generate_exact_scenarios.py. "
-            "All answers visually verified against iOS 26 simulator output. "
+    if delta_only:
+        description = (
+            "v0.4.0 DELTA — new scenarios only (30 status bar/cellular-bars "
+            "variants x 2 apps, 5 QA pairs each, adds 'How many cellular "
+            "signal bars are shown?'). Generated by "
+            "scripts/generate_exact_scenarios.py --delta-only. Pass this "
+            "file to capture_screenshots.sh --scenarios so the already-"
+            "promoted v0.3.0 base scenarios are not re-captured. "
             "Do not edit by hand — regenerate instead."
-        ),
+        )
+    else:
+        description = (
+            "Full canonical scenario definitions, v0.3.0 base (50 status "
+            "bar variants) + v0.4.0 delta (30 cellular_bars variants), "
+            "full Maps coverage. Generated by "
+            "scripts/generate_exact_scenarios.py. Reference only — the "
+            "base scenarios here are already captured/promoted; use "
+            "--delta-only output to capture just the new ones. "
+            "All answers visually verified against iOS 26 simulator "
+            "output. Do not edit by hand — regenerate instead."
+        )
+
+    return {
+        "_version": "0.4.0-delta" if delta_only else "0.4.0",
+        "_description": description,
         "_total_scenarios": len(scenarios),
         "_total_qa_pairs": total_qa,
         "_visual_verification_note": (
             "iOS 26 Settings main screen does NOT show Airplane Mode, "
-            "Wi-Fi, or Bluetooth toggles (moved to sub-pages). "
-            "Only status bar content, Apple Account state, and Maps "
-            "search bar text are used as exact answers."
+            "Wi-Fi, or Bluetooth toggles (moved to sub-pages). Wifi signal "
+            "bars and carrier name were checked and are not reliably "
+            "readable on this device's status bar, so they are not used "
+            "as exact answers. Only status bar time/battery/charging, "
+            "cellular signal bars, Apple Account state, and Maps search "
+            "bar text are used as exact answers."
         ),
         "default_status_bar": DEFAULT_STATUS_BAR,
         "scenarios": scenarios,
@@ -264,9 +393,20 @@ def main() -> None:
         action="store_true",
         help="Print summary without writing files",
     )
+    parser.add_argument(
+        "--delta-only",
+        action="store_true",
+        help=(
+            "Write only the new v0.4.0 scenarios to "
+            "capture_scenarios_v04_delta.json, instead of the full "
+            "canonical set. Use this file with capture_screenshots.sh "
+            "to avoid re-capturing/re-promoting the already-promoted "
+            "v0.3.0 base scenarios."
+        ),
+    )
     args = parser.parse_args()
 
-    data = generate()
+    data = generate(delta_only=args.delta_only)
 
     settings_count = sum(
         1 for s in data["scenarios"] if s["screen_family"] == "settings"
@@ -281,8 +421,12 @@ def main() -> None:
     print(f"    Settings main: {settings_count}")
     print(f"    Maps default:  {maps_count}")
     print(f"  Total QA pairs:  {data['_total_qa_pairs']}")
-    print(f"    Per Settings:  4 (time, battery%, charging, signed-in)")
-    print(f"    Per Maps:      4 (time, battery%, charging, search bar text)")
+    if args.delta_only:
+        print(f"    Per Settings:  5 (time, battery%, charging, signed-in, cellular bars)")
+        print(f"    Per Maps:      5 (time, battery%, charging, search bar text, cellular bars)")
+    else:
+        print(f"    Per Settings:  4 or 5 (base scenarios lack cellular bars)")
+        print(f"    Per Maps:      4 or 5 (base scenarios lack cellular bars)")
     print(f"  All answers:     exact (visually verified)")
     print()
 
@@ -293,7 +437,8 @@ def main() -> None:
         print(json.dumps(data["scenarios"][0], indent=2))
         return
 
-    output_path = SCRIPT_DIR / "capture_scenarios.json"
+    filename = "capture_scenarios_v04_delta.json" if args.delta_only else "capture_scenarios.json"
+    output_path = SCRIPT_DIR / filename
     with open(output_path, "w") as f:
         json.dump(data, f, indent=2)
         f.write("\n")
