@@ -1,0 +1,5057 @@
+{
+  "_description": "Relations for kg/entities.json. Regenerate with ml/scripts/build_kg.py -- do not hand-edit.",
+  "_relation_count": 1009,
+  "_predicate_counts": {
+    "grounds_example": 751,
+    "has_attribute": 39,
+    "has_screen": 19,
+    "has_value": 200
+  },
+  "relations": [
+    {
+      "subject": "app:app_store",
+      "predicate": "has_screen",
+      "object": "screen:app_store:default"
+    },
+    {
+      "subject": "app:calculator",
+      "predicate": "has_screen",
+      "object": "screen:calculator:default"
+    },
+    {
+      "subject": "app:clock",
+      "predicate": "has_screen",
+      "object": "screen:clock:alarm"
+    },
+    {
+      "subject": "app:clock",
+      "predicate": "has_screen",
+      "object": "screen:clock:stopwatch"
+    },
+    {
+      "subject": "app:clock",
+      "predicate": "has_screen",
+      "object": "screen:clock:world_clock"
+    },
+    {
+      "subject": "app:control_center",
+      "predicate": "has_screen",
+      "object": "screen:control_center:airdrop"
+    },
+    {
+      "subject": "app:control_center",
+      "predicate": "has_screen",
+      "object": "screen:control_center:connectivity"
+    },
+    {
+      "subject": "app:control_center",
+      "predicate": "has_screen",
+      "object": "screen:control_center:default"
+    },
+    {
+      "subject": "app:control_center",
+      "predicate": "has_screen",
+      "object": "screen:control_center:wi-fi"
+    },
+    {
+      "subject": "app:lock_screen",
+      "predicate": "has_screen",
+      "object": "screen:lock_screen:default"
+    },
+    {
+      "subject": "app:maps",
+      "predicate": "has_screen",
+      "object": "screen:maps:default_view"
+    },
+    {
+      "subject": "app:settings",
+      "predicate": "has_screen",
+      "object": "screen:settings:airplane_mode"
+    },
+    {
+      "subject": "app:settings",
+      "predicate": "has_screen",
+      "object": "screen:settings:battery"
+    },
+    {
+      "subject": "app:settings",
+      "predicate": "has_screen",
+      "object": "screen:settings:bluetooth"
+    },
+    {
+      "subject": "app:settings",
+      "predicate": "has_screen",
+      "object": "screen:settings:cellular"
+    },
+    {
+      "subject": "app:settings",
+      "predicate": "has_screen",
+      "object": "screen:settings:main"
+    },
+    {
+      "subject": "app:settings",
+      "predicate": "has_screen",
+      "object": "screen:settings:wi-fi"
+    },
+    {
+      "subject": "app:status_bar",
+      "predicate": "has_screen",
+      "object": "screen:status_bar:default"
+    },
+    {
+      "subject": "app:weather",
+      "predicate": "has_screen",
+      "object": "screen:weather:default"
+    },
+    {
+      "subject": "attr:airplane_mode",
+      "predicate": "has_value",
+      "object": "answer:no"
+    },
+    {
+      "subject": "attr:airplane_mode",
+      "predicate": "has_value",
+      "object": "answer:off"
+    },
+    {
+      "subject": "attr:airplane_mode",
+      "predicate": "has_value",
+      "object": "answer:on"
+    },
+    {
+      "subject": "attr:app_store",
+      "predicate": "has_value",
+      "object": "answer:apps"
+    },
+    {
+      "subject": "attr:app_store",
+      "predicate": "has_value",
+      "object": "answer:games"
+    },
+    {
+      "subject": "attr:apple_account",
+      "predicate": "has_value",
+      "object": "answer:no"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:100%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:11%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:12%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:13%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:15%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:16%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:17%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:18%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:19%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:2%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:21%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:23%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:24%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:26%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:28%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:29%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:3%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:31%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:33%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:34%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:35%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:38%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:39%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:40%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:41%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:42%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:44%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:45%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:46%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:47%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:48%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:5%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:50%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:52%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:53%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:55%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:57%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:58%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:6%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:60%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:61%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:62%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:63%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:65%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:67%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:69%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:7%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:71%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:73%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:74%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:76%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:77%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:78%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:79%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:8%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:80%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:82%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:83%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:84%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:86%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:87%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:88%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:9%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:90%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:91%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:92%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:93%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:95%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:96%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:97%"
+    },
+    {
+      "subject": "attr:battery_pct",
+      "predicate": "has_value",
+      "object": "answer:99%"
+    },
+    {
+      "subject": "attr:battery_settings",
+      "predicate": "has_value",
+      "object": "answer:off"
+    },
+    {
+      "subject": "attr:bluetooth_status",
+      "predicate": "has_value",
+      "object": "answer:off"
+    },
+    {
+      "subject": "attr:bluetooth_status",
+      "predicate": "has_value",
+      "object": "answer:on"
+    },
+    {
+      "subject": "attr:calculator",
+      "predicate": "has_value",
+      "object": "answer:48\u00f712+25.5"
+    },
+    {
+      "subject": "attr:calculator",
+      "predicate": "has_value",
+      "object": "answer:54"
+    },
+    {
+      "subject": "attr:calculator",
+      "predicate": "has_value",
+      "object": "answer:basic"
+    },
+    {
+      "subject": "attr:calculator",
+      "predicate": "has_value",
+      "object": "answer:scientific"
+    },
+    {
+      "subject": "attr:cellular_status",
+      "predicate": "has_value",
+      "object": "answer:1"
+    },
+    {
+      "subject": "attr:cellular_status",
+      "predicate": "has_value",
+      "object": "answer:2"
+    },
+    {
+      "subject": "attr:cellular_status",
+      "predicate": "has_value",
+      "object": "answer:3"
+    },
+    {
+      "subject": "attr:cellular_status",
+      "predicate": "has_value",
+      "object": "answer:4"
+    },
+    {
+      "subject": "attr:cellular_status",
+      "predicate": "has_value",
+      "object": "answer:off"
+    },
+    {
+      "subject": "attr:cellular_status",
+      "predicate": "has_value",
+      "object": "answer:on"
+    },
+    {
+      "subject": "attr:charging",
+      "predicate": "has_value",
+      "object": "answer:no"
+    },
+    {
+      "subject": "attr:charging",
+      "predicate": "has_value",
+      "object": "answer:yes"
+    },
+    {
+      "subject": "attr:control_center",
+      "predicate": "has_value",
+      "object": "answer:no"
+    },
+    {
+      "subject": "attr:location",
+      "predicate": "has_value",
+      "object": "answer:vancouver"
+    },
+    {
+      "subject": "attr:lock_screen",
+      "predicate": "has_value",
+      "object": "answer:sun_mar_15"
+    },
+    {
+      "subject": "attr:maps",
+      "predicate": "has_value",
+      "object": "answer:explore"
+    },
+    {
+      "subject": "attr:maps",
+      "predicate": "has_value",
+      "object": "answer:paris"
+    },
+    {
+      "subject": "attr:maps",
+      "predicate": "has_value",
+      "object": "answer:satellite"
+    },
+    {
+      "subject": "attr:maps",
+      "predicate": "has_value",
+      "object": "answer:transit"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:01:07.09"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:4"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:off"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:wednesday"
+    },
+    {
+      "subject": "attr:search_bar",
+      "predicate": "has_value",
+      "object": "answer:apple_maps"
+    },
+    {
+      "subject": "attr:temperature",
+      "predicate": "has_value",
+      "object": "answer:2\u00b0"
+    },
+    {
+      "subject": "attr:temperature",
+      "predicate": "has_value",
+      "object": "answer:3\u00b0"
+    },
+    {
+      "subject": "attr:temperature",
+      "predicate": "has_value",
+      "object": "answer:5\u00b0"
+    },
+    {
+      "subject": "attr:temperature",
+      "predicate": "has_value",
+      "object": "answer:7\u00b0"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:08"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:10"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:25"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:35"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:40"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:40am"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:10:55"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:11"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:35"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:11:55"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:12:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:12:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:12:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:12:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:12:40"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:12:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:1:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:1:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:1:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:1:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:1:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:1:50"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:2:10"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:2:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:2:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:2:40"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:2:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:2:55"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:13"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:35"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:3:50"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:40"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:50"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:4:55"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:5:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:5:10"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:5:25"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:5:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:5:47"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:10"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:54am"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:6:55"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:35"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:45_pm"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:46"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:50"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:7:55"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:8:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:8:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:8:20"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:8:22"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:8:40"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:8:45"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:00"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:02"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:05"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:15"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:25"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:30"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:40"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:41"
+    },
+    {
+      "subject": "attr:time",
+      "predicate": "has_value",
+      "object": "answer:9:50"
+    },
+    {
+      "subject": "attr:visual_detail",
+      "predicate": "has_value",
+      "object": "answer:yellow"
+    },
+    {
+      "subject": "attr:weather",
+      "predicate": "has_value",
+      "object": "answer:rain"
+    },
+    {
+      "subject": "attr:wifi_status",
+      "predicate": "has_value",
+      "object": "answer:eduroam"
+    },
+    {
+      "subject": "attr:wifi_status",
+      "predicate": "has_value",
+      "object": "answer:off"
+    },
+    {
+      "subject": "attr:wifi_status",
+      "predicate": "has_value",
+      "object": "answer:on"
+    },
+    {
+      "subject": "attr:wifi_status",
+      "predicate": "has_value",
+      "object": "answer:yes"
+    },
+    {
+      "subject": "screen:app_store:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_037"
+    },
+    {
+      "subject": "screen:app_store:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_038"
+    },
+    {
+      "subject": "screen:app_store:default",
+      "predicate": "has_attribute",
+      "object": "attr:app_store"
+    },
+    {
+      "subject": "screen:calculator:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_025"
+    },
+    {
+      "subject": "screen:calculator:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_026"
+    },
+    {
+      "subject": "screen:calculator:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_027"
+    },
+    {
+      "subject": "screen:calculator:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_028"
+    },
+    {
+      "subject": "screen:calculator:default",
+      "predicate": "has_attribute",
+      "object": "attr:calculator"
+    },
+    {
+      "subject": "screen:clock:alarm",
+      "predicate": "grounds_example",
+      "object": "example:ex_029"
+    },
+    {
+      "subject": "screen:clock:alarm",
+      "predicate": "grounds_example",
+      "object": "example:ex_030"
+    },
+    {
+      "subject": "screen:clock:alarm",
+      "predicate": "has_attribute",
+      "object": "attr:other"
+    },
+    {
+      "subject": "screen:clock:alarm",
+      "predicate": "has_attribute",
+      "object": "attr:time"
+    },
+    {
+      "subject": "screen:clock:stopwatch",
+      "predicate": "grounds_example",
+      "object": "example:ex_032"
+    },
+    {
+      "subject": "screen:clock:stopwatch",
+      "predicate": "has_attribute",
+      "object": "attr:other"
+    },
+    {
+      "subject": "screen:clock:world_clock",
+      "predicate": "grounds_example",
+      "object": "example:ex_031"
+    },
+    {
+      "subject": "screen:clock:world_clock",
+      "predicate": "has_attribute",
+      "object": "attr:time"
+    },
+    {
+      "subject": "screen:control_center:airdrop",
+      "predicate": "grounds_example",
+      "object": "example:ex_046"
+    },
+    {
+      "subject": "screen:control_center:airdrop",
+      "predicate": "has_attribute",
+      "object": "attr:control_center"
+    },
+    {
+      "subject": "screen:control_center:connectivity",
+      "predicate": "grounds_example",
+      "object": "example:ex_048"
+    },
+    {
+      "subject": "screen:control_center:connectivity",
+      "predicate": "has_attribute",
+      "object": "attr:other"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_011"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_012"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_013"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_014"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_015"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_016"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_017"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_049"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "has_attribute",
+      "object": "attr:airplane_mode"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "has_attribute",
+      "object": "attr:battery_pct"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "has_attribute",
+      "object": "attr:bluetooth_status"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "has_attribute",
+      "object": "attr:cellular_status"
+    },
+    {
+      "subject": "screen:control_center:default",
+      "predicate": "has_attribute",
+      "object": "attr:wifi_status"
+    },
+    {
+      "subject": "screen:control_center:wi-fi",
+      "predicate": "grounds_example",
+      "object": "example:ex_047"
+    },
+    {
+      "subject": "screen:control_center:wi-fi",
+      "predicate": "has_attribute",
+      "object": "attr:wifi_status"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_005"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_018"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_019"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_042"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_045"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_050"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "has_attribute",
+      "object": "attr:lock_screen"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "has_attribute",
+      "object": "attr:other"
+    },
+    {
+      "subject": "screen:lock_screen:default",
+      "predicate": "has_attribute",
+      "object": "attr:time"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_033"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_034"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_035"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_036"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_253"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_254"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_255"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_256"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_257"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_258"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_259"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_260"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_261"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_262"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_263"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_264"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_265"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_266"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_267"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_268"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_269"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_270"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_271"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_272"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_273"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_274"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_275"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_276"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_277"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_278"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_279"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_280"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_281"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_282"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_283"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_284"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_285"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_286"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_287"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_288"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_289"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_290"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_291"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_292"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_293"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_294"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_295"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_296"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_297"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_298"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_299"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_300"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_301"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_302"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_303"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_304"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_305"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_306"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_307"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_308"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_309"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_310"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_311"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_312"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_313"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_314"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_315"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_316"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_317"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_318"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_319"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_320"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_321"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_322"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_323"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_324"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_325"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_326"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_327"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_328"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_329"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_330"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_331"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_332"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_333"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_334"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_335"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_336"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_337"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_338"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_339"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_340"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_341"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_342"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_343"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_344"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_345"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_346"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_347"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_348"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_349"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_350"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_351"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_352"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_353"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_354"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_355"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_356"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_357"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_358"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_359"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_360"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_361"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_362"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_363"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_364"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_365"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_366"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_367"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_368"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_369"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_370"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_371"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_372"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_373"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_374"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_375"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_376"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_377"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_378"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_379"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_380"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_381"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_382"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_383"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_384"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_385"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_386"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_387"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_388"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_389"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_390"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_391"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_392"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_393"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_394"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_395"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_396"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_397"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_398"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_399"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_400"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_401"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_402"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_403"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_404"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_405"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_406"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_407"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_408"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_409"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_410"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_411"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_412"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_413"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_414"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_415"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_416"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_417"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_418"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_419"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_420"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_421"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_422"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_423"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_424"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_425"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_426"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_427"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_428"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_429"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_430"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_431"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_432"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_433"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_434"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_435"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_436"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_437"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_438"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_439"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_440"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_441"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_442"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_443"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_444"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_445"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_446"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_447"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_448"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_449"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_450"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_451"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_452"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_603"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_604"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_605"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_607"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_608"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_609"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_610"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_611"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_612"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_613"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_614"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_615"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_616"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_617"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_618"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_619"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_620"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_621"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_622"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_623"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_624"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_625"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_626"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_627"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_628"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_629"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_630"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_631"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_632"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_633"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_634"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_635"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_636"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_637"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_638"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_639"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_640"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_641"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_642"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_643"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_644"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_645"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_646"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_647"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_648"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_649"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_650"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_651"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_652"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_653"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_654"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_655"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_656"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_657"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_658"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_659"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_660"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_661"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_662"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_663"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_664"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_665"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_666"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_667"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_668"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_669"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_670"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_671"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_672"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_673"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_674"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_675"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_676"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_677"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_678"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_679"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_680"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_681"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_682"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_683"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_684"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_685"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_686"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_687"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_688"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_689"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_690"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_691"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_692"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_693"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_694"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_695"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_696"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_697"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_698"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_699"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_700"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_701"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_702"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_703"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_704"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_705"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_706"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_707"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_708"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_709"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_710"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_711"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_712"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_713"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_714"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_715"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_716"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_717"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_718"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_719"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_720"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_721"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_722"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_723"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_724"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_725"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_726"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_727"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_728"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_729"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_730"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_731"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_732"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_733"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_734"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_735"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_736"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_737"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_738"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_739"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_740"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_741"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_742"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_743"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_744"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_745"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_746"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_747"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_748"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_749"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_750"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_751"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "grounds_example",
+      "object": "example:ex_752"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "has_attribute",
+      "object": "attr:battery_pct"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "has_attribute",
+      "object": "attr:cellular_status"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "has_attribute",
+      "object": "attr:charging"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "has_attribute",
+      "object": "attr:maps"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "has_attribute",
+      "object": "attr:search_bar"
+    },
+    {
+      "subject": "screen:maps:default_view",
+      "predicate": "has_attribute",
+      "object": "attr:time"
+    },
+    {
+      "subject": "screen:settings:airplane_mode",
+      "predicate": "grounds_example",
+      "object": "example:ex_040"
+    },
+    {
+      "subject": "screen:settings:airplane_mode",
+      "predicate": "has_attribute",
+      "object": "attr:airplane_mode"
+    },
+    {
+      "subject": "screen:settings:battery",
+      "predicate": "grounds_example",
+      "object": "example:ex_023"
+    },
+    {
+      "subject": "screen:settings:battery",
+      "predicate": "has_attribute",
+      "object": "attr:battery_settings"
+    },
+    {
+      "subject": "screen:settings:bluetooth",
+      "predicate": "grounds_example",
+      "object": "example:ex_002"
+    },
+    {
+      "subject": "screen:settings:bluetooth",
+      "predicate": "grounds_example",
+      "object": "example:ex_003"
+    },
+    {
+      "subject": "screen:settings:bluetooth",
+      "predicate": "has_attribute",
+      "object": "attr:bluetooth_status"
+    },
+    {
+      "subject": "screen:settings:cellular",
+      "predicate": "grounds_example",
+      "object": "example:ex_010"
+    },
+    {
+      "subject": "screen:settings:cellular",
+      "predicate": "grounds_example",
+      "object": "example:ex_024"
+    },
+    {
+      "subject": "screen:settings:cellular",
+      "predicate": "has_attribute",
+      "object": "attr:cellular_status"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_053"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_054"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_055"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_056"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_057"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_058"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_059"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_060"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_061"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_062"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_063"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_064"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_065"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_066"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_067"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_068"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_069"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_070"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_071"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_072"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_073"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_074"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_075"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_076"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_077"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_078"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_079"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_080"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_081"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_082"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_083"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_084"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_085"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_086"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_087"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_088"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_089"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_090"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_091"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_092"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_093"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_094"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_095"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_096"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_097"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_098"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_099"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_100"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_101"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_102"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_103"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_104"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_105"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_106"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_107"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_108"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_109"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_110"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_111"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_112"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_113"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_114"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_115"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_116"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_117"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_118"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_119"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_120"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_121"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_122"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_123"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_124"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_125"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_126"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_127"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_128"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_129"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_130"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_131"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_132"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_133"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_134"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_135"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_136"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_137"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_138"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_139"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_140"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_141"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_142"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_143"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_144"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_145"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_146"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_147"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_148"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_149"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_150"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_151"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_152"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_153"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_154"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_155"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_156"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_157"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_158"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_159"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_160"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_161"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_162"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_163"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_164"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_165"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_166"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_167"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_168"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_169"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_170"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_171"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_172"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_173"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_174"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_175"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_176"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_177"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_178"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_179"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_180"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_181"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_182"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_183"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_184"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_185"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_186"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_187"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_188"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_189"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_190"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_191"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_192"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_193"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_194"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_195"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_196"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_197"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_198"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_199"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_200"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_201"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_202"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_203"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_204"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_205"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_206"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_207"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_208"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_209"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_210"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_211"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_212"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_213"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_214"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_215"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_216"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_217"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_218"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_219"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_220"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_221"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_222"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_223"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_224"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_225"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_226"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_227"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_228"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_229"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_230"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_231"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_232"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_233"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_234"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_235"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_236"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_237"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_238"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_239"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_240"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_241"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_242"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_243"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_244"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_245"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_246"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_247"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_248"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_249"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_250"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_251"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_252"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_453"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_454"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_455"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_456"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_457"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_458"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_459"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_460"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_461"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_462"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_463"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_464"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_465"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_466"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_467"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_468"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_469"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_470"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_471"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_472"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_473"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_474"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_475"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_476"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_477"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_478"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_479"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_480"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_481"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_482"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_483"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_484"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_485"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_486"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_487"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_488"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_489"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_490"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_491"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_492"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_493"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_494"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_495"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_496"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_497"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_498"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_499"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_500"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_501"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_502"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_503"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_504"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_505"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_506"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_507"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_508"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_509"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_510"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_511"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_512"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_513"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_514"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_515"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_516"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_517"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_518"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_519"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_520"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_521"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_522"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_523"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_524"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_525"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_526"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_527"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_528"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_529"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_530"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_531"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_532"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_533"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_534"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_535"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_536"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_537"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_538"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_539"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_540"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_541"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_542"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_543"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_544"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_545"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_546"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_547"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_548"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_549"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_550"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_551"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_552"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_553"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_554"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_555"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_556"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_557"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_558"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_559"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_560"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_561"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_562"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_563"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_564"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_565"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_566"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_567"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_568"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_569"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_570"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_571"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_572"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_573"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_574"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_575"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_576"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_577"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_578"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_579"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_580"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_581"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_582"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_583"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_584"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_585"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_586"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_587"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_588"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_589"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_590"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_591"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_592"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_593"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_594"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_595"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_596"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_597"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_598"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_599"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_600"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_601"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "grounds_example",
+      "object": "example:ex_602"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "has_attribute",
+      "object": "attr:apple_account"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "has_attribute",
+      "object": "attr:battery_pct"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "has_attribute",
+      "object": "attr:cellular_status"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "has_attribute",
+      "object": "attr:charging"
+    },
+    {
+      "subject": "screen:settings:main",
+      "predicate": "has_attribute",
+      "object": "attr:time"
+    },
+    {
+      "subject": "screen:settings:wi-fi",
+      "predicate": "grounds_example",
+      "object": "example:ex_001"
+    },
+    {
+      "subject": "screen:settings:wi-fi",
+      "predicate": "grounds_example",
+      "object": "example:ex_022"
+    },
+    {
+      "subject": "screen:settings:wi-fi",
+      "predicate": "grounds_example",
+      "object": "example:ex_039"
+    },
+    {
+      "subject": "screen:settings:wi-fi",
+      "predicate": "has_attribute",
+      "object": "attr:wifi_status"
+    },
+    {
+      "subject": "screen:status_bar:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_004"
+    },
+    {
+      "subject": "screen:status_bar:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_009"
+    },
+    {
+      "subject": "screen:status_bar:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_041"
+    },
+    {
+      "subject": "screen:status_bar:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_051"
+    },
+    {
+      "subject": "screen:status_bar:default",
+      "predicate": "has_attribute",
+      "object": "attr:battery_pct"
+    },
+    {
+      "subject": "screen:status_bar:default",
+      "predicate": "has_attribute",
+      "object": "attr:visual_detail"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_006"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_007"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_008"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_020"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_021"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_043"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_044"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_052"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "has_attribute",
+      "object": "attr:location"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "has_attribute",
+      "object": "attr:temperature"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "has_attribute",
+      "object": "attr:time"
+    },
+    {
+      "subject": "screen:weather:default",
+      "predicate": "has_attribute",
+      "object": "attr:weather"
+    }
+  ]
+}

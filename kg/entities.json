@@ -1,0 +1,1188 @@
+{
+  "_description": "Compact KG extracted programmatically from dataset v3's notes/question/answer fields. Regenerate with ml/scripts/build_kg.py -- do not hand-edit.",
+  "_source_dataset": "data/manifests (pool+val+test)",
+  "_entity_count": 235,
+  "_type_counts": {
+    "AnswerValue": 187,
+    "App": 9,
+    "Attribute": 20,
+    "Screen": 19
+  },
+  "entities": [
+    {
+      "id": "answer:01:07.09",
+      "type": "AnswerValue",
+      "label": "01:07.09"
+    },
+    {
+      "id": "answer:1",
+      "type": "AnswerValue",
+      "label": "1"
+    },
+    {
+      "id": "answer:100%",
+      "type": "AnswerValue",
+      "label": "100%"
+    },
+    {
+      "id": "answer:10:00",
+      "type": "AnswerValue",
+      "label": "10:00"
+    },
+    {
+      "id": "answer:10:08",
+      "type": "AnswerValue",
+      "label": "10:08"
+    },
+    {
+      "id": "answer:10:10",
+      "type": "AnswerValue",
+      "label": "10:10"
+    },
+    {
+      "id": "answer:10:25",
+      "type": "AnswerValue",
+      "label": "10:25"
+    },
+    {
+      "id": "answer:10:35",
+      "type": "AnswerValue",
+      "label": "10:35"
+    },
+    {
+      "id": "answer:10:40",
+      "type": "AnswerValue",
+      "label": "10:40"
+    },
+    {
+      "id": "answer:10:40am",
+      "type": "AnswerValue",
+      "label": "10:40AM"
+    },
+    {
+      "id": "answer:10:55",
+      "type": "AnswerValue",
+      "label": "10:55"
+    },
+    {
+      "id": "answer:11%",
+      "type": "AnswerValue",
+      "label": "11%"
+    },
+    {
+      "id": "answer:11:00",
+      "type": "AnswerValue",
+      "label": "11:00"
+    },
+    {
+      "id": "answer:11:05",
+      "type": "AnswerValue",
+      "label": "11:05"
+    },
+    {
+      "id": "answer:11:11",
+      "type": "AnswerValue",
+      "label": "11:11"
+    },
+    {
+      "id": "answer:11:20",
+      "type": "AnswerValue",
+      "label": "11:20"
+    },
+    {
+      "id": "answer:11:30",
+      "type": "AnswerValue",
+      "label": "11:30"
+    },
+    {
+      "id": "answer:11:35",
+      "type": "AnswerValue",
+      "label": "11:35"
+    },
+    {
+      "id": "answer:11:45",
+      "type": "AnswerValue",
+      "label": "11:45"
+    },
+    {
+      "id": "answer:11:55",
+      "type": "AnswerValue",
+      "label": "11:55"
+    },
+    {
+      "id": "answer:12%",
+      "type": "AnswerValue",
+      "label": "12%"
+    },
+    {
+      "id": "answer:12:00",
+      "type": "AnswerValue",
+      "label": "12:00"
+    },
+    {
+      "id": "answer:12:05",
+      "type": "AnswerValue",
+      "label": "12:05"
+    },
+    {
+      "id": "answer:12:15",
+      "type": "AnswerValue",
+      "label": "12:15"
+    },
+    {
+      "id": "answer:12:30",
+      "type": "AnswerValue",
+      "label": "12:30"
+    },
+    {
+      "id": "answer:12:40",
+      "type": "AnswerValue",
+      "label": "12:40"
+    },
+    {
+      "id": "answer:12:45",
+      "type": "AnswerValue",
+      "label": "12:45"
+    },
+    {
+      "id": "answer:13%",
+      "type": "AnswerValue",
+      "label": "13%"
+    },
+    {
+      "id": "answer:15%",
+      "type": "AnswerValue",
+      "label": "15%"
+    },
+    {
+      "id": "answer:16%",
+      "type": "AnswerValue",
+      "label": "16%"
+    },
+    {
+      "id": "answer:17%",
+      "type": "AnswerValue",
+      "label": "17%"
+    },
+    {
+      "id": "answer:18%",
+      "type": "AnswerValue",
+      "label": "18%"
+    },
+    {
+      "id": "answer:19%",
+      "type": "AnswerValue",
+      "label": "19%"
+    },
+    {
+      "id": "answer:1:05",
+      "type": "AnswerValue",
+      "label": "1:05"
+    },
+    {
+      "id": "answer:1:15",
+      "type": "AnswerValue",
+      "label": "1:15"
+    },
+    {
+      "id": "answer:1:20",
+      "type": "AnswerValue",
+      "label": "1:20"
+    },
+    {
+      "id": "answer:1:30",
+      "type": "AnswerValue",
+      "label": "1:30"
+    },
+    {
+      "id": "answer:1:45",
+      "type": "AnswerValue",
+      "label": "1:45"
+    },
+    {
+      "id": "answer:1:50",
+      "type": "AnswerValue",
+      "label": "1:50"
+    },
+    {
+      "id": "answer:2",
+      "type": "AnswerValue",
+      "label": "2"
+    },
+    {
+      "id": "answer:2%",
+      "type": "AnswerValue",
+      "label": "2%"
+    },
+    {
+      "id": "answer:21%",
+      "type": "AnswerValue",
+      "label": "21%"
+    },
+    {
+      "id": "answer:23%",
+      "type": "AnswerValue",
+      "label": "23%"
+    },
+    {
+      "id": "answer:24%",
+      "type": "AnswerValue",
+      "label": "24%"
+    },
+    {
+      "id": "answer:26%",
+      "type": "AnswerValue",
+      "label": "26%"
+    },
+    {
+      "id": "answer:28%",
+      "type": "AnswerValue",
+      "label": "28%"
+    },
+    {
+      "id": "answer:29%",
+      "type": "AnswerValue",
+      "label": "29%"
+    },
+    {
+      "id": "answer:2:10",
+      "type": "AnswerValue",
+      "label": "2:10"
+    },
+    {
+      "id": "answer:2:15",
+      "type": "AnswerValue",
+      "label": "2:15"
+    },
+    {
+      "id": "answer:2:30",
+      "type": "AnswerValue",
+      "label": "2:30"
+    },
+    {
+      "id": "answer:2:40",
+      "type": "AnswerValue",
+      "label": "2:40"
+    },
+    {
+      "id": "answer:2:45",
+      "type": "AnswerValue",
+      "label": "2:45"
+    },
+    {
+      "id": "answer:2:55",
+      "type": "AnswerValue",
+      "label": "2:55"
+    },
+    {
+      "id": "answer:2\u00b0",
+      "type": "AnswerValue",
+      "label": "2\u00b0"
+    },
+    {
+      "id": "answer:3",
+      "type": "AnswerValue",
+      "label": "3"
+    },
+    {
+      "id": "answer:3%",
+      "type": "AnswerValue",
+      "label": "3%"
+    },
+    {
+      "id": "answer:31%",
+      "type": "AnswerValue",
+      "label": "31%"
+    },
+    {
+      "id": "answer:33%",
+      "type": "AnswerValue",
+      "label": "33%"
+    },
+    {
+      "id": "answer:34%",
+      "type": "AnswerValue",
+      "label": "34%"
+    },
+    {
+      "id": "answer:35%",
+      "type": "AnswerValue",
+      "label": "35%"
+    },
+    {
+      "id": "answer:38%",
+      "type": "AnswerValue",
+      "label": "38%"
+    },
+    {
+      "id": "answer:39%",
+      "type": "AnswerValue",
+      "label": "39%"
+    },
+    {
+      "id": "answer:3:00",
+      "type": "AnswerValue",
+      "label": "3:00"
+    },
+    {
+      "id": "answer:3:05",
+      "type": "AnswerValue",
+      "label": "3:05"
+    },
+    {
+      "id": "answer:3:13",
+      "type": "AnswerValue",
+      "label": "3:13"
+    },
+    {
+      "id": "answer:3:15",
+      "type": "AnswerValue",
+      "label": "3:15"
+    },
+    {
+      "id": "answer:3:20",
+      "type": "AnswerValue",
+      "label": "3:20"
+    },
+    {
+      "id": "answer:3:35",
+      "type": "AnswerValue",
+      "label": "3:35"
+    },
+    {
+      "id": "answer:3:50",
+      "type": "AnswerValue",
+      "label": "3:50"
+    },
+    {
+      "id": "answer:3\u00b0",
+      "type": "AnswerValue",
+      "label": "3\u00b0"
+    },
+    {
+      "id": "answer:4",
+      "type": "AnswerValue",
+      "label": "4"
+    },
+    {
+      "id": "answer:40%",
+      "type": "AnswerValue",
+      "label": "40%"
+    },
+    {
+      "id": "answer:41%",
+      "type": "AnswerValue",
+      "label": "41%"
+    },
+    {
+      "id": "answer:42%",
+      "type": "AnswerValue",
+      "label": "42%"
+    },
+    {
+      "id": "answer:44%",
+      "type": "AnswerValue",
+      "label": "44%"
+    },
+    {
+      "id": "answer:45%",
+      "type": "AnswerValue",
+      "label": "45%"
+    },
+    {
+      "id": "answer:46%",
+      "type": "AnswerValue",
+      "label": "46%"
+    },
+    {
+      "id": "answer:47%",
+      "type": "AnswerValue",
+      "label": "47%"
+    },
+    {
+      "id": "answer:48%",
+      "type": "AnswerValue",
+      "label": "48%"
+    },
+    {
+      "id": "answer:48\u00f712+25.5",
+      "type": "AnswerValue",
+      "label": "48\u00f712+25.5"
+    },
+    {
+      "id": "answer:4:05",
+      "type": "AnswerValue",
+      "label": "4:05"
+    },
+    {
+      "id": "answer:4:15",
+      "type": "AnswerValue",
+      "label": "4:15"
+    },
+    {
+      "id": "answer:4:20",
+      "type": "AnswerValue",
+      "label": "4:20"
+    },
+    {
+      "id": "answer:4:30",
+      "type": "AnswerValue",
+      "label": "4:30"
+    },
+    {
+      "id": "answer:4:40",
+      "type": "AnswerValue",
+      "label": "4:40"
+    },
+    {
+      "id": "answer:4:50",
+      "type": "AnswerValue",
+      "label": "4:50"
+    },
+    {
+      "id": "answer:4:55",
+      "type": "AnswerValue",
+      "label": "4:55"
+    },
+    {
+      "id": "answer:5%",
+      "type": "AnswerValue",
+      "label": "5%"
+    },
+    {
+      "id": "answer:50%",
+      "type": "AnswerValue",
+      "label": "50%"
+    },
+    {
+      "id": "answer:52%",
+      "type": "AnswerValue",
+      "label": "52%"
+    },
+    {
+      "id": "answer:53%",
+      "type": "AnswerValue",
+      "label": "53%"
+    },
+    {
+      "id": "answer:54",
+      "type": "AnswerValue",
+      "label": "54"
+    },
+    {
+      "id": "answer:55%",
+      "type": "AnswerValue",
+      "label": "55%"
+    },
+    {
+      "id": "answer:57%",
+      "type": "AnswerValue",
+      "label": "57%"
+    },
+    {
+      "id": "answer:58%",
+      "type": "AnswerValue",
+      "label": "58%"
+    },
+    {
+      "id": "answer:5:00",
+      "type": "AnswerValue",
+      "label": "5:00"
+    },
+    {
+      "id": "answer:5:10",
+      "type": "AnswerValue",
+      "label": "5:10"
+    },
+    {
+      "id": "answer:5:25",
+      "type": "AnswerValue",
+      "label": "5:25"
+    },
+    {
+      "id": "answer:5:30",
+      "type": "AnswerValue",
+      "label": "5:30"
+    },
+    {
+      "id": "answer:5:47",
+      "type": "AnswerValue",
+      "label": "5:47"
+    },
+    {
+      "id": "answer:5\u00b0",
+      "type": "AnswerValue",
+      "label": "5\u00b0"
+    },
+    {
+      "id": "answer:6%",
+      "type": "AnswerValue",
+      "label": "6%"
+    },
+    {
+      "id": "answer:60%",
+      "type": "AnswerValue",
+      "label": "60%"
+    },
+    {
+      "id": "answer:61%",
+      "type": "AnswerValue",
+      "label": "61%"
+    },
+    {
+      "id": "answer:62%",
+      "type": "AnswerValue",
+      "label": "62%"
+    },
+    {
+      "id": "answer:63%",
+      "type": "AnswerValue",
+      "label": "63%"
+    },
+    {
+      "id": "answer:65%",
+      "type": "AnswerValue",
+      "label": "65%"
+    },
+    {
+      "id": "answer:67%",
+      "type": "AnswerValue",
+      "label": "67%"
+    },
+    {
+      "id": "answer:69%",
+      "type": "AnswerValue",
+      "label": "69%"
+    },
+    {
+      "id": "answer:6:00",
+      "type": "AnswerValue",
+      "label": "6:00"
+    },
+    {
+      "id": "answer:6:10",
+      "type": "AnswerValue",
+      "label": "6:10"
+    },
+    {
+      "id": "answer:6:15",
+      "type": "AnswerValue",
+      "label": "6:15"
+    },
+    {
+      "id": "answer:6:20",
+      "type": "AnswerValue",
+      "label": "6:20"
+    },
+    {
+      "id": "answer:6:30",
+      "type": "AnswerValue",
+      "label": "6:30"
+    },
+    {
+      "id": "answer:6:45",
+      "type": "AnswerValue",
+      "label": "6:45"
+    },
+    {
+      "id": "answer:6:54am",
+      "type": "AnswerValue",
+      "label": "6:54AM"
+    },
+    {
+      "id": "answer:6:55",
+      "type": "AnswerValue",
+      "label": "6:55"
+    },
+    {
+      "id": "answer:7%",
+      "type": "AnswerValue",
+      "label": "7%"
+    },
+    {
+      "id": "answer:71%",
+      "type": "AnswerValue",
+      "label": "71%"
+    },
+    {
+      "id": "answer:73%",
+      "type": "AnswerValue",
+      "label": "73%"
+    },
+    {
+      "id": "answer:74%",
+      "type": "AnswerValue",
+      "label": "74%"
+    },
+    {
+      "id": "answer:76%",
+      "type": "AnswerValue",
+      "label": "76%"
+    },
+    {
+      "id": "answer:77%",
+      "type": "AnswerValue",
+      "label": "77%"
+    },
+    {
+      "id": "answer:78%",
+      "type": "AnswerValue",
+      "label": "78%"
+    },
+    {
+      "id": "answer:79%",
+      "type": "AnswerValue",
+      "label": "79%"
+    },
+    {
+      "id": "answer:7:00",
+      "type": "AnswerValue",
+      "label": "7:00"
+    },
+    {
+      "id": "answer:7:05",
+      "type": "AnswerValue",
+      "label": "7:05"
+    },
+    {
+      "id": "answer:7:20",
+      "type": "AnswerValue",
+      "label": "7:20"
+    },
+    {
+      "id": "answer:7:30",
+      "type": "AnswerValue",
+      "label": "7:30"
+    },
+    {
+      "id": "answer:7:35",
+      "type": "AnswerValue",
+      "label": "7:35"
+    },
+    {
+      "id": "answer:7:45",
+      "type": "AnswerValue",
+      "label": "7:45"
+    },
+    {
+      "id": "answer:7:45_pm",
+      "type": "AnswerValue",
+      "label": "7:45 PM"
+    },
+    {
+      "id": "answer:7:46",
+      "type": "AnswerValue",
+      "label": "7:46"
+    },
+    {
+      "id": "answer:7:50",
+      "type": "AnswerValue",
+      "label": "7:50"
+    },
+    {
+      "id": "answer:7:55",
+      "type": "AnswerValue",
+      "label": "7:55"
+    },
+    {
+      "id": "answer:7\u00b0",
+      "type": "AnswerValue",
+      "label": "7\u00b0"
+    },
+    {
+      "id": "answer:8%",
+      "type": "AnswerValue",
+      "label": "8%"
+    },
+    {
+      "id": "answer:80%",
+      "type": "AnswerValue",
+      "label": "80%"
+    },
+    {
+      "id": "answer:82%",
+      "type": "AnswerValue",
+      "label": "82%"
+    },
+    {
+      "id": "answer:83%",
+      "type": "AnswerValue",
+      "label": "83%"
+    },
+    {
+      "id": "answer:84%",
+      "type": "AnswerValue",
+      "label": "84%"
+    },
+    {
+      "id": "answer:86%",
+      "type": "AnswerValue",
+      "label": "86%"
+    },
+    {
+      "id": "answer:87%",
+      "type": "AnswerValue",
+      "label": "87%"
+    },
+    {
+      "id": "answer:88%",
+      "type": "AnswerValue",
+      "label": "88%"
+    },
+    {
+      "id": "answer:8:00",
+      "type": "AnswerValue",
+      "label": "8:00"
+    },
+    {
+      "id": "answer:8:15",
+      "type": "AnswerValue",
+      "label": "8:15"
+    },
+    {
+      "id": "answer:8:20",
+      "type": "AnswerValue",
+      "label": "8:20"
+    },
+    {
+      "id": "answer:8:22",
+      "type": "AnswerValue",
+      "label": "8:22"
+    },
+    {
+      "id": "answer:8:40",
+      "type": "AnswerValue",
+      "label": "8:40"
+    },
+    {
+      "id": "answer:8:45",
+      "type": "AnswerValue",
+      "label": "8:45"
+    },
+    {
+      "id": "answer:9%",
+      "type": "AnswerValue",
+      "label": "9%"
+    },
+    {
+      "id": "answer:90%",
+      "type": "AnswerValue",
+      "label": "90%"
+    },
+    {
+      "id": "answer:91%",
+      "type": "AnswerValue",
+      "label": "91%"
+    },
+    {
+      "id": "answer:92%",
+      "type": "AnswerValue",
+      "label": "92%"
+    },
+    {
+      "id": "answer:93%",
+      "type": "AnswerValue",
+      "label": "93%"
+    },
+    {
+      "id": "answer:95%",
+      "type": "AnswerValue",
+      "label": "95%"
+    },
+    {
+      "id": "answer:96%",
+      "type": "AnswerValue",
+      "label": "96%"
+    },
+    {
+      "id": "answer:97%",
+      "type": "AnswerValue",
+      "label": "97%"
+    },
+    {
+      "id": "answer:99%",
+      "type": "AnswerValue",
+      "label": "99%"
+    },
+    {
+      "id": "answer:9:00",
+      "type": "AnswerValue",
+      "label": "9:00"
+    },
+    {
+      "id": "answer:9:02",
+      "type": "AnswerValue",
+      "label": "9:02"
+    },
+    {
+      "id": "answer:9:05",
+      "type": "AnswerValue",
+      "label": "9:05"
+    },
+    {
+      "id": "answer:9:15",
+      "type": "AnswerValue",
+      "label": "9:15"
+    },
+    {
+      "id": "answer:9:25",
+      "type": "AnswerValue",
+      "label": "9:25"
+    },
+    {
+      "id": "answer:9:30",
+      "type": "AnswerValue",
+      "label": "9:30"
+    },
+    {
+      "id": "answer:9:40",
+      "type": "AnswerValue",
+      "label": "9:40"
+    },
+    {
+      "id": "answer:9:41",
+      "type": "AnswerValue",
+      "label": "9:41"
+    },
+    {
+      "id": "answer:9:50",
+      "type": "AnswerValue",
+      "label": "9:50"
+    },
+    {
+      "id": "answer:apple_maps",
+      "type": "AnswerValue",
+      "label": "Apple Maps"
+    },
+    {
+      "id": "answer:apps",
+      "type": "AnswerValue",
+      "label": "Apps"
+    },
+    {
+      "id": "answer:basic",
+      "type": "AnswerValue",
+      "label": "Basic"
+    },
+    {
+      "id": "answer:eduroam",
+      "type": "AnswerValue",
+      "label": "eduroam"
+    },
+    {
+      "id": "answer:explore",
+      "type": "AnswerValue",
+      "label": "Explore"
+    },
+    {
+      "id": "answer:games",
+      "type": "AnswerValue",
+      "label": "Games"
+    },
+    {
+      "id": "answer:no",
+      "type": "AnswerValue",
+      "label": "No"
+    },
+    {
+      "id": "answer:off",
+      "type": "AnswerValue",
+      "label": "Off"
+    },
+    {
+      "id": "answer:on",
+      "type": "AnswerValue",
+      "label": "On"
+    },
+    {
+      "id": "answer:paris",
+      "type": "AnswerValue",
+      "label": "Paris"
+    },
+    {
+      "id": "answer:rain",
+      "type": "AnswerValue",
+      "label": "Rain"
+    },
+    {
+      "id": "answer:satellite",
+      "type": "AnswerValue",
+      "label": "Satellite"
+    },
+    {
+      "id": "answer:scientific",
+      "type": "AnswerValue",
+      "label": "Scientific"
+    },
+    {
+      "id": "answer:sun_mar_15",
+      "type": "AnswerValue",
+      "label": "Sun Mar 15"
+    },
+    {
+      "id": "answer:transit",
+      "type": "AnswerValue",
+      "label": "Transit"
+    },
+    {
+      "id": "answer:vancouver",
+      "type": "AnswerValue",
+      "label": "Vancouver"
+    },
+    {
+      "id": "answer:wednesday",
+      "type": "AnswerValue",
+      "label": "Wednesday"
+    },
+    {
+      "id": "answer:yellow",
+      "type": "AnswerValue",
+      "label": "Yellow"
+    },
+    {
+      "id": "answer:yes",
+      "type": "AnswerValue",
+      "label": "Yes"
+    },
+    {
+      "id": "app:app_store",
+      "type": "App",
+      "label": "App Store"
+    },
+    {
+      "id": "app:calculator",
+      "type": "App",
+      "label": "Calculator"
+    },
+    {
+      "id": "app:clock",
+      "type": "App",
+      "label": "Clock"
+    },
+    {
+      "id": "app:control_center",
+      "type": "App",
+      "label": "Control Center"
+    },
+    {
+      "id": "app:lock_screen",
+      "type": "App",
+      "label": "Lock Screen"
+    },
+    {
+      "id": "app:maps",
+      "type": "App",
+      "label": "Maps"
+    },
+    {
+      "id": "app:settings",
+      "type": "App",
+      "label": "Settings"
+    },
+    {
+      "id": "app:status_bar",
+      "type": "App",
+      "label": "Status Bar"
+    },
+    {
+      "id": "app:weather",
+      "type": "App",
+      "label": "Weather"
+    },
+    {
+      "id": "attr:airplane_mode",
+      "type": "Attribute",
+      "label": "airplane_mode"
+    },
+    {
+      "id": "attr:app_store",
+      "type": "Attribute",
+      "label": "app_store"
+    },
+    {
+      "id": "attr:apple_account",
+      "type": "Attribute",
+      "label": "apple_account"
+    },
+    {
+      "id": "attr:battery_pct",
+      "type": "Attribute",
+      "label": "battery_pct"
+    },
+    {
+      "id": "attr:battery_settings",
+      "type": "Attribute",
+      "label": "battery_settings"
+    },
+    {
+      "id": "attr:bluetooth_status",
+      "type": "Attribute",
+      "label": "bluetooth_status"
+    },
+    {
+      "id": "attr:calculator",
+      "type": "Attribute",
+      "label": "calculator"
+    },
+    {
+      "id": "attr:cellular_status",
+      "type": "Attribute",
+      "label": "cellular_status"
+    },
+    {
+      "id": "attr:charging",
+      "type": "Attribute",
+      "label": "charging"
+    },
+    {
+      "id": "attr:control_center",
+      "type": "Attribute",
+      "label": "control_center"
+    },
+    {
+      "id": "attr:location",
+      "type": "Attribute",
+      "label": "location"
+    },
+    {
+      "id": "attr:lock_screen",
+      "type": "Attribute",
+      "label": "lock_screen"
+    },
+    {
+      "id": "attr:maps",
+      "type": "Attribute",
+      "label": "maps"
+    },
+    {
+      "id": "attr:other",
+      "type": "Attribute",
+      "label": "other"
+    },
+    {
+      "id": "attr:search_bar",
+      "type": "Attribute",
+      "label": "search_bar"
+    },
+    {
+      "id": "attr:temperature",
+      "type": "Attribute",
+      "label": "temperature"
+    },
+    {
+      "id": "attr:time",
+      "type": "Attribute",
+      "label": "time"
+    },
+    {
+      "id": "attr:visual_detail",
+      "type": "Attribute",
+      "label": "visual_detail"
+    },
+    {
+      "id": "attr:weather",
+      "type": "Attribute",
+      "label": "weather"
+    },
+    {
+      "id": "attr:wifi_status",
+      "type": "Attribute",
+      "label": "wifi_status"
+    },
+    {
+      "id": "screen:app_store:default",
+      "type": "Screen",
+      "label": "App Store / default"
+    },
+    {
+      "id": "screen:calculator:default",
+      "type": "Screen",
+      "label": "Calculator / default"
+    },
+    {
+      "id": "screen:clock:alarm",
+      "type": "Screen",
+      "label": "Clock / Alarm"
+    },
+    {
+      "id": "screen:clock:stopwatch",
+      "type": "Screen",
+      "label": "Clock / Stopwatch"
+    },
+    {
+      "id": "screen:clock:world_clock",
+      "type": "Screen",
+      "label": "Clock / World Clock"
+    },
+    {
+      "id": "screen:control_center:airdrop",
+      "type": "Screen",
+      "label": "Control Center / AirDrop"
+    },
+    {
+      "id": "screen:control_center:connectivity",
+      "type": "Screen",
+      "label": "Control Center / Connectivity"
+    },
+    {
+      "id": "screen:control_center:default",
+      "type": "Screen",
+      "label": "Control Center / default"
+    },
+    {
+      "id": "screen:control_center:wi-fi",
+      "type": "Screen",
+      "label": "Control Center / Wi-Fi"
+    },
+    {
+      "id": "screen:lock_screen:default",
+      "type": "Screen",
+      "label": "Lock Screen / default"
+    },
+    {
+      "id": "screen:maps:default_view",
+      "type": "Screen",
+      "label": "Maps / default view"
+    },
+    {
+      "id": "screen:settings:airplane_mode",
+      "type": "Screen",
+      "label": "Settings / Airplane Mode"
+    },
+    {
+      "id": "screen:settings:battery",
+      "type": "Screen",
+      "label": "Settings / Battery"
+    },
+    {
+      "id": "screen:settings:bluetooth",
+      "type": "Screen",
+      "label": "Settings / Bluetooth"
+    },
+    {
+      "id": "screen:settings:cellular",
+      "type": "Screen",
+      "label": "Settings / Cellular"
+    },
+    {
+      "id": "screen:settings:main",
+      "type": "Screen",
+      "label": "Settings / main"
+    },
+    {
+      "id": "screen:settings:wi-fi",
+      "type": "Screen",
+      "label": "Settings / Wi-Fi"
+    },
+    {
+      "id": "screen:status_bar:default",
+      "type": "Screen",
+      "label": "Status Bar / default"
+    },
+    {
+      "id": "screen:weather:default",
+      "type": "Screen",
+      "label": "Weather / default"
+    }
+  ]
+}
