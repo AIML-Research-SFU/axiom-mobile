@@ -10,7 +10,12 @@ final class TestbedViewModel {
     var selectedPhotoItem: PhotosPickerItem?
     var screenshotImage: UIImage?
     var question = ""
-    var selectedModel: ModelInfo = ModelCatalog.all[0]
+    /// Was previously `ModelCatalog.all[0]` -- silently coupled the actual
+    /// default model to array order in ModelCatalog.all, so reordering the
+    /// picker list (e.g. to put a newer model first for visibility) would
+    /// have silently changed the real default too. Now resolves by
+    /// `defaultModelID` explicitly, matching its documented intent.
+    var selectedModel: ModelInfo = ModelCatalog.all.first(where: { $0.id == ModelCatalog.defaultModelID }) ?? ModelCatalog.all[0]
     var result: InferenceResult?
     var isRunning = false
 

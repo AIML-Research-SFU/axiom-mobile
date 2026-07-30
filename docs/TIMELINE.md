@@ -223,8 +223,26 @@ Last updated: 2026-07-29. Phases 1-6 above are semester 1 (through Paper Draft v
 - `[x]` Attempted a matching sweep with `axiom_lora_v1` (real trainable model) on the local Phase 8 dataset (committed v3 images still unavailable — Drive sync gap). Calibrated real per-cell timing (~2.5 min worst case, ~4hr for the full grid), ran it, then parallelized across strategies + `caffeinate` to speed it up after sleep interruptions slowed the first attempt. **Abandoned partway through (50/240 runs) and deleted the partial results**: sustained multi-process training load made the laptop uncomfortably hot. Decided this class of experiment isn't worth running on personal laptop hardware — documented as a real, deliberate scope limitation in `docs/LEARNING_CURVES.md` and `docs/SELECTION_STRATEGIES.md`, not hidden or silently dropped.
 - `[ ]` Not planned on this hardware going forward. Would need either a much smaller grid or non-laptop compute (e.g. a cloud/remote environment) to revisit.
 
-### Phases 11-13 — Not started
+### Phase 11 (Quantization + device profiling) — Complete except energy/memory (unreachable without a physical device)
 
-- `[ ]` Phase 11: Quantization pipeline + energy/memory device profiling (the one phase with real physical-device manual work).
-- `[ ]` Phase 12: Statistical rigor — bootstrap CIs/paired comparisons at 10 seeds, refit power-law curves, full Pareto view across all 5 constraints.
-- `[ ]` Phase 13: Paper v4 + final deck.
+- `[x]` `ml/scripts/quantize_coreml.py` (new): int8 post-training quantization via `coremltools.optimize`, same accuracy-gate discipline as export. `axiom_lora_v1`: 2.04MB -> 1.14MB (1.80x), 0% accuracy drop.
+- `[x]` `axiom_lora_v1` bundled into the iOS app locally (mlpackage, labels, empirically-calibrated metadata sidecar), routed through `CoreMLInferenceService`, selectable in the picker but not made default (quality is a wash, not a win). Verified `*.mlpackage`/`*.mlmodel` are gitignored project-wide and even the existing `TinyMultimodalV1.mlpackage` (v0/v1) isn't tracked in git — this integration is exactly as real, and exactly as local-only, as every prior model integration in this project. Not a new gap; a pre-existing one, now documented.
+- `[x]` Found and fixed a real bug while wiring this up: `TestbedViewModel.selectedModel` initialized from `ModelCatalog.all[0]` (array position) instead of the documented `defaultModelID` constant — adding a new picker entry first would have silently changed the real default.
+- `[x]` Simulator latency profiling for `axiom_lora_v1`: p50=99.5ms (50 iter, Release, iPhone 17 Pro Sim) — labeled simulator_only, not publishable, consistent with this project's standing position.
+- `[ ]` Allocations (memory) trace attempted via `xctrace record --attach`, hung across two bounded attempts, abandoned rather than burning more time on a flaky CLI interaction. Not a new gap — even Simulator memory was never considered meaningful by this project's own conventions.
+- `[ ]` Energy: not measured, any model, any semester. Requires a physical device + Instruments Energy Log, unavailable on Simulator entirely (not just "not meaningful" — not present at all).
+- **Near miss, caught before commit**: regenerating the device-profile aggregate summary after adding the new Simulator session would have silently dropped the real historical AT-X physical-device sessions (raw session folders are gitignored and were never on this machine). Reverted via `git checkout` before it could be committed.
+
+### Phase 12 (Statistical rigor) — Complete for the heuristic-baseline sweep
+
+- `[x]` Full statistical analysis re-run (`ml/scripts/run_statistical_analysis.py`) against the real Phase 10 sweep (240 runs) and the regenerated baselines.
+- `[x]` **Three real bugs found and fixed** in the analysis pipeline itself: (1) hardcoded `sweep_v0` path silently ignored the real 240-run sweep; (2) Pareto view used a stale training-time size estimate instead of the measured CoreML export size; (3) memory status falsely reported "complete" by conflating "a trace sidecar exists" with "memory data exists." All three verified fixed and re-run clean.
+- `[x]` Power-law fits improved (R^2 up to 0.49, from <0.2 in v3) with the larger budget range and 10 seeds — still not strong evidence of scaling, but real progress.
+- `[x]` Pareto view now includes `question_lookup_v0`, `tiny_multimodal_v1` (regenerated), and `axiom_lora_v1` with real measured sizes: `axiom_lora_v1` is Pareto-dominated.
+- `[ ]` `ml/scripts/build_paper_assets.py`/`build_presentation_assets.py` found to contain hardcoded/stale text in parts of their output (e.g. `facts_at_a_glance.md` claimed 54 sweep runs, blocked KG-guided, and 0% test EM — all wrong) that does not actually reflect the `--analysis-dir` data passed in. Documented as a known bug, **not fixed this pass** — paper v4 was hand-drafted from verified real numbers instead of trusting this generator's output.
+
+### Phase 13 (Paper v4 + deck) — Complete
+
+- `[x]` `paper/PAPER_DRAFT_v4.md`: full rewrite incorporating dataset v3, KG v1, the 240-run sweep, `axiom_lora_v1` (reported as a quality wash, not a win), quantization, Simulator profiling, and a dedicated section on the three analysis-pipeline bugs found this semester.
+- `[x]` `presentation/SLIDE_DECK_v4.md` (new — `SLIDE_DECK_v3.md` already exists as a committed, differently-formatted deck from Ariel Tyson; used v4 to avoid overwriting a teammate's work).
+- `[ ]` Energy/memory sections remain explicitly marked outstanding in both — not filled with placeholder or estimated numbers.

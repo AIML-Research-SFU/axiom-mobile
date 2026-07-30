@@ -1,0 +1,29 @@
+{
+  "model_id": "axiom_lora_v1",
+  "model_version": 1,
+  "num_classes": 157,
+  "confidence_threshold": 0.45,
+  "threshold_rationale": "Empirically calibrated from val+test predictions (n=70) on the local Phase 8 dataset. Correct predictions: confidence range [0.36, 0.99], mean 0.87. Incorrect predictions: confidence range [0.02, 0.56], mean 0.21. Unlike tiny_multimodal_v1, separation is imperfect -- there is a real overlap zone (0.36-0.56) where both correct and incorrect predictions occur, so 0.45 is a reasonable midpoint rather than a clean boundary. Documented honestly rather than implying a cleaner separation than what was measured.",
+  "random_baseline": 0.0064,
+  "calibration_data": {
+    "correct_confidence_range": [0.3619, 0.9897],
+    "correct_confidence_mean": 0.8721,
+    "incorrect_confidence_range": [0.0189, 0.5577],
+    "incorrect_confidence_median": 0.2061,
+    "n_correct": 19,
+    "n_incorrect": 51
+  },
+  "supported_question_types": [
+    "time display",
+    "battery percentage",
+    "battery charging state",
+    "cellular signal bars",
+    "Apple Account sign-in state",
+    "Maps search bar text"
+  ],
+  "task_summary": "157-class screenshot QA classifier: pretrained MobileNetV3-Small (frozen, ImageNet) backbone with a LoRA adapter (rank=8) on the final conv, char-level text encoder, trained on a 699-QA local reproduction of dataset v3's auto-generated majority (see docs/MODEL_SELECTION.md).",
+  "dataset_version": "v3-local-phase8",
+  "backbone": "mobilenet_v3_small (torchvision, ImageNet-pretrained, frozen)",
+  "lora_rank": 8,
+  "not_trained_on_committed_dataset": true
+}

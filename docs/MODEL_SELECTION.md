@@ -390,6 +390,123 @@ Phase 8 stands. What doesn't exist is a full-scale strategy comparison
 grid (fewer seeds/budgets, e.g. 3 seeds x 3 budgets instead of 10x6) or
 compute that isn't this laptop -- not a retry of the same approach.
 
+## Phase 11: quantization, app integration, Simulator profiling
+
+### Quantization
+
+`ml/scripts/quantize_coreml.py` (new, Phase 11) applies int8 linear
+weight quantization via `coremltools.optimize` to an exported
+`.mlpackage`, then re-runs the same accuracy-drop gate discipline used at
+export time (original vs quantized, not PyTorch vs CoreML). Deferred for
+`tiny_multimodal_v0/v1` since those were already tiny (96KB); worth doing
+for `axiom_lora_v1` since it's dominated by the frozen pretrained
+backbone.
+
+**Result**: 2.04MB -> 1.14MB (**1.80x compression**), **0% accuracy
+drop** on both val and test (bit-identical predictions before/after).
+One benign `RuntimeWarning: divide by zero` during quantization (a
+per-channel weight with zero range, likely a bias or a dead unit) --
+verified harmless given predictions match exactly.
+
+### Real bugs found and fixed in the analysis pipeline
+
+Running `ml/scripts/run_statistical_analysis.py` against the new Phase
+10/11 data surfaced three real, pre-existing bugs, all fixed:
+
+1. **Stale sweep hardcode**: `discover_sweep()` always loaded
+   `selection_sweeps/sweep_v0` (the original 54-run Phase 3 scaffold
+   sweep) because that directory always exists, so the fallback
+   auto-discovery logic never triggered even after the real 240-run
+   Phase 10 sweep existed alongside it. Fixed to pick whichever sweep
+   directory has the most completed run files, not directory name.
+2. **Stale Pareto size**: the Pareto view read `expected_app_footprint_mb`
+   from a training run's embedded model-spec *snapshot* (frozen at
+   train time) instead of the actual measured `mlpackage_size_mb` from
+   the real CoreML export. `axiom_lora_v1`'s spec estimate was corrected
+   from 6.0MB to the measured 2.04MB after Phase 8's export, but the
+   training run's snapshot still had the old number. Fixed to prefer the
+   measured export size when available. `export_coreml.py` (the
+   original tiny_multimodal export script) was also missing this field
+   entirely -- added it there too, matching `export_coreml_lora.py`.
+3. **False "Memory: complete" status**: the check was `has_trace_metrics`
+   (true for *any* trace sidecar, including a Time Profiler trace with no
+   memory data) combined with "any physical session exists" -- so the
+   AT-X `tiny_multimodal_v1` session (which only ever captured a Time
+   Profiler trace, per `docs/TIMELINE.md`) made the report claim memory
+   data was available when every session's `memory` field is actually
+   `None`. Fixed to check specifically for `peak_memory_mb` inside
+   `trace_metrics` on a physical-device session. Now correctly reports
+   `physical_device_required`, matching `docs/INSTRUMENTS_RUNBOOK.md`'s
+   own honest status.
+
+### App integration
+
+`axiom_lora_v1` is now bundled into the app locally
+(`Resources/AxiomLoraV1.mlpackage`, `axiom_lora_v1_labels.json`,
+`axiom_lora_v1_metadata.json` with an empirically calibrated confidence
+threshold of 0.45 -- noted honestly that separation between correct/
+incorrect confidence is imperfect here, unlike v1's cleaner separation),
+routed through `CoreMLInferenceService`, and selectable in the model
+picker. **Not** made the default model (`tiny_multimodal_v1` remains
+default) -- Phase 8 found this is a wash on quality, not a win.
+
+**Correction to "bundled" -- checked, not assumed.** `*.mlpackage` and
+`*.mlmodel` are gitignored project-wide (`.gitignore` lines 29-30).
+Checked whether the *existing* `TinyMultimodalV1.mlpackage` (which v0/v1
+have used since Phase 4) is tracked in git: it is not (`git ls-files`
+returns nothing for it). This means "bundled into the app" has never
+meant "ships to a fresh clone via git" for any model in this project --
+each contributor's local Xcode checkout only has a working model because
+someone ran the export script locally and the file happens to sit in
+`Resources/`. `axiom_lora_v1`'s integration is real and builds/runs
+correctly on this machine, exactly as real as v0/v1's, and exactly as
+local-only. This is a pre-existing project-wide gap, not something
+introduced here -- worth a team decision (Git LFS, or a documented
+manual "export and copy" step) if teammates need to build the app with
+CoreML models present, but not something to unilaterally change in this
+pass.
+
+**A second real bug found while wiring this up**: `TestbedViewModel`
+initialized `selectedModel` from `ModelCatalog.all[0]` (array position)
+rather than the documented `defaultModelID` constant. Adding
+`axiom_lora_v1` as the first picker entry would have silently made it
+the *actual* default model, contradicting the "keep v1 default" decision
+above purely because of list order. Fixed to resolve by `defaultModelID`
+explicitly.
+
+### Simulator profiling (pipeline validation only, not publishable)
+
+Built Release, installed on iPhone 17 Pro Simulator (iOS 26.4), ran
+`--auto-benchmark`, staged via `ml/scripts/stage_device_profile_session.py
+--from-simulator`: 50 iterations, real CoreML inference
+(`is_placeholder: false`), **p50 = 99.5ms**. Consistent with this
+project's standing position (`docs/INSTRUMENTS_RUNBOOK.md`): Simulator
+has no NPU and no real thermal behavior, so this validates the pipeline
+end-to-end but is **not** a publishable latency number -- only the
+physical-device numbers already in `docs/INSTRUMENTS_RUNBOOK.md` (v0/v1,
+14.0-14.5ms) count as evidence.
+
+An Allocations (memory) trace was attempted via `xctrace record
+--attach` but the CLI hung across two attempts (both with and without
+`--time-limit`) and was abandoned after a bounded effort rather than
+burning more time on a flaky tool interaction. Memory remains
+`physical_device_required` for `axiom_lora_v1`, same as it already was
+for v0/v1 -- not a new gap, and consistent with this project's existing
+position that even Simulator memory numbers aren't meaningful.
+
+**Important process note**: the first attempt to regenerate
+`results/device_profiles/analysis/summary.json` via
+`summarize_device_profiles.py` after adding the new Simulator session
+silently *dropped* the real historical AT-X physical-device sessions
+from the aggregate -- those raw session folders are gitignored and were
+never on this machine to begin with (same Drive-sync-adjacent gap as
+elsewhere), so the summarizer only saw the 1 new local session and
+rebuilt the "aggregate" from just that. Caught before committing and
+reverted via `git checkout`. The new Simulator session's raw CSV/meta
+exist locally (gitignored, as designed) but were **not** merged into the
+committed aggregate -- doing that safely requires the historical raw
+sessions, which aren't available here.
+
 ## Result Artifact Contract
 
 Every baseline run should write:

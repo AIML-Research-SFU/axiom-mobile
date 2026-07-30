@@ -251,6 +251,20 @@ def main() -> int:
     all_passed = all(g["gate_passed"] for g in gate_results)
     overall_status = "passed" if all_passed else "failed"
 
+    # Measure the real package size on disk -- Pareto/analysis tooling
+    # prefers this over a model config's expected_app_footprint_mb
+    # estimate, which can go stale (see run_statistical_analysis.py).
+    import os
+
+    def _dir_size_mb(path: Path) -> float:
+        total = 0
+        for dirpath, _, filenames in os.walk(path):
+            for f in filenames:
+                total += os.path.getsize(os.path.join(dirpath, f))
+        return total / 1024 / 1024
+
+    mlpackage_size_mb = round(_dir_size_mb(mlpackage_path), 3)
+
     # Write conversion report
     report = {
         "run_id": f"coreml_export_{args.model_id}_seed{args.seed}",
@@ -258,6 +272,7 @@ def main() -> int:
         "model_id": args.model_id,
         "checkpoint_dir": str(checkpoint_dir),
         "image_root": str(image_root),
+        "mlpackage_size_mb": mlpackage_size_mb,
         "export": export_info,
         "pytorch_metrics": {k: v for k, v in pytorch_results.items()},
         "coreml_metrics": {k: v for k, v in coreml_results.items()},

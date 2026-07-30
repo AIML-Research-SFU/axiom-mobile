@@ -90,21 +90,38 @@ def discover_trainable_baselines(results_dir: Path) -> list[dict[str, Any]]:
     return results
 
 
-def discover_sweep(results_dir: Path) -> dict[str, Any] | None:
-    """Load the latest sweep summary + learning-curve summary."""
-    sweep_dir = results_dir / "selection_sweeps" / "sweep_v0"
-    summary_path = sweep_dir / "summary.json"
-    if not summary_path.exists():
-        # Try to find any sweep directory
-        sweeps_root = results_dir / "selection_sweeps"
+def discover_sweep(results_dir: Path, sweep_name: str | None = None) -> dict[str, Any] | None:
+    """Load the most complete sweep summary + learning-curve summary.
+
+    Previously hardcoded to `selection_sweeps/sweep_v0` with alphabetical
+    fallback -- meant that once a newer, larger sweep existed alongside
+    the original Phase 3 scaffold sweep, this function kept silently
+    loading the old 54-run one, since `sweep_v0` always exists and the
+    fallback only triggered if it were missing. Fixed to pick whichever
+    sweep directory has the most completed per-run result files (a
+    direct, robust measure of "most complete data"), not directory name
+    or alphabetical order. Pass --sweep-name to force a specific one.
+    """
+    sweeps_root = results_dir / "selection_sweeps"
+    if sweep_name is not None:
+        sweep_dir = sweeps_root / sweep_name
+        summary_path = sweep_dir / "summary.json"
+    else:
+        sweep_dir = None
+        summary_path = None
+        best_run_count = -1
         if sweeps_root.is_dir():
-            for child in sorted(sweeps_root.iterdir(), reverse=True):
+            for child in sorted(sweeps_root.iterdir()):
                 sp = child / "summary.json"
-                if sp.exists():
-                    summary_path = sp
+                if not sp.exists():
+                    continue
+                runs_dir = child / "runs"
+                run_count = len(list(runs_dir.glob("*.json"))) if runs_dir.is_dir() else 0
+                if run_count > best_run_count:
+                    best_run_count = run_count
                     sweep_dir = child
-                    break
-    if not summary_path.exists():
+                    summary_path = sp
+    if sweep_dir is None or summary_path is None or not summary_path.exists():
         return None
 
     data: dict[str, Any] = load_json(summary_path)
@@ -482,13 +499,29 @@ def analyze_device_profiles(
         else:
             phys_sessions.append(analysis.to_dict())
 
-    # Memory / energy status
-    has_trace = any(s.get("has_trace_metrics", False) for s in sessions)
-    has_phys = len(phys_sessions) > 0
+    # Memory / energy status.
+    #
+    # Bug fixed here: this used to check `has_trace_metrics` (true for ANY
+    # trace_metrics.json sidecar, e.g. a Time Profiler trace) combined with
+    # "any physical session exists" -- so a physical session with only a
+    # Time Profiler trace (no Allocations data) got reported as
+    # "Memory: complete" even though every session's `memory` field is
+    # actually None. Now checks specifically for `peak_memory_mb` inside
+    # `trace_metrics` on a physical-device session, which is what an
+    # Allocations trace sidecar actually populates (see
+    # docs/INSTRUMENTS_RUNBOOK.md's trace_metrics.json schema).
+    has_physical_memory_data = any(
+        not (
+            "sim" in s.get("session_dir", "").lower()
+            or "simulator" in s.get("device_name", "").lower()
+        )
+        and s.get("trace_metrics", {}).get("peak_memory_mb") is not None
+        for s in sessions
+    )
 
     memory_status = AnalysisStatus.PHYSICAL_DEVICE_REQUIRED
-    memory_reason = "No physical-device Instruments Allocations trace captured yet."
-    if has_trace and has_phys:
+    memory_reason = "No physical-device Instruments Allocations trace with peak_memory_mb captured yet."
+    if has_physical_memory_data:
         memory_status = AnalysisStatus.COMPLETE
         memory_reason = "Physical-device memory data available."
 
@@ -541,19 +574,34 @@ def analyze_pareto(
     points: list[ParetoPoint] = []
     notes: list[str] = []
 
+    # Actual measured package sizes from real CoreML exports, keyed by
+    # model_id -- always preferred over the `expected_app_footprint_mb`
+    # estimate baked into a training run's spec snapshot at train time,
+    # which goes stale the moment the real export measures a different
+    # number (e.g. axiom_lora_v1's config was corrected from a 6.0MB
+    # estimate to a measured 2.04MB after Phase 8's real export, but
+    # trainable_baselines/*/run_result.json still has the old estimate
+    # frozen in from before that correction).
+    measured_size_by_model: dict[str, float] = {}
+    for exp in coreml_exports:
+        mid = exp.get("model_id")
+        size = exp.get("mlpackage_size_mb")
+        if mid and size is not None:
+            measured_size_by_model[mid] = size
+
     # Gather all models with their test EM
     models: dict[str, dict[str, Any]] = {}
 
     for b in baselines:
         mid = b.get("model", {}).get("model_id", "unknown")
         test_em = b.get("metrics", {}).get("test", {}).get("exact_match", 0.0)
-        size_mb = b.get("model", {}).get("expected_app_footprint_mb")
+        size_mb = measured_size_by_model.get(mid, b.get("model", {}).get("expected_app_footprint_mb"))
         models[mid] = {"test_em": test_em, "size_mb": size_mb, "source": "baseline"}
 
     for t in trainable:
         mid = t.get("model", {}).get("model_id", "unknown")
         test_em = t.get("metrics", {}).get("test", {}).get("exact_match", 0.0)
-        size_mb = t.get("model", {}).get("expected_app_footprint_mb")
+        size_mb = measured_size_by_model.get(mid, t.get("model", {}).get("expected_app_footprint_mb"))
         models[mid] = {"test_em": test_em, "size_mb": size_mb, "source": "trainable"}
 
     # Get latency from device profiles
@@ -1147,6 +1195,14 @@ def main() -> None:
         default=_PROJECT_ROOT / "results" / "analysis" / "phase6_v0",
         help="Output directory for analysis artifacts.",
     )
+    parser.add_argument(
+        "--sweep-name",
+        default=None,
+        help=(
+            "Force a specific selection_sweeps/<name> directory instead of "
+            "auto-picking the one with the most completed runs."
+        ),
+    )
     args = parser.parse_args()
 
     results_dir: Path = args.results_dir.resolve()
@@ -1164,7 +1220,7 @@ def main() -> None:
     trainable = discover_trainable_baselines(results_dir)
     print(f"  Trainable baselines: {len(trainable)}")
 
-    sweep = discover_sweep(results_dir)
+    sweep = discover_sweep(results_dir, sweep_name=args.sweep_name)
     print(f"  Sweep: {'found' if sweep else 'not found'}")
     if sweep:
         per_run = sweep.get("per_run_results", [])

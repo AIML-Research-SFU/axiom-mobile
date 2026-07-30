@@ -1,0 +1,950 @@
+{
+  "analysis_id": "phase6_v0",
+  "comparisons": {
+    "baseline_comparison": {
+      "reason": "Missing heuristic or trainable baseline results.",
+      "status": "blocked"
+    },
+    "notes": [],
+    "pairwise_comparisons": [
+      {
+        "budget": 500,
+        "ci_level": 0.95,
+        "ci_lower": 0.0,
+        "ci_upper": 0.0075,
+        "mean_diff": 0.0025,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 10,
+        "reason": "",
+        "status": "complete",
+        "strategy_a": "diversity",
+        "strategy_b": "kg_guided"
+      },
+      {
+        "budget": 500,
+        "ci_level": 0.95,
+        "ci_lower": -0.02,
+        "ci_upper": 0.0025,
+        "mean_diff": -0.0075,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 10,
+        "reason": "",
+        "status": "complete",
+        "strategy_a": "diversity",
+        "strategy_b": "random"
+      },
+      {
+        "budget": 500,
+        "ci_level": 0.95,
+        "ci_lower": 0.075,
+        "ci_upper": 0.0825,
+        "mean_diff": 0.0775,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 10,
+        "reason": "",
+        "status": "complete",
+        "strategy_a": "diversity",
+        "strategy_b": "uncertainty"
+      },
+      {
+        "budget": 500,
+        "ci_level": 0.95,
+        "ci_lower": -0.0225,
+        "ci_upper": 0.0,
+        "mean_diff": -0.01,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 10,
+        "reason": "",
+        "status": "complete",
+        "strategy_a": "kg_guided",
+        "strategy_b": "random"
+      },
+      {
+        "budget": 500,
+        "ci_level": 0.95,
+        "ci_lower": 0.075,
+        "ci_upper": 0.075,
+        "mean_diff": 0.075,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 10,
+        "reason": "",
+        "status": "complete",
+        "strategy_a": "kg_guided",
+        "strategy_b": "uncertainty"
+      },
+      {
+        "budget": 500,
+        "ci_level": 0.95,
+        "ci_lower": 0.075,
+        "ci_upper": 0.0975,
+        "mean_diff": 0.085,
+        "metric": "test_em",
+        "n_bootstrap": 10000,
+        "n_seeds": 10,
+        "reason": "",
+        "status": "complete",
+        "strategy_a": "random",
+        "strategy_b": "uncertainty"
+      }
+    ],
+    "reason": "6 pairwise comparisons at budget=500 with 4 strategies. Small sample sizes (3 seeds); bootstrap CIs are provided but may be unreliable.",
+    "status": "partial"
+  },
+  "created_at_utc": "2026-07-30T20:07:33Z",
+  "device_profiles": {
+    "energy_reason": "Energy Log requires physical device. Instruments reports relative levels (0-20 scale), not battery %/hr. Not available from Simulator.",
+    "energy_status": "physical_device_required",
+    "memory_reason": "No physical-device Instruments Allocations trace with peak_memory_mb captured yet.",
+    "memory_status": "physical_device_required",
+    "notes": [],
+    "physical_device": [
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "physical_device",
+        "max_ms": 104,
+        "mean_ms": 18.0,
+        "min_ms": 11,
+        "model_id": "tiny_multimodal_v0",
+        "n_sessions": 1,
+        "n_total_records": 50,
+        "p50_ms": 14.0,
+        "p95_ms": 26.2,
+        "reason": "Physical-device measurement.",
+        "status": "complete",
+        "threshold_evaluations": [
+          {
+            "measured_value": "14.0 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "26.2 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      },
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "physical_device",
+        "max_ms": 61,
+        "mean_ms": 16.8,
+        "min_ms": 11,
+        "model_id": "tiny_multimodal_v0",
+        "n_sessions": 1,
+        "n_total_records": 50,
+        "p50_ms": 14.5,
+        "p95_ms": 22.0,
+        "reason": "Physical-device measurement.",
+        "status": "complete",
+        "threshold_evaluations": [
+          {
+            "measured_value": "14.5 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "22.0 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      },
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "physical_device",
+        "max_ms": 209,
+        "mean_ms": 21.3,
+        "min_ms": 11,
+        "model_id": "tiny_multimodal_v1",
+        "n_sessions": 1,
+        "n_total_records": 50,
+        "p50_ms": 14.5,
+        "p95_ms": 24.6,
+        "reason": "Physical-device measurement.",
+        "status": "complete",
+        "threshold_evaluations": [
+          {
+            "measured_value": "14.5 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "24.6 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      }
+    ],
+    "reason": "3 simulator session(s), 3 physical-device session(s).",
+    "simulator": [
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "simulator",
+        "max_ms": 498,
+        "mean_ms": 220.2,
+        "min_ms": 185,
+        "model_id": "tiny_multimodal_v0",
+        "n_sessions": 1,
+        "n_total_records": 20,
+        "p50_ms": 199.5,
+        "p95_ms": 304.2,
+        "reason": "Simulator latency \u2014 not valid for on-device performance conclusions. No NPU, no real thermal behavior.",
+        "status": "simulator_only",
+        "threshold_evaluations": [
+          {
+            "measured_value": "199.5 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "304.2 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      },
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "simulator",
+        "max_ms": 282,
+        "mean_ms": 103.3,
+        "min_ms": 91,
+        "model_id": "tiny_multimodal_v0",
+        "n_sessions": 1,
+        "n_total_records": 50,
+        "p50_ms": 98.0,
+        "p95_ms": 112.8,
+        "reason": "Simulator latency \u2014 not valid for on-device performance conclusions. No NPU, no real thermal behavior.",
+        "status": "simulator_only",
+        "threshold_evaluations": [
+          {
+            "measured_value": "98.0 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "112.8 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      },
+      {
+        "bootstrap_ci_p50": null,
+        "environment": "simulator",
+        "max_ms": 709,
+        "mean_ms": 148.1,
+        "min_ms": 103,
+        "model_id": "tiny_multimodal_v1",
+        "n_sessions": 1,
+        "n_total_records": 50,
+        "p50_ms": 125.0,
+        "p95_ms": 229.5,
+        "reason": "Simulator latency \u2014 not valid for on-device performance conclusions. No NPU, no real thermal behavior.",
+        "status": "simulator_only",
+        "threshold_evaluations": [
+          {
+            "measured_value": "125.0 ms",
+            "metric_name": "latency_p50",
+            "reason": "p50 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 400 ms"
+          },
+          {
+            "measured_value": "229.5 ms",
+            "metric_name": "latency_p95",
+            "reason": "p95 latency meets threshold.",
+            "status": "pass",
+            "threshold": "<= 600 ms"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "peak_memory",
+            "reason": "No trace_metrics.json with peak_memory_mb. Run Instruments Allocations template.",
+            "status": "unavailable",
+            "threshold": "< 500 MB"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "energy",
+            "reason": "No trace_metrics.json with energy data. Run Instruments Energy Log on physical device.",
+            "status": "unavailable",
+            "threshold": "< 5.0% battery/hr"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "exact_match",
+            "reason": "Quality metrics (EM, BLEU, hallucination rate) are not captured in device benchmark sessions. These require offline evaluation against ground-truth labels from data/manifests/.",
+            "status": "unavailable",
+            "threshold": ">= 70% EM"
+          },
+          {
+            "measured_value": null,
+            "metric_name": "model_size",
+            "reason": "Model size is not captured in device benchmark sessions. Requires measuring .mlpackage size after Core ML conversion (Phase 4).",
+            "status": "unavailable",
+            "threshold": "< 100 MB"
+          }
+        ]
+      }
+    ],
+    "status": "complete"
+  },
+  "learning_curves": {
+    "dataset_info": {
+      "fingerprint": {
+        "combined_sha256": "4ac8a248db3fc030fcbd4dd5d36d4c55e8277f334478c44cd145735cdaea54f8",
+        "split_sha256": {
+          "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+          "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8",
+          "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0"
+        }
+      },
+      "pool_size": 681,
+      "test_size": 40,
+      "val_size": 30
+    },
+    "notes": [],
+    "reason": "4 strategies analyzed across 6 budgets. Dataset is small (pool=681, test=40, val=30); results validate the pipeline but are not publication-ready.",
+    "status": "partial",
+    "strategies": [
+      {
+        "budgets": [
+          10,
+          25,
+          50,
+          100,
+          250,
+          500
+        ],
+        "power_law_fit": {
+          "a": 0.041716,
+          "b": 0.404365,
+          "n_points": 6,
+          "r_squared": 0.485869,
+          "reason": "Power-law fit on 6 points. R^2=0.4859 (log-space).",
+          "residuals_mean": 0.10165,
+          "status": "complete"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "diversity",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.01,
+            "ci_upper": 0.0825,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.0425,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.2875,
+            "ci_upper": 0.3675,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.33,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.31,
+            "ci_upper": 0.3475,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3275,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3,
+            "ci_upper": 0.325,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3125,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.325,
+            "ci_upper": 0.375,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.35,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.35,
+            "ci_upper": 0.3575,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3525,
+            "reason": "",
+            "status": "complete"
+          }
+        ],
+        "test_em_means": [
+          0.0425,
+          0.33,
+          0.3275,
+          0.3125,
+          0.35,
+          0.3525
+        ],
+        "val_em_means": [
+          0.076667,
+          0.3,
+          0.353333,
+          0.366667,
+          0.333333,
+          0.31
+        ]
+      },
+      {
+        "budgets": [
+          10,
+          25,
+          50,
+          100,
+          250,
+          500
+        ],
+        "power_law_fit": {
+          "a": 0.099312,
+          "b": 0.249946,
+          "n_points": 6,
+          "r_squared": 0.489594,
+          "reason": "Power-law fit on 6 points. R^2=0.4896 (log-space).",
+          "residuals_mean": 0.084299,
+          "status": "complete"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "kg_guided",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.055,
+            "ci_upper": 0.15,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.1025,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.2575,
+            "ci_upper": 0.3475,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3025,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3825,
+            "ci_upper": 0.4075,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.395,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3725,
+            "ci_upper": 0.4,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.385,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3575,
+            "ci_upper": 0.3725,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.365,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.35,
+            "ci_upper": 0.35,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.35,
+            "reason": "",
+            "status": "complete"
+          }
+        ],
+        "test_em_means": [
+          0.1025,
+          0.3025,
+          0.395,
+          0.385,
+          0.365,
+          0.35
+        ],
+        "val_em_means": [
+          0.076667,
+          0.253333,
+          0.293333,
+          0.296667,
+          0.31,
+          0.3
+        ]
+      },
+      {
+        "budgets": [
+          10,
+          25,
+          50,
+          100,
+          250,
+          500
+        ],
+        "power_law_fit": {
+          "a": 0.319446,
+          "b": 0.024509,
+          "n_points": 6,
+          "r_squared": 0.362258,
+          "reason": "Power-law fit on 6 points. R^2=0.3623 (log-space).",
+          "residuals_mean": 0.01306,
+          "status": "complete"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "random",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.2725,
+            "ci_upper": 0.355,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.315,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3375,
+            "ci_upper": 0.385,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3625,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3575,
+            "ci_upper": 0.385,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.37,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3525,
+            "ci_upper": 0.3725,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3625,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.3525,
+            "ci_upper": 0.3725,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.3625,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.35,
+            "ci_upper": 0.37,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.36,
+            "reason": "",
+            "status": "complete"
+          }
+        ],
+        "test_em_means": [
+          0.315,
+          0.3625,
+          0.37,
+          0.3625,
+          0.3625,
+          0.36
+        ],
+        "val_em_means": [
+          0.263333,
+          0.296667,
+          0.293333,
+          0.303333,
+          0.31,
+          0.31
+        ]
+      },
+      {
+        "budgets": [
+          10,
+          25,
+          50,
+          100,
+          250,
+          500
+        ],
+        "power_law_fit": {
+          "a": 0.021254,
+          "b": 0.210213,
+          "n_points": 5,
+          "r_squared": 0.119274,
+          "reason": "Power-law fit on 5 points. R^2=0.1193 (log-space).",
+          "residuals_mean": 0.058803,
+          "status": "complete"
+        },
+        "reason": "",
+        "status": "complete",
+        "strategy": "uncertainty",
+        "test_em_cis": [
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.05,
+            "ci_upper": 0.05,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.05,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.05,
+            "ci_upper": 0.05,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.05,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.0,
+            "ci_upper": 0.0,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.0,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.025,
+            "ci_upper": 0.025,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.025,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.025,
+            "ci_upper": 0.025,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.025,
+            "reason": "",
+            "status": "complete"
+          },
+          {
+            "ci_level": 0.95,
+            "ci_lower": 0.275,
+            "ci_upper": 0.275,
+            "metric_name": "mean",
+            "n_bootstrap": 10000,
+            "n_observations": 10,
+            "point_estimate": 0.275,
+            "reason": "",
+            "status": "complete"
+          }
+        ],
+        "test_em_means": [
+          0.05,
+          0.05,
+          0.0,
+          0.025,
+          0.025,
+          0.275
+        ],
+        "val_em_means": [
+          0.0,
+          0.0,
+          0.066667,
+          0.033333,
+          0.033333,
+          0.366667
+        ]
+      }
+    ]
+  },
+  "overall_notes": [
+    "Learning-curve analysis is based on a small dataset (52 examples) with a heuristic lookup baseline. Results validate the pipeline but are not yet publication-ready.",
+    "This analysis package is designed to absorb future physical-device data and larger-dataset runs with no code changes."
+  ],
+  "overall_status": "partial",
+  "pareto": {
+    "notes": [],
+    "points": [
+      {
+        "artifact_size_mb": 0.1,
+        "is_pareto_optimal": true,
+        "latency_environment": "unavailable",
+        "latency_p50_ms": null,
+        "model_id": "question_lookup_v0",
+        "quality_metric": "test_em",
+        "quality_value": 0.35,
+        "reason": "No latency data available.",
+        "status": "partial"
+      },
+      {
+        "artifact_size_mb": 2.04,
+        "is_pareto_optimal": false,
+        "latency_environment": "unavailable",
+        "latency_p50_ms": null,
+        "model_id": "axiom_lora_v1",
+        "quality_metric": "test_em",
+        "quality_value": 0.3,
+        "reason": "No latency data available.",
+        "status": "partial"
+      },
+      {
+        "artifact_size_mb": 0.106,
+        "is_pareto_optimal": true,
+        "latency_environment": "physical_device",
+        "latency_p50_ms": 14.5,
+        "model_id": "tiny_multimodal_v1",
+        "quality_metric": "test_em",
+        "quality_value": 0.35,
+        "reason": "",
+        "status": "complete"
+      }
+    ],
+    "reason": "3 model(s) in Pareto view.",
+    "status": "partial"
+  },
+  "version": "0.1.0"
+}

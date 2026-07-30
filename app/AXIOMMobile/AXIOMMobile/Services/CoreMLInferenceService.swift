@@ -35,6 +35,11 @@ struct CoreMLInferenceService: InferenceServiceProtocol {
         /// Known resource mappings for each model version.
         static func resolve(_ modelID: String) -> ModelResources {
             switch modelID {
+            case "axiom_lora_v1":
+                return ModelResources(
+                    mlpackageName: "AxiomLoraV1",
+                    labelsName: "axiom_lora_v1_labels"
+                )
             case "tiny_multimodal_v1":
                 return ModelResources(
                     mlpackageName: "TinyMultimodalV1",
