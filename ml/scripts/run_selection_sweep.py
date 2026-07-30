@@ -9,22 +9,34 @@ For each (strategy, budget, seed) combination this script:
 
 After all runs it writes ``summary.json`` and ``summary.csv``.
 
-Strategies that are not yet implemented (e.g. kg_guided) are recorded
-as skipped rather than crashing the sweep.
+Strategies that are not implemented for a given call are recorded as
+skipped rather than crashing the sweep (as of Phase 9, all four --
+random, uncertainty, diversity, kg_guided -- are implemented; this guard
+is generic, not currently exercised).
 
-Example
--------
+Example (heuristic baseline, no images needed)
+------------------------------------------------
     python3 ml/scripts/run_selection_sweep.py \\
         --strategies random uncertainty diversity kg_guided \\
-        --budgets 5 10 15 20 25 37 \\
-        --seeds 0 1 2 \\
+        --budgets 10 25 50 100 250 500 \\
+        --seeds 0 1 2 3 4 5 6 7 8 9 \\
         --model-id question_lookup_v0
+
+Example (trainable image-based model)
+----------------------------------------
+    python3 ml/scripts/run_selection_sweep.py \\
+        --model-id axiom_lora_v1 \\
+        --image-root ~/Datasets/axiom-mobile/local_phase8_images \\
+        --manifest-dir ~/Datasets/axiom-mobile/local_phase8_manifests \\
+        --epochs 20
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
@@ -34,6 +46,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "ml" / "src"))
 
 from axiom.data import dataset_fingerprint, load_all_splits  # noqa: E402
+from axiom.data.images import resolve_image_root  # noqa: E402
 from axiom.eval import compute_exact_match_metrics  # noqa: E402
 from axiom.models import instantiate_model  # noqa: E402
 from axiom.results import (  # noqa: E402
@@ -44,9 +57,13 @@ from axiom.results import (  # noqa: E402
 )
 from axiom.selection import get_strategy  # noqa: E402
 
+# Phase 10: widened from the Phase 3 scaffold defaults (budgets up to 37,
+# 3 seeds) to match dataset v3's scale and the roadmap's statistical-rigor
+# target (>=10 seeds). Override with --budgets/--seeds for a quick check
+# against a smaller dataset.
 DEFAULT_STRATEGIES = ["random", "uncertainty", "diversity", "kg_guided"]
-DEFAULT_BUDGETS = [5, 10, 15, 20, 25, 37]
-DEFAULT_SEEDS = [0, 1, 2]
+DEFAULT_BUDGETS = [10, 25, 50, 100, 250, 500]
+DEFAULT_SEEDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 def parse_args() -> argparse.Namespace:
@@ -86,6 +103,37 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Output directory (default: results/selection_sweeps/<timestamp>)",
     )
+    p.add_argument(
+        "--image-root",
+        default=None,
+        help=(
+            "Path to a screenshot directory (or set AXIOM_SCREENSHOT_ROOT). "
+            "Required for image-based models (tiny_multimodal_*, axiom_lora_*); "
+            "not needed for question_lookup_v0, which never touches images."
+        ),
+    )
+    p.add_argument(
+        "--manifest-dir",
+        default=None,
+        help=(
+            "Override manifest directory (default: {repo-root}/data/manifests/). "
+            "Use this to point at a local-only manifest set (e.g. one built "
+            "outside data/manifests/ because the committed images aren't "
+            "available on this machine)."
+        ),
+    )
+    p.add_argument(
+        "--epochs",
+        type=int,
+        default=None,
+        help="Epochs for trainable models (only forwarded if set; "
+             "question_lookup_v0 ignores this and errors if you pass it anyway).",
+    )
+    p.add_argument(
+        "--class-weighted",
+        action="store_true",
+        help="Class-weighted CE loss for trainable models (see --epochs note).",
+    )
     return p.parse_args()
 
 
@@ -113,6 +161,8 @@ def _run_one(
     splits: dict[str, list[dict[str, Any]]],
     ds_fingerprint: dict[str, Any],
     pool_size: int,
+    image_root: Path | None,
+    train_kwargs: dict[str, Any],
 ) -> SelectionRunResult:
     """Execute one (strategy, budget, seed) combination."""
     strategy = get_strategy(strategy_name)
@@ -121,8 +171,10 @@ def _run_one(
     selected_rows = [pool[i] for i in selected_indices]
     selected_ids = [pool[i]["id"] for i in selected_indices]
 
-    model = instantiate_model(model_id)
-    training_summary = model.train(selected_rows, val_rows=splits["val"], seed=seed)
+    model = instantiate_model(model_id, image_root=image_root)
+    training_summary = model.train(
+        selected_rows, val_rows=splits["val"], seed=seed, **train_kwargs
+    )
 
     metrics_by_split: dict[str, dict[str, Any]] = {}
 
@@ -185,15 +237,54 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> Path:
     return path
 
 
+def _load_splits(manifest_dir: Path | None, repo_root: Path) -> dict[str, list[dict[str, Any]]]:
+    """Load manifest splits, optionally from a non-committed manifest dir
+    (e.g. a local-only set built when the committed images aren't
+    available on this machine -- same pattern export_coreml_lora.py uses)."""
+    if manifest_dir is not None:
+        splits: dict[str, list[dict[str, Any]]] = {}
+        for split_name in ("pool", "val", "test"):
+            path = manifest_dir / f"{split_name}.jsonl"
+            if not path.exists():
+                raise FileNotFoundError(f"Missing manifest: {path}")
+            rows = []
+            for line in path.read_text(encoding="utf-8").strip().split("\n"):
+                if line.strip():
+                    rows.append(json.loads(line))
+            splits[split_name] = rows
+        return splits
+    return load_all_splits(repo_root=repo_root, validate=True)
+
+
 def main() -> int:
     args = parse_args()
     repo_root = Path(args.repo_root).resolve()
 
+    # Resolve image root -- optional. question_lookup_v0 never touches
+    # images, so don't force this to be set; image-based models will
+    # raise a clear error from within model.train() if it's actually
+    # needed and wasn't provided.
+    image_root: Path | None = None
+    if args.image_root or os.environ.get("AXIOM_SCREENSHOT_ROOT"):
+        image_root = resolve_image_root(args.image_root)
+        print(f"Image root: {image_root}")
+
+    train_kwargs: dict[str, Any] = {}
+    if args.epochs is not None:
+        train_kwargs["num_epochs"] = args.epochs
+    if args.class_weighted:
+        train_kwargs["class_weighted"] = True
+
     # Load dataset.
-    splits = load_all_splits(repo_root=repo_root, validate=True)
+    manifest_dir = Path(args.manifest_dir).resolve() if args.manifest_dir else None
+    splits = _load_splits(manifest_dir, repo_root)
     pool = splits["pool"]
     pool_size = len(pool)
-    ds_fingerprint = dataset_fingerprint(repo_root=repo_root)
+    ds_fingerprint = (
+        {"note": "custom manifest directory", "path": str(manifest_dir)}
+        if manifest_dir is not None
+        else dataset_fingerprint(repo_root=repo_root)
+    )
 
     print(f"Pool size: {pool_size}  Val: {len(splits['val'])}  Test: {len(splits['test'])}")
 
@@ -265,6 +356,8 @@ def main() -> int:
                     splits=splits,
                     ds_fingerprint=ds_fingerprint,
                     pool_size=pool_size,
+                    image_root=image_root,
+                    train_kwargs=train_kwargs,
                 )
 
                 # Write per-run JSON.

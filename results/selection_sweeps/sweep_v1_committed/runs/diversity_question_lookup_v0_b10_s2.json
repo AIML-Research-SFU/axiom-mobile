@@ -1,0 +1,65 @@
+{
+  "budget": 10,
+  "created_at_utc": "2026-07-29T21:49:30.351085+00:00",
+  "dataset": {
+    "fingerprint": {
+      "combined_sha256": "4ac8a248db3fc030fcbd4dd5d36d4c55e8277f334478c44cd145735cdaea54f8",
+      "split_sha256": {
+        "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+        "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8",
+        "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0"
+      }
+    },
+    "pool_size": 681,
+    "test_size": 40,
+    "val_size": 30
+  },
+  "metrics": {
+    "test": {
+      "exact_match": 0.0,
+      "num_correct": 0,
+      "num_examples": 40,
+      "split_name": "test"
+    },
+    "train_subset": {
+      "exact_match": 1.0,
+      "num_correct": 10,
+      "num_examples": 10,
+      "split_name": "train_subset"
+    },
+    "val": {
+      "exact_match": 0.03333333333333333,
+      "num_correct": 1,
+      "num_examples": 30,
+      "split_name": "val"
+    }
+  },
+  "model_id": "question_lookup_v0",
+  "notes": "",
+  "run_id": "diversity_question_lookup_v0_b10_s2",
+  "seed": 2,
+  "selected_ids": [
+    "ex_011",
+    "ex_027",
+    "ex_030",
+    "ex_035",
+    "ex_039",
+    "ex_049",
+    "ex_050",
+    "ex_052",
+    "ex_069",
+    "ex_627"
+  ],
+  "status": "completed",
+  "strategy": "diversity",
+  "training": {
+    "num_selected": 10,
+    "seed": 2,
+    "summary": {
+      "default_answer": "91%",
+      "train_examples": 10,
+      "unique_answers": 10,
+      "unique_questions": 10
+    }
+  }
+}

@@ -185,3 +185,46 @@ Deliverable status: `[x]` Complete.
 - `[x]` App integration of v1: `TinyMultimodalV1.mlpackage` + `tiny_multimodal_v1_labels.json` + `tiny_multimodal_v1_metadata.json` bundled. `CoreMLInferenceService` routes by model ID. `InferenceResult` reads threshold from metadata. `AnswerCard` and `QuestionInputSection` use `ModelMetadata` for dynamic copy. v1 is default model; v0 remains available.
 - `[ ]` Extend XCUITest for Settings sub-pages (General, Accessibility, etc.) and Maps navigation.
 - `[ ]` Add dual-annotator agreement workflow (Cohen's kappa >= 0.75).
+
+## Semester 2 (Phases 7-13)
+
+Last updated: 2026-07-29. Phases 1-6 above are semester 1 (through Paper Draft v3). This section tracks the semester 2 roadmap.
+
+### Phase 7 (Dataset v3 scale-up) — Complete, committed (`0b13ec2`)
+
+- `[x]` Extended `generate_exact_scenarios.py` to v0.4.0: 30 new variants x 2 apps x 5 QA (adds "How many cellular signal bars are shown?"), with a `--delta-only` mode so the already-promoted v0.3.0 base scenarios aren't re-captured/re-promoted as duplicates.
+- `[x]` Investigated and rejected two candidate status-bar dimensions (wifi signal bars, carrier name) after visually confirming neither is reliably readable on this device — only shipped `cellular_bars`, which was.
+- `[x]` Found and fixed a real bug in `capture_screenshots.sh`: per-scenario `cellular_bars` override was parsed but never applied.
+- `[x]` Captured 60 new screenshots, 300 QA pairs, 0 skipped. Caught and removed 1 mislabeled example (a one-time "Enable Notifications" prompt covering the Maps search bar on the batch's first capture) via visual spot-check, not just pipeline trust.
+- `[x]` `freeze_dataset_v3.py`: dataset v3 frozen at pool=681/val=30/test=40 (751 total), v2 archived with fingerprints.
+
+### Phase 8 (Pretrained backbone + LoRA) — Complete, committed (`01ac454`)
+
+- `[x]` De-risk spike: pretrained MobileNetV3-Small traces/converts via coremltools cleanly.
+- `[x]` De-risk spike: pretrained transformer + LoRA text tower (bert-tiny, then all-MiniLM-L6-v2) attempted — fails at coremltools conversion, isolated (via a LoRA-removed control test) to the base transformer's traced graph, not LoRA-specific. Fell back to the roadmap's pre-registered plan B.
+- `[x]` `axiom_lora_v1`: frozen pretrained MobileNetV3-Small backbone + genuine LoRA adapter (rank=8) on the final conv + unchanged char-level text encoder. Subclasses `TinyMultimodalBaseline` via a new `_build_net()` factory.
+- `[x]` Real blocker found: committed dataset v3's original 452 images aren't on this machine (Drive not synced). Trained instead on a 699-QA machine-local recapture of the auto-generated portion of v3 — not committed, not the literal split.
+- `[x]` CoreML export: accuracy gate passed, 0% drop, 2.04MB package.
+- `[~]` Results are a wash vs `tiny_multimodal_v1` (30.0% vs 27.5% test EM, worse on val, different dataset) — reported honestly, not oversold. On-device latency only checked as a macOS-host proxy; real Simulator/device benchmarking needs Swift app integration, not done yet.
+
+### Phase 9 (KG v1 + KG-guided strategy) — Complete, uncommitted
+
+- `[x]` `ml/scripts/build_kg.py`: KG v1 extracted programmatically from dataset v3's own `notes`/`question`/`answer` fields — no manual curation. 235 entities (9 App, 19 Screen, 20 Attribute, 187 AnswerValue), 1,009 relations.
+- `[x]` Found and fixed a real bug in the extraction logic before shipping: first-pass App/Screen parsing misclassified compound notes strings ("Bluetooth settings", "AirDrop tile") as standalone apps. Rewrote with explicit rules grounded in the actual 29 distinct notes prefixes in the dataset.
+- `[x]` `kg_guided.py` implemented: round-robins across `(Screen, Attribute)` regions to maximize coverage breadth. Measured: 25/37 regions covered at budget=25 vs 11/37 for random sampling at the same budget.
+- `[x]` Verified end to end: all 4 strategies (random/uncertainty/diversity/kg\_guided) run cleanly through the real sweep runner, 0 skipped.
+- `[x]` `kg/README.md` (was empty) and `docs/SELECTION_STRATEGIES.md` updated.
+
+### Phase 10 (Full selection sweep at scale) — Complete (heuristic baseline), trainable-model sweep deliberately abandoned
+
+- `[x]` Found and fixed a real gap: `run_selection_sweep.py` never wired `image_root` through to trainable models — it had only ever been exercised with the heuristic baseline. Added `--image-root`/`--manifest-dir`/`--epochs`/`--class-weighted` CLI flags (kept — verified working, reusable infrastructure regardless of the scope decision below).
+- `[x]` Full sweep on the **real committed dataset v3**: 4 strategies x budgets `{10,25,50,100,250,500}` x **10 seeds** (up from 3) x `question_lookup_v0`. 240 runs, 0 skipped, ~6.5 minutes. First-ever KG-guided results at scale on committed data.
+- `[x]` Learning curves regenerated (`docs/LEARNING_CURVES.md` updated with real findings — e.g. random beats coverage-first strategies at tiny budgets for a memorization heuristic, but kg\_guided overtakes it by budget=50).
+- `[x]` Attempted a matching sweep with `axiom_lora_v1` (real trainable model) on the local Phase 8 dataset (committed v3 images still unavailable — Drive sync gap). Calibrated real per-cell timing (~2.5 min worst case, ~4hr for the full grid), ran it, then parallelized across strategies + `caffeinate` to speed it up after sleep interruptions slowed the first attempt. **Abandoned partway through (50/240 runs) and deleted the partial results**: sustained multi-process training load made the laptop uncomfortably hot. Decided this class of experiment isn't worth running on personal laptop hardware — documented as a real, deliberate scope limitation in `docs/LEARNING_CURVES.md` and `docs/SELECTION_STRATEGIES.md`, not hidden or silently dropped.
+- `[ ]` Not planned on this hardware going forward. Would need either a much smaller grid or non-laptop compute (e.g. a cloud/remote environment) to revisit.
+
+### Phases 11-13 — Not started
+
+- `[ ]` Phase 11: Quantization pipeline + energy/memory device profiling (the one phase with real physical-device manual work).
+- `[ ]` Phase 12: Statistical rigor — bootstrap CIs/paired comparisons at 10 seeds, refit power-law curves, full Pareto view across all 5 constraints.
+- `[ ]` Phase 13: Paper v4 + final deck.

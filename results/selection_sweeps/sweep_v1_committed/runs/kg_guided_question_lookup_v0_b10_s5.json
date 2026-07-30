@@ -1,0 +1,65 @@
+{
+  "budget": 10,
+  "created_at_utc": "2026-07-29T21:56:03.172626+00:00",
+  "dataset": {
+    "fingerprint": {
+      "combined_sha256": "4ac8a248db3fc030fcbd4dd5d36d4c55e8277f334478c44cd145735cdaea54f8",
+      "split_sha256": {
+        "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+        "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8",
+        "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0"
+      }
+    },
+    "pool_size": 681,
+    "test_size": 40,
+    "val_size": 30
+  },
+  "metrics": {
+    "test": {
+      "exact_match": 0.125,
+      "num_correct": 5,
+      "num_examples": 40,
+      "split_name": "test"
+    },
+    "train_subset": {
+      "exact_match": 0.9,
+      "num_correct": 9,
+      "num_examples": 10,
+      "split_name": "train_subset"
+    },
+    "val": {
+      "exact_match": 0.13333333333333333,
+      "num_correct": 4,
+      "num_examples": 30,
+      "split_name": "val"
+    }
+  },
+  "model_id": "question_lookup_v0",
+  "notes": "",
+  "run_id": "kg_guided_question_lookup_v0_b10_s5",
+  "seed": 5,
+  "selected_ids": [
+    "ex_004",
+    "ex_012",
+    "ex_029",
+    "ex_034",
+    "ex_042",
+    "ex_050",
+    "ex_200",
+    "ex_261",
+    "ex_557",
+    "ex_654"
+  ],
+  "status": "completed",
+  "strategy": "kg_guided",
+  "training": {
+    "num_selected": 10,
+    "seed": 5,
+    "summary": {
+      "default_answer": "61%",
+      "train_examples": 10,
+      "unique_answers": 10,
+      "unique_questions": 9
+    }
+  }
+}

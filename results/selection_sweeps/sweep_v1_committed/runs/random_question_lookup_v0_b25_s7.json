@@ -1,0 +1,80 @@
+{
+  "budget": 25,
+  "created_at_utc": "2026-07-29T21:49:30.183181+00:00",
+  "dataset": {
+    "fingerprint": {
+      "combined_sha256": "4ac8a248db3fc030fcbd4dd5d36d4c55e8277f334478c44cd145735cdaea54f8",
+      "split_sha256": {
+        "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+        "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8",
+        "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0"
+      }
+    },
+    "pool_size": 681,
+    "test_size": 40,
+    "val_size": 30
+  },
+  "metrics": {
+    "test": {
+      "exact_match": 0.35,
+      "num_correct": 14,
+      "num_examples": 40,
+      "split_name": "test"
+    },
+    "train_subset": {
+      "exact_match": 0.52,
+      "num_correct": 13,
+      "num_examples": 25,
+      "split_name": "train_subset"
+    },
+    "val": {
+      "exact_match": 0.3,
+      "num_correct": 9,
+      "num_examples": 30,
+      "split_name": "val"
+    }
+  },
+  "model_id": "question_lookup_v0",
+  "notes": "",
+  "run_id": "random_question_lookup_v0_b25_s7",
+  "seed": 7,
+  "selected_ids": [
+    "ex_018",
+    "ex_023",
+    "ex_039",
+    "ex_134",
+    "ex_147",
+    "ex_183",
+    "ex_190",
+    "ex_194",
+    "ex_202",
+    "ex_234",
+    "ex_246",
+    "ex_378",
+    "ex_391",
+    "ex_498",
+    "ex_506",
+    "ex_578",
+    "ex_581",
+    "ex_603",
+    "ex_609",
+    "ex_621",
+    "ex_627",
+    "ex_633",
+    "ex_723",
+    "ex_744",
+    "ex_745"
+  ],
+  "status": "completed",
+  "strategy": "random",
+  "training": {
+    "num_selected": 25,
+    "seed": 7,
+    "summary": {
+      "default_answer": "No",
+      "train_examples": 25,
+      "unique_answers": 20,
+      "unique_questions": 9
+    }
+  }
+}

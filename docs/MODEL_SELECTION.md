@@ -363,6 +363,33 @@ python3 ml/scripts/export_coreml_lora.py \
 - [ ] Retrain on the real committed dataset v3 split once Drive sync is available
 - [ ] Quality result is a wash vs v1, not a win -- worth investigating unfreezing more backbone / higher LoRA rank once real-data training is possible
 
+### Phase 10 addendum: a full selection-strategy sweep with axiom_lora_v1 was attempted and abandoned
+
+Phase 10 tried to run the same 4-strategy x 6-budget x 10-seed sweep used
+for `question_lookup_v0` (see `docs/SELECTION_STRATEGIES.md`,
+`docs/LEARNING_CURVES.md`) with `axiom_lora_v1` instead, on the local
+Phase 8 dataset (committed v3 images still unavailable on this machine).
+The infrastructure work paid off -- `run_selection_sweep.py` was extended
+with `--image-root`/`--manifest-dir`/`--epochs`/`--class-weighted` flags,
+verified working end to end, real per-cell timing was measured (~2.5 min
+at the worst-case budget) rather than guessed, and the full 240-run grid
+was launched.
+
+It was killed partway through (50/240 runs complete) and the partial
+results deleted. A single sequential process was slow (interrupted by the
+laptop sleeping); parallelizing across the 4 strategies plus `caffeinate`
+to prevent sleep sped it up but made the machine uncomfortably hot under
+sustained multi-process training load. This is a personal laptop, not
+dedicated training hardware, and the honest call was to stop rather than
+push through.
+
+**What this means going forward**: `axiom_lora_v1` is real, trained,
+CoreML-exported, and passes its accuracy gate (see above) -- that part of
+Phase 8 stands. What doesn't exist is a full-scale strategy comparison
+*using* it. If that's wanted later, it needs either a much smaller
+grid (fewer seeds/budgets, e.g. 3 seeds x 3 budgets instead of 10x6) or
+compute that isn't this laptop -- not a retry of the same approach.
+
 ## Result Artifact Contract
 
 Every baseline run should write:

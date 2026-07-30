@@ -71,27 +71,45 @@ From the repository root:
 python3 ml/scripts/run_selection_sweep.py
 ```
 
-Default configuration:
+Default configuration (updated Phase 10 — previously budgets up to 37 and 3 seeds, matching the old 37-example scaffold dataset):
 
 - **Strategies**: random, uncertainty, diversity, kg_guided
-- **Budgets**: 5, 10, 15, 20, 25, 37
-- **Seeds**: 0, 1, 2
-- **Model**: question_lookup_v0
+- **Budgets**: 10, 25, 50, 100, 250, 500
+- **Seeds**: 0 through 9 (10 seeds)
+- **Model**: question_lookup_v0 (no images required)
 
-Custom example:
+Custom example, heuristic baseline on committed data:
 
 ```bash
 python3 ml/scripts/run_selection_sweep.py \
-    --strategies random uncertainty diversity \
-    --budgets 5 10 20 37 \
-    --seeds 0 1 \
+    --strategies random uncertainty diversity kg_guided \
+    --budgets 10 25 50 100 250 \
+    --seeds 0 1 2 \
     --model-id question_lookup_v0 \
     --output-dir results/selection_sweeps/my_run
 ```
 
+**Phase 10**: the sweep runner now supports trainable image-based models too (previously it only worked with `question_lookup_v0` — `instantiate_model()` was never called with `image_root`, so any image-based model would fail the moment `model.train()` tried to load a screenshot). New flags:
+
+```bash
+python3 ml/scripts/run_selection_sweep.py \
+    --model-id axiom_lora_v1 \
+    --image-root /path/to/screenshots \
+    --manifest-dir /path/to/manifests \
+    --epochs 20 \
+    --class-weighted \
+    --output-dir results/selection_sweeps/my_lora_run
+```
+
+- `--image-root` — same resolution rules as `run_trainable_baseline.py` (explicit flag, else `AXIOM_SCREENSHOT_ROOT`). Not required for `question_lookup_v0`, which never touches images.
+- `--manifest-dir` — override `data/manifests/`, e.g. to point at a local-only manifest set built when the committed images aren't available on this machine (see `docs/MODEL_SELECTION.md`'s Phase 8 writeup for why that situation exists).
+- `--epochs`/`--class-weighted` — forwarded to `model.train()` only if explicitly set, so `question_lookup_v0`'s fixed `train()` signature (which doesn't accept these) is unaffected by default.
+
+**Real timing, not estimated**: a single `axiom_lora_v1` cell at the most expensive budget (500) took ~2.5 minutes. A full 4-strategy x 6-budget x 10-seed grid (240 runs) is on the order of **4 hours** of sustained CPU load — this was tried (including parallelizing across strategies to cut wall-clock time) and abandoned on a personal laptop due to heat. Treat this as a job for either a much smaller grid (fewer seeds/budgets) or non-laptop compute, not something to run synchronously or as a multi-hour background job on a machine someone is actively using.
+
 ### Budget validation
 
-Budgets are validated against the current pool size.  Any budget exceeding `pool=37` is automatically dropped with a warning.  The sweep does not silently run impossible configurations.
+Budgets are validated against the current pool size.  Any budget exceeding the pool size is automatically dropped with a warning.  The sweep does not silently run impossible configurations.
 
 ### Output structure
 
@@ -112,10 +130,14 @@ Each per-run JSON contains: run_id, strategy, budget, seed, model_id, dataset fi
 
 `summary.csv` has one row per (strategy, budget, seed) — including skipped runs — for quick inspection in a spreadsheet.
 
+**Real Phase 10 sweep output**: `results/selection_sweeps/sweep_v1_committed/` (question_lookup_v0, committed dataset v3, 240 runs). See `docs/LEARNING_CURVES.md` for the aggregated findings.
+
+**A matching `axiom_lora_v1` sweep was attempted and deliberately abandoned**, not just deferred: the `--image-root`/`--manifest-dir`/`--epochs`/`--class-weighted` flags documented above exist and work (verified: a single cell completed cleanly, real accuracy numbers came back), but running the full 240-run grid meant sustained heavy CPU load on a personal laptop for hours, which got uncomfortably hot. The partial results were deleted rather than kept in a half-finished state. This is a genuine, acknowledged scope limitation, not a technical blocker — see `docs/MODEL_SELECTION.md`.
+
 ## Current limitations
 
-1. **Pool size**: 681 examples (dataset v3) is far larger than the original 37-example scaffold, but the sweep has not yet been re-run at this scale with a real trainable model — see `docs/TIMELINE.md` Phase 10.
-2. **Heuristic baseline**: `question_lookup_v0` memorizes question→answer mappings; it does not learn visual features.  Strategy differences may be muted.  `axiom_lora_v1` (Phase 8) is executable now and would give a more meaningful signal for a real sweep.
+1. **Pool size**: 681 examples (dataset v3) is far larger than the original 37-example scaffold. The full sweep has been re-run at this scale (Phase 10) with `question_lookup_v0`.
+2. **Heuristic baseline only**: `question_lookup_v0` memorizes question→answer mappings; it does not learn visual features, so strategy differences reflect memorization dynamics, not visual generalization. `axiom_lora_v1` (Phase 8) is executable and sweep-compatible, but a full-grid sweep with it is impractical on available hardware (see above) — this is consistent with every sweep this project has run to date, all of which used the heuristic baseline for exactly this reason.
 3. **Uncertainty proxy**: uses metadata, not model logits.
 4. **KG-guided (Phase 9)**: no longer blocked. Uses `kg/entities.json`/`kg/relations.json`, built programmatically from the dataset. See `kg/README.md` for the full writeup, including a measured coverage comparison against random sampling.
 5. **Plotting available**: learning curve SVG plots are generated by `ml/scripts/generate_learning_curves.py`; see `docs/LEARNING_CURVES.md`.

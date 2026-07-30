@@ -1,0 +1,105 @@
+{
+  "budget": 50,
+  "created_at_utc": "2026-07-29T21:49:31.962619+00:00",
+  "dataset": {
+    "fingerprint": {
+      "combined_sha256": "4ac8a248db3fc030fcbd4dd5d36d4c55e8277f334478c44cd145735cdaea54f8",
+      "split_sha256": {
+        "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+        "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8",
+        "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0"
+      }
+    },
+    "pool_size": 681,
+    "test_size": 40,
+    "val_size": 30
+  },
+  "metrics": {
+    "test": {
+      "exact_match": 0.35,
+      "num_correct": 14,
+      "num_examples": 40,
+      "split_name": "test"
+    },
+    "train_subset": {
+      "exact_match": 0.72,
+      "num_correct": 36,
+      "num_examples": 50,
+      "split_name": "train_subset"
+    },
+    "val": {
+      "exact_match": 0.3333333333333333,
+      "num_correct": 10,
+      "num_examples": 30,
+      "split_name": "val"
+    }
+  },
+  "model_id": "question_lookup_v0",
+  "notes": "",
+  "run_id": "diversity_question_lookup_v0_b50_s0",
+  "seed": 0,
+  "selected_ids": [
+    "ex_003",
+    "ex_004",
+    "ex_005",
+    "ex_006",
+    "ex_009",
+    "ex_010",
+    "ex_011",
+    "ex_012",
+    "ex_017",
+    "ex_019",
+    "ex_020",
+    "ex_022",
+    "ex_023",
+    "ex_025",
+    "ex_027",
+    "ex_028",
+    "ex_029",
+    "ex_030",
+    "ex_033",
+    "ex_034",
+    "ex_038",
+    "ex_039",
+    "ex_040",
+    "ex_043",
+    "ex_044",
+    "ex_046",
+    "ex_047",
+    "ex_048",
+    "ex_049",
+    "ex_050",
+    "ex_052",
+    "ex_215",
+    "ex_269",
+    "ex_302",
+    "ex_317",
+    "ex_325",
+    "ex_349",
+    "ex_385",
+    "ex_436",
+    "ex_467",
+    "ex_471",
+    "ex_473",
+    "ex_584",
+    "ex_603",
+    "ex_648",
+    "ex_660",
+    "ex_668",
+    "ex_727",
+    "ex_748",
+    "ex_750"
+  ],
+  "status": "completed",
+  "strategy": "diversity",
+  "training": {
+    "num_selected": 50,
+    "seed": 0,
+    "summary": {
+      "default_answer": "Off",
+      "train_examples": 50,
+      "unique_answers": 39,
+      "unique_questions": 34
+    }
+  }
+}

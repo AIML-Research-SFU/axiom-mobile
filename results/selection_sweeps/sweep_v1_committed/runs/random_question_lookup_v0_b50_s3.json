@@ -1,0 +1,105 @@
+{
+  "budget": 50,
+  "created_at_utc": "2026-07-29T21:49:30.185817+00:00",
+  "dataset": {
+    "fingerprint": {
+      "combined_sha256": "4ac8a248db3fc030fcbd4dd5d36d4c55e8277f334478c44cd145735cdaea54f8",
+      "split_sha256": {
+        "pool": "bbcbd1ad399dcdb2ff7d4a2f54d594fa0caa5751883b09e21122e74a9d9679d9",
+        "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8",
+        "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0"
+      }
+    },
+    "pool_size": 681,
+    "test_size": 40,
+    "val_size": 30
+  },
+  "metrics": {
+    "test": {
+      "exact_match": 0.375,
+      "num_correct": 15,
+      "num_examples": 40,
+      "split_name": "test"
+    },
+    "train_subset": {
+      "exact_match": 0.52,
+      "num_correct": 26,
+      "num_examples": 50,
+      "split_name": "train_subset"
+    },
+    "val": {
+      "exact_match": 0.26666666666666666,
+      "num_correct": 8,
+      "num_examples": 30,
+      "split_name": "val"
+    }
+  },
+  "model_id": "question_lookup_v0",
+  "notes": "",
+  "run_id": "random_question_lookup_v0_b50_s3",
+  "seed": 3,
+  "selected_ids": [
+    "ex_010",
+    "ex_086",
+    "ex_087",
+    "ex_097",
+    "ex_106",
+    "ex_125",
+    "ex_130",
+    "ex_139",
+    "ex_152",
+    "ex_196",
+    "ex_210",
+    "ex_211",
+    "ex_234",
+    "ex_236",
+    "ex_278",
+    "ex_290",
+    "ex_315",
+    "ex_316",
+    "ex_334",
+    "ex_336",
+    "ex_341",
+    "ex_351",
+    "ex_390",
+    "ex_395",
+    "ex_426",
+    "ex_432",
+    "ex_453",
+    "ex_461",
+    "ex_465",
+    "ex_467",
+    "ex_488",
+    "ex_492",
+    "ex_496",
+    "ex_517",
+    "ex_551",
+    "ex_552",
+    "ex_555",
+    "ex_557",
+    "ex_578",
+    "ex_579",
+    "ex_598",
+    "ex_616",
+    "ex_633",
+    "ex_678",
+    "ex_679",
+    "ex_681",
+    "ex_699",
+    "ex_705",
+    "ex_741",
+    "ex_748"
+  ],
+  "status": "completed",
+  "strategy": "random",
+  "training": {
+    "num_selected": 50,
+    "seed": 3,
+    "summary": {
+      "default_answer": "No",
+      "train_examples": 50,
+      "unique_answers": 29,
+      "unique_questions": 7
+    }
+  }
+}
