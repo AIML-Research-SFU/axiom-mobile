@@ -15,6 +15,14 @@ train = [
     "torchvision>=0.16",
     "Pillow>=10.0",
     "numpy>=1.24",
+    # Pinned, not >=: transformers 5.x's newer internal attention-mask
+    # construction (a `new_ones` op) is not implemented by coremltools
+    # 9.0's PyTorch frontend. Verified transformers==4.44.2/peft==0.13.2
+    # converts cleanly (with the static-position_ids fix in
+    # axiom_lora_text.py) against the current torch; unpin only after
+    # confirming a newer transformers converts too.
+    "transformers==4.44.2",
+    "peft==0.13.2",
 ]
 export = [
     "torch>=2.1",
@@ -22,6 +30,8 @@ export = [
     "Pillow>=10.0",
     "numpy>=1.24",
     "coremltools>=8.0",
+    "transformers==4.44.2",
+    "peft==0.13.2",
 ]
 dev = []
 

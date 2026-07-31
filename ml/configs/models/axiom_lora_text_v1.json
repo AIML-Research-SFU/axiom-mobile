@@ -1,0 +1,17 @@
+{
+  "model_id": "axiom_lora_text_v1",
+  "display_name": "AXIOM-LoRA-Text v1",
+  "family": "custom",
+  "backend": "pytorch",
+  "stage": "trainable_baseline",
+  "description": "Retry of the Phase 8 pretrained-TEXT-transformer + LoRA approach the original README specified, dropped in Phase 8 after a CoreML conversion failure that was never retried with a fix. Frozen sentence-transformers/all-MiniLM-L6-v2 (BERT-family) text tower with a LoRA adapter on the query/value attention projections, static registered position_ids (the fix -- see module docstring), mean-pooled -> projection. Image side is the unchanged from-scratch CNN from tiny_multimodal, isolating the pretrained-text contribution specifically.",
+  "source": "custom (in-repo), text tower from sentence-transformers/all-MiniLM-L6-v2 (HuggingFace, pretrained)",
+  "notes": "Root cause of the original Phase 8 failure (TypeError: only 0-dimensional arrays can be converted to Python scalars, at the embeddings layer) was isolated by direct repro to BERT-family dynamic position_ids computation at trace time -- reproduced identically across three separate torch/transformers version pairings, including the exact combination coremltools 9.0 itself recommends, ruling out a version-pin fix. Fixed architecturally: position_ids is passed to the model as a static registered buffer (exact, not approximate, given this project's fixed-length input contract) instead of being derived dynamically from sequence length. Both torch.jit.trace and coremltools.convert succeed with this fix, with and without LoRA applied. On-device Swift integration (WordPiece tokenizer) is out of scope for this pass -- Python-side train/export/accuracy-gate only, consistent with how axiom_lora_v1 was bundled locally before its own on-device evaluation was complete.",
+  "executable": true,
+  "coreml_ready": true,
+  "params_millions": null,
+  "expected_app_footprint_mb": null,
+  "quantization": null,
+  "priority_rank": 2,
+  "supported_capabilities": ["image_qa", "classification", "pretrained_text_backbone", "lora_adapter"]
+}
