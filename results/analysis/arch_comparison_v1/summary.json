@@ -1,0 +1,181 @@
+{
+  "analysis_id": "arch_comparison_v1",
+  "created_at_utc": "2026-07-31T10:19:36.312277+00:00",
+  "purpose": "Replace the v4 paper draft n=1 wash-not-a-win verdict on axiom_lora_v1 with a real multi-seed comparison across all three trainable model architectures (from-scratch, pretrained-vision+LoRA, pretrained-text+LoRA).",
+  "dataset": {
+    "image_root": "locally-regenerated auto-generated portion of dataset v3/v4 (see ml/scripts/regenerate_local_images.py)",
+    "manifest": "filtered to auto-captured rows only (699 examples: pool=638, val=26, test=35); 52 manually-captured examples excluded -- see docs/PRIVATE_DATA_SETUP.md Option D",
+    "note": "NOT the literal committed dataset v4 split (which includes the 52 manual examples)."
+  },
+  "training_config": {
+    "epochs": 40,
+    "class_weighted": true,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "device": "mps (Apple M1)"
+  },
+  "models": {
+    "tiny_multimodal_v1": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "pool_em": 0.3056426332288401,
+          "val_em": 0.4230769230769231,
+          "test_em": 0.3142857142857143
+        },
+        {
+          "seed": 1,
+          "pool_em": 0.30407523510971785,
+          "val_em": 0.46153846153846156,
+          "test_em": 0.3142857142857143
+        },
+        {
+          "seed": 2,
+          "pool_em": 0.3056426332288401,
+          "val_em": 0.4230769230769231,
+          "test_em": 0.3142857142857143
+        },
+        {
+          "seed": 3,
+          "pool_em": 0.30250783699059564,
+          "val_em": 0.38461538461538464,
+          "test_em": 0.34285714285714286
+        },
+        {
+          "seed": 4,
+          "pool_em": 0.3056426332288401,
+          "val_em": 0.4230769230769231,
+          "test_em": 0.3142857142857143
+        }
+      ],
+      "test_em_mean": 0.32,
+      "test_em_std": 0.012777531299998802,
+      "val_em_mean": 0.4230769230769231,
+      "val_em_std": 0.02719641466102106,
+      "pool_em_mean": 0.3047021943573668,
+      "pool_em_std": 0.0014019234968650576
+    },
+    "axiom_lora_v1": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "pool_em": 0.329153605015674,
+          "val_em": 0.4230769230769231,
+          "test_em": 0.3142857142857143
+        },
+        {
+          "seed": 1,
+          "pool_em": 0.3072100313479624,
+          "val_em": 0.46153846153846156,
+          "test_em": 0.3142857142857143
+        },
+        {
+          "seed": 2,
+          "pool_em": 0.45454545454545453,
+          "val_em": 0.34615384615384615,
+          "test_em": 0.4
+        },
+        {
+          "seed": 3,
+          "pool_em": 0.37460815047021945,
+          "val_em": 0.46153846153846156,
+          "test_em": 0.4
+        },
+        {
+          "seed": 4,
+          "pool_em": 0.45297805642633227,
+          "val_em": 0.34615384615384615,
+          "test_em": 0.4
+        }
+      ],
+      "test_em_mean": 0.3657142857142857,
+      "test_em_std": 0.046947647786157114,
+      "val_em_mean": 0.4076923076923077,
+      "val_em_std": 0.058329811108088866,
+      "pool_em_mean": 0.38369905956112854,
+      "pool_em_std": 0.0684237052591936
+    },
+    "axiom_lora_text_v1": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "pool_em": 0.4482758620689655,
+          "val_em": 0.34615384615384615,
+          "test_em": 0.4
+        },
+        {
+          "seed": 1,
+          "pool_em": 0.30407523510971785,
+          "val_em": 0.46153846153846156,
+          "test_em": 0.3142857142857143
+        },
+        {
+          "seed": 2,
+          "pool_em": 0.4482758620689655,
+          "val_em": 0.34615384615384615,
+          "test_em": 0.4
+        },
+        {
+          "seed": 3,
+          "pool_em": 0.445141065830721,
+          "val_em": 0.3076923076923077,
+          "test_em": 0.42857142857142855
+        },
+        {
+          "seed": 4,
+          "pool_em": 0.3056426332288401,
+          "val_em": 0.4230769230769231,
+          "test_em": 0.3142857142857143
+        }
+      ],
+      "test_em_mean": 0.37142857142857144,
+      "test_em_std": 0.05345224838248488,
+      "val_em_mean": 0.3769230769230769,
+      "val_em_std": 0.06319875663521148,
+      "pool_em_mean": 0.390282131661442,
+      "pool_em_std": 0.07799282322648735
+    }
+  },
+  "comparisons": [
+    {
+      "a": "axiom_lora_v1",
+      "b": "tiny_multimodal_v1",
+      "metric": "test_em",
+      "mean_diff": 0.04562857142857396,
+      "ci_95_lo": 0.011428571428571455,
+      "ci_95_hi": 0.08000000000000007,
+      "significant": true,
+      "method": "paired bootstrap, 10000 resamples over 5 seeds, seed=0"
+    },
+    {
+      "a": "axiom_lora_text_v1",
+      "b": "tiny_multimodal_v1",
+      "metric": "test_em",
+      "mean_diff": 0.05104800000000188,
+      "ci_95_lo": 0.017142857142857126,
+      "ci_95_hi": 0.08571428571428574,
+      "significant": true,
+      "method": "paired bootstrap, 10000 resamples over 5 seeds, seed=0"
+    },
+    {
+      "a": "axiom_lora_text_v1",
+      "b": "axiom_lora_v1",
+      "metric": "test_em",
+      "mean_diff": 0.005419428571428755,
+      "ci_95_lo": -0.04571428571428576,
+      "ci_95_hi": 0.05142857142857149,
+      "significant": false,
+      "method": "paired bootstrap, 10000 resamples over 5 seeds, seed=0"
+    }
+  ],
+  "overall_notes": [
+    "Both pretrained-backbone approaches (vision-LoRA, text-LoRA) significantly outperform the from-scratch baseline on test EM (95% CI excludes zero).",
+    "Vision-LoRA vs text-LoRA is not statistically distinguishable at this seed count.",
+    "This reverses the v4 paper draft conclusion, which rested on a single run per model."
+  ]
+}
