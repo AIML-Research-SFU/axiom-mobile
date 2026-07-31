@@ -1,0 +1,14 @@
+{
+  "version": "v4",
+  "note": "Growth over v3: +46 QA pairs from 15 Safari synthetic-page screenshots + 1 Contacts screenshot (v0.5.0 delta). Val/test held constant at 30/40 (all growth into pool), same convention as v2->v3.",
+  "split_sizes": {
+    "pool": 727,
+    "val": 30,
+    "test": 40
+  },
+  "sha256": {
+    "pool": "a17b9dda8a11aab358eaf40b59258b10704c2a5480ee610a28c82773e91ba713",
+    "val": "d9e493428b3cff91dd0baa4cd5b933b863740004dcf718e51888dfd5f559cba0",
+    "test": "a3ef1ecfbaff18d98ce23dffa4e0cbf2f070b5636dd521cb64e063c63217cde8"
+  }
+}
