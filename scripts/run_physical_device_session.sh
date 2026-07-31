@@ -26,17 +26,21 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+XCODEPROJ="$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj"
 BUNDLE_ID="com.arieljtyson.AXIOMMobile"
 ITERATIONS=50
 MODEL_ID=""
+DEVICE_UDID_OVERRIDE=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --model) MODEL_ID="$2"; shift 2 ;;
         --bundle-id) BUNDLE_ID="$2"; shift 2 ;;
+        --udid) DEVICE_UDID_OVERRIDE="$2"; shift 2 ;;
         -h|--help)
-            echo "Usage: $0 --model <model_id> [--bundle-id <id>]"
+            echo "Usage: $0 --model <model_id> [--bundle-id <id>] [--udid <device_udid>]"
             echo "  Ready-to-profile models (real CoreML app integration): tiny_multimodal_v1, axiom_lora_v1"
+            echo "  --udid: disambiguate when multiple physical devices are known to Xcode"
             exit 0
             ;;
         *) echo "Unknown argument: $1"; exit 1 ;;
@@ -53,15 +57,38 @@ echo "  Physical-Device Profiling Session — $MODEL_ID"
 echo "================================================================"
 
 # ── 1. Verify device ─────────────────────────────────────────────────
+# `xcodebuild -showdestinations` is the source of truth here, not
+# `xctrace list devices`: it explicitly tags each destination with
+# `platform:iOS,` (real device) vs `platform:iOS Simulator,`, and flags
+# devices that can't actually build this scheme with an `error:` field
+# (e.g. an iOS version below the deployment target) -- both distinctions
+# `xctrace`'s plain device list doesn't reliably make (simulator entries
+# don't all contain the word "Simulator" in their name, and it has no
+# concept of build compatibility at all). Excludes the generic "Any iOS
+# Device" placeholder destination, which has no real UDID.
 echo -e "\n[1/7] Verifying physical device..."
-DEVICE_LINE="$(xcrun xctrace list devices 2>&1 | grep -v "Simulator" | grep -iE "iPhone|iPad" | head -1 || true)"
-if [[ -z "$DEVICE_LINE" ]]; then
-    echo "ERROR: No physical device found. Connect via USB, unlock it, and trust this Mac."
-    echo "  xcrun xctrace list devices"
-    exit 1
+if [[ -n "$DEVICE_UDID_OVERRIDE" ]]; then
+    DEVICE_UDID="$DEVICE_UDID_OVERRIDE"
+    echo "  Using --udid override: $DEVICE_UDID"
+else
+    CANDIDATES="$(xcodebuild -showdestinations -project "$XCODEPROJ" -scheme AXIOMMobile 2>&1 \
+        | grep "platform:iOS," | grep -v "dvtdevice-" | grep -v "error:")"
+    CANDIDATE_COUNT="$(echo "$CANDIDATES" | grep -c "id:" || true)"
+
+    if [[ "$CANDIDATE_COUNT" -eq 0 ]]; then
+        echo "ERROR: No compatible physical device found."
+        echo "Full destination list (look for your device and any 'error:' explaining why it's excluded):"
+        xcodebuild -showdestinations -project "$XCODEPROJ" -scheme AXIOMMobile 2>&1 | grep "platform:iOS,"
+        exit 1
+    elif [[ "$CANDIDATE_COUNT" -gt 1 ]]; then
+        echo "ERROR: Multiple compatible devices found -- re-run with --udid to pick one:"
+        echo "$CANDIDATES"
+        exit 1
+    fi
+
+    DEVICE_UDID="$(echo "$CANDIDATES" | grep -oE "id:[0-9A-Fa-f-]+" | head -1 | cut -d: -f2)"
+    echo "  Found: $(echo "$CANDIDATES" | grep -oE "name:[^,}]+" | head -1 | cut -d: -f2)"
 fi
-DEVICE_UDID="$(echo "$DEVICE_LINE" | grep -oE "\([0-9A-Fa-f-]{25,}\)" | tr -d '()')"
-echo "  Found: $DEVICE_LINE"
 echo "  UDID: $DEVICE_UDID"
 
 # ── 2. Build + install Release ───────────────────────────────────────
