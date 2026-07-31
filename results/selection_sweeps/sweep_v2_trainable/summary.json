@@ -1,0 +1,764 @@
+{
+  "config": {
+    "budgets": [
+      50,
+      150,
+      300,
+      600
+    ],
+    "model_id": "axiom_lora_v1",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "strategies_requested": [
+      "random",
+      "uncertainty",
+      "diversity",
+      "kg_guided"
+    ]
+  },
+  "created_at_utc": "2026-07-31T10:58:52.327624+00:00",
+  "dataset": {
+    "fingerprint": {
+      "note": "custom manifest directory",
+      "path": "/Users/arieltyson/axiom-local-data/manifests"
+    },
+    "pool_size": 638,
+    "test_size": 35,
+    "val_size": 26
+  },
+  "runs": [
+    {
+      "budget": 50,
+      "run_id": "random_axiom_lora_v1_b50_s0",
+      "seed": 0,
+      "strategy": "random",
+      "test_em": 0.02857142857142857,
+      "train_subset_em": 0.08,
+      "val_em": 0.0
+    },
+    {
+      "budget": 50,
+      "run_id": "random_axiom_lora_v1_b50_s1",
+      "seed": 1,
+      "strategy": "random",
+      "test_em": 0.11428571428571428,
+      "train_subset_em": 0.12,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 50,
+      "run_id": "random_axiom_lora_v1_b50_s2",
+      "seed": 2,
+      "strategy": "random",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 50,
+      "run_id": "random_axiom_lora_v1_b50_s3",
+      "seed": 3,
+      "strategy": "random",
+      "test_em": 0.2571428571428571,
+      "train_subset_em": 0.22,
+      "val_em": 0.15384615384615385
+    },
+    {
+      "budget": 50,
+      "run_id": "random_axiom_lora_v1_b50_s4",
+      "seed": 4,
+      "strategy": "random",
+      "test_em": 0.05714285714285714,
+      "train_subset_em": 0.08,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 150,
+      "run_id": "random_axiom_lora_v1_b150_s0",
+      "seed": 0,
+      "strategy": "random",
+      "test_em": 0.14285714285714285,
+      "train_subset_em": 0.14666666666666667,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 150,
+      "run_id": "random_axiom_lora_v1_b150_s1",
+      "seed": 1,
+      "strategy": "random",
+      "test_em": 0.11428571428571428,
+      "train_subset_em": 0.10666666666666667,
+      "val_em": 0.15384615384615385
+    },
+    {
+      "budget": 150,
+      "run_id": "random_axiom_lora_v1_b150_s2",
+      "seed": 2,
+      "strategy": "random",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.3333333333333333,
+      "val_em": 0.3076923076923077
+    },
+    {
+      "budget": 150,
+      "run_id": "random_axiom_lora_v1_b150_s3",
+      "seed": 3,
+      "strategy": "random",
+      "test_em": 0.11428571428571428,
+      "train_subset_em": 0.10666666666666667,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 150,
+      "run_id": "random_axiom_lora_v1_b150_s4",
+      "seed": 4,
+      "strategy": "random",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.3466666666666667,
+      "val_em": 0.2692307692307692
+    },
+    {
+      "budget": 300,
+      "run_id": "random_axiom_lora_v1_b300_s0",
+      "seed": 0,
+      "strategy": "random",
+      "test_em": 0.4,
+      "train_subset_em": 0.33666666666666667,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 300,
+      "run_id": "random_axiom_lora_v1_b300_s1",
+      "seed": 1,
+      "strategy": "random",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.31333333333333335,
+      "val_em": 0.3076923076923077
+    },
+    {
+      "budget": 300,
+      "run_id": "random_axiom_lora_v1_b300_s2",
+      "seed": 2,
+      "strategy": "random",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.33,
+      "val_em": 0.3076923076923077
+    },
+    {
+      "budget": 300,
+      "run_id": "random_axiom_lora_v1_b300_s3",
+      "seed": 3,
+      "strategy": "random",
+      "test_em": 0.4,
+      "train_subset_em": 0.33,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 300,
+      "run_id": "random_axiom_lora_v1_b300_s4",
+      "seed": 4,
+      "strategy": "random",
+      "test_em": 0.45714285714285713,
+      "train_subset_em": 0.38333333333333336,
+      "val_em": 0.38461538461538464
+    },
+    {
+      "budget": 600,
+      "run_id": "random_axiom_lora_v1_b600_s0",
+      "seed": 0,
+      "strategy": "random",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.3,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 600,
+      "run_id": "random_axiom_lora_v1_b600_s1",
+      "seed": 1,
+      "strategy": "random",
+      "test_em": 0.4,
+      "train_subset_em": 0.3616666666666667,
+      "val_em": 0.46153846153846156
+    },
+    {
+      "budget": 600,
+      "run_id": "random_axiom_lora_v1_b600_s2",
+      "seed": 2,
+      "strategy": "random",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.31666666666666665,
+      "val_em": 0.5
+    },
+    {
+      "budget": 600,
+      "run_id": "random_axiom_lora_v1_b600_s3",
+      "seed": 3,
+      "strategy": "random",
+      "test_em": 0.4,
+      "train_subset_em": 0.35833333333333334,
+      "val_em": 0.34615384615384615
+    },
+    {
+      "budget": 600,
+      "run_id": "random_axiom_lora_v1_b600_s4",
+      "seed": 4,
+      "strategy": "random",
+      "test_em": 0.2857142857142857,
+      "train_subset_em": 0.20333333333333334,
+      "val_em": 0.34615384615384615
+    },
+    {
+      "budget": 50,
+      "run_id": "uncertainty_axiom_lora_v1_b50_s0",
+      "seed": 0,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.26,
+      "val_em": 0.07692307692307693
+    },
+    {
+      "budget": 50,
+      "run_id": "uncertainty_axiom_lora_v1_b50_s1",
+      "seed": 1,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.28,
+      "val_em": 0.0
+    },
+    {
+      "budget": 50,
+      "run_id": "uncertainty_axiom_lora_v1_b50_s2",
+      "seed": 2,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.28,
+      "val_em": 0.07692307692307693
+    },
+    {
+      "budget": 50,
+      "run_id": "uncertainty_axiom_lora_v1_b50_s3",
+      "seed": 3,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.28,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 50,
+      "run_id": "uncertainty_axiom_lora_v1_b50_s4",
+      "seed": 4,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.22,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 150,
+      "run_id": "uncertainty_axiom_lora_v1_b150_s0",
+      "seed": 0,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "uncertainty_axiom_lora_v1_b150_s1",
+      "seed": 1,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "uncertainty_axiom_lora_v1_b150_s2",
+      "seed": 2,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "uncertainty_axiom_lora_v1_b150_s3",
+      "seed": 3,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.02,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "uncertainty_axiom_lora_v1_b150_s4",
+      "seed": 4,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "uncertainty_axiom_lora_v1_b300_s0",
+      "seed": 0,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.01,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "uncertainty_axiom_lora_v1_b300_s1",
+      "seed": 1,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.01,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "uncertainty_axiom_lora_v1_b300_s2",
+      "seed": 2,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.006666666666666667,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "uncertainty_axiom_lora_v1_b300_s3",
+      "seed": 3,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.03333333333333333,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "uncertainty_axiom_lora_v1_b300_s4",
+      "seed": 4,
+      "strategy": "uncertainty",
+      "test_em": 0.0,
+      "train_subset_em": 0.03666666666666667,
+      "val_em": 0.0
+    },
+    {
+      "budget": 600,
+      "run_id": "uncertainty_axiom_lora_v1_b600_s0",
+      "seed": 0,
+      "strategy": "uncertainty",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.315,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 600,
+      "run_id": "uncertainty_axiom_lora_v1_b600_s1",
+      "seed": 1,
+      "strategy": "uncertainty",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.31666666666666665,
+      "val_em": 0.46153846153846156
+    },
+    {
+      "budget": 600,
+      "run_id": "uncertainty_axiom_lora_v1_b600_s2",
+      "seed": 2,
+      "strategy": "uncertainty",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.315,
+      "val_em": 0.46153846153846156
+    },
+    {
+      "budget": 600,
+      "run_id": "uncertainty_axiom_lora_v1_b600_s3",
+      "seed": 3,
+      "strategy": "uncertainty",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.31833333333333336,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 600,
+      "run_id": "uncertainty_axiom_lora_v1_b600_s4",
+      "seed": 4,
+      "strategy": "uncertainty",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.31333333333333335,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 50,
+      "run_id": "diversity_axiom_lora_v1_b50_s0",
+      "seed": 0,
+      "strategy": "diversity",
+      "test_em": 0.11428571428571428,
+      "train_subset_em": 0.04,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 50,
+      "run_id": "diversity_axiom_lora_v1_b50_s1",
+      "seed": 1,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 50,
+      "run_id": "diversity_axiom_lora_v1_b50_s2",
+      "seed": 2,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.0
+    },
+    {
+      "budget": 50,
+      "run_id": "diversity_axiom_lora_v1_b50_s3",
+      "seed": 3,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.0
+    },
+    {
+      "budget": 50,
+      "run_id": "diversity_axiom_lora_v1_b50_s4",
+      "seed": 4,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 150,
+      "run_id": "diversity_axiom_lora_v1_b150_s0",
+      "seed": 0,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.02666666666666667,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "diversity_axiom_lora_v1_b150_s1",
+      "seed": 1,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.02,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "diversity_axiom_lora_v1_b150_s2",
+      "seed": 2,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.02,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 150,
+      "run_id": "diversity_axiom_lora_v1_b150_s3",
+      "seed": 3,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.02,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "diversity_axiom_lora_v1_b150_s4",
+      "seed": 4,
+      "strategy": "diversity",
+      "test_em": 0.02857142857142857,
+      "train_subset_em": 0.02666666666666667,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "diversity_axiom_lora_v1_b300_s0",
+      "seed": 0,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.01,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "diversity_axiom_lora_v1_b300_s1",
+      "seed": 1,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.01,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "diversity_axiom_lora_v1_b300_s2",
+      "seed": 2,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "diversity_axiom_lora_v1_b300_s3",
+      "seed": 3,
+      "strategy": "diversity",
+      "test_em": 0.0,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.0
+    },
+    {
+      "budget": 300,
+      "run_id": "diversity_axiom_lora_v1_b300_s4",
+      "seed": 4,
+      "strategy": "diversity",
+      "test_em": 0.11428571428571428,
+      "train_subset_em": 0.013333333333333334,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 600,
+      "run_id": "diversity_axiom_lora_v1_b600_s0",
+      "seed": 0,
+      "strategy": "diversity",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.26,
+      "val_em": 0.38461538461538464
+    },
+    {
+      "budget": 600,
+      "run_id": "diversity_axiom_lora_v1_b600_s1",
+      "seed": 1,
+      "strategy": "diversity",
+      "test_em": 0.2571428571428571,
+      "train_subset_em": 0.20833333333333334,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 600,
+      "run_id": "diversity_axiom_lora_v1_b600_s2",
+      "seed": 2,
+      "strategy": "diversity",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.2816666666666667,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 600,
+      "run_id": "diversity_axiom_lora_v1_b600_s3",
+      "seed": 3,
+      "strategy": "diversity",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.265,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 600,
+      "run_id": "diversity_axiom_lora_v1_b600_s4",
+      "seed": 4,
+      "strategy": "diversity",
+      "test_em": 0.4,
+      "train_subset_em": 0.4216666666666667,
+      "val_em": 0.34615384615384615
+    },
+    {
+      "budget": 50,
+      "run_id": "kg_guided_axiom_lora_v1_b50_s0",
+      "seed": 0,
+      "strategy": "kg_guided",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.0
+    },
+    {
+      "budget": 50,
+      "run_id": "kg_guided_axiom_lora_v1_b50_s1",
+      "seed": 1,
+      "strategy": "kg_guided",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.0
+    },
+    {
+      "budget": 50,
+      "run_id": "kg_guided_axiom_lora_v1_b50_s2",
+      "seed": 2,
+      "strategy": "kg_guided",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.038461538461538464
+    },
+    {
+      "budget": 50,
+      "run_id": "kg_guided_axiom_lora_v1_b50_s3",
+      "seed": 3,
+      "strategy": "kg_guided",
+      "test_em": 0.11428571428571428,
+      "train_subset_em": 0.16,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 50,
+      "run_id": "kg_guided_axiom_lora_v1_b50_s4",
+      "seed": 4,
+      "strategy": "kg_guided",
+      "test_em": 0.0,
+      "train_subset_em": 0.04,
+      "val_em": 0.0
+    },
+    {
+      "budget": 150,
+      "run_id": "kg_guided_axiom_lora_v1_b150_s0",
+      "seed": 0,
+      "strategy": "kg_guided",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.32666666666666666,
+      "val_em": 0.2692307692307692
+    },
+    {
+      "budget": 150,
+      "run_id": "kg_guided_axiom_lora_v1_b150_s1",
+      "seed": 1,
+      "strategy": "kg_guided",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.32666666666666666,
+      "val_em": 0.2692307692307692
+    },
+    {
+      "budget": 150,
+      "run_id": "kg_guided_axiom_lora_v1_b150_s2",
+      "seed": 2,
+      "strategy": "kg_guided",
+      "test_em": 0.37142857142857144,
+      "train_subset_em": 0.3333333333333333,
+      "val_em": 0.3076923076923077
+    },
+    {
+      "budget": 150,
+      "run_id": "kg_guided_axiom_lora_v1_b150_s3",
+      "seed": 3,
+      "strategy": "kg_guided",
+      "test_em": 0.17142857142857143,
+      "train_subset_em": 0.20666666666666667,
+      "val_em": 0.15384615384615385
+    },
+    {
+      "budget": 150,
+      "run_id": "kg_guided_axiom_lora_v1_b150_s4",
+      "seed": 4,
+      "strategy": "kg_guided",
+      "test_em": 0.2,
+      "train_subset_em": 0.15333333333333332,
+      "val_em": 0.11538461538461539
+    },
+    {
+      "budget": 300,
+      "run_id": "kg_guided_axiom_lora_v1_b300_s0",
+      "seed": 0,
+      "strategy": "kg_guided",
+      "test_em": 0.4,
+      "train_subset_em": 0.36666666666666664,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 300,
+      "run_id": "kg_guided_axiom_lora_v1_b300_s1",
+      "seed": 1,
+      "strategy": "kg_guided",
+      "test_em": 0.4,
+      "train_subset_em": 0.3566666666666667,
+      "val_em": 0.4230769230769231
+    },
+    {
+      "budget": 300,
+      "run_id": "kg_guided_axiom_lora_v1_b300_s2",
+      "seed": 2,
+      "strategy": "kg_guided",
+      "test_em": 0.2857142857142857,
+      "train_subset_em": 0.2733333333333333,
+      "val_em": 0.34615384615384615
+    },
+    {
+      "budget": 300,
+      "run_id": "kg_guided_axiom_lora_v1_b300_s3",
+      "seed": 3,
+      "strategy": "kg_guided",
+      "test_em": 0.42857142857142855,
+      "train_subset_em": 0.4166666666666667,
+      "val_em": 0.3076923076923077
+    },
+    {
+      "budget": 300,
+      "run_id": "kg_guided_axiom_lora_v1_b300_s4",
+      "seed": 4,
+      "strategy": "kg_guided",
+      "test_em": 0.42857142857142855,
+      "train_subset_em": 0.3333333333333333,
+      "val_em": 0.3076923076923077
+    },
+    {
+      "budget": 600,
+      "run_id": "kg_guided_axiom_lora_v1_b600_s0",
+      "seed": 0,
+      "strategy": "kg_guided",
+      "test_em": 0.42857142857142855,
+      "train_subset_em": 0.365,
+      "val_em": 0.38461538461538464
+    },
+    {
+      "budget": 600,
+      "run_id": "kg_guided_axiom_lora_v1_b600_s1",
+      "seed": 1,
+      "strategy": "kg_guided",
+      "test_em": 0.4,
+      "train_subset_em": 0.37666666666666665,
+      "val_em": 0.46153846153846156
+    },
+    {
+      "budget": 600,
+      "run_id": "kg_guided_axiom_lora_v1_b600_s2",
+      "seed": 2,
+      "strategy": "kg_guided",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.3,
+      "val_em": 0.46153846153846156
+    },
+    {
+      "budget": 600,
+      "run_id": "kg_guided_axiom_lora_v1_b600_s3",
+      "seed": 3,
+      "strategy": "kg_guided",
+      "test_em": 0.4,
+      "train_subset_em": 0.44166666666666665,
+      "val_em": 0.38461538461538464
+    },
+    {
+      "budget": 600,
+      "run_id": "kg_guided_axiom_lora_v1_b600_s4",
+      "seed": 4,
+      "strategy": "kg_guided",
+      "test_em": 0.3142857142857143,
+      "train_subset_em": 0.2966666666666667,
+      "val_em": 0.4230769230769231
+    }
+  ],
+  "strategies_executed": [
+    "random",
+    "uncertainty",
+    "diversity",
+    "kg_guided"
+  ],
+  "strategies_skipped": [],
+  "sweep_id": "20260731T100615Z"
+}
