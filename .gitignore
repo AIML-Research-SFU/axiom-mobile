@@ -52,3 +52,8 @@ data/images/
 data/manifests/generated_candidates.jsonl
 data/manifests/generated_candidates_review.jsonl
 data/manifests/rename_map.json
+
+# Synthetic web pages for Safari scenarios: regenerated deterministically
+# by generate_synthetic_web_pages.py from generate_exact_scenarios.py's
+# WEB_VARIANTS, not hand-authored -- no need to track the rendered output.
+scripts/synthetic_web_pages/

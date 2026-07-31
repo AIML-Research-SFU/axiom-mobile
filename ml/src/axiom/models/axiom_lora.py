@@ -224,9 +224,13 @@ class AxiomLoraBaseline(TinyMultimodalBaseline):
         example_image = torch.rand(1, 3, IMAGE_SIZE, IMAGE_SIZE)
         example_text = torch.randint(0, VOCAB_SIZE, (1, MAX_CHAR_LEN))
 
+        # Trace on CPU regardless of the training device (see
+        # tiny_multimodal.py's export_coreml for the same pattern/rationale).
+        self._net = self._net.to("cpu")
         self._net.eval()
         with torch.no_grad():
             traced = torch.jit.trace(self._net, (example_image, example_text))
+        self._net = self._net.to(self._device)
 
         mlmodel = ct.convert(
             traced,

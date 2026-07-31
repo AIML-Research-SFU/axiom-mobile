@@ -50,6 +50,10 @@ def instantiate_model(
     if spec.backend == "heuristic" and spec.model_id == "question_lookup_v0":
         return QuestionLookupBaseline(spec)
 
+    if spec.backend == "pytorch" and spec.model_id.startswith("axiom_lora_text_v"):
+        from .axiom_lora_text import AxiomLoraTextBaseline
+        return AxiomLoraTextBaseline(spec, **kwargs)
+
     if spec.backend == "pytorch" and spec.model_id.startswith("axiom_lora_v"):
         from .axiom_lora import AxiomLoraBaseline
         return AxiomLoraBaseline(spec, **kwargs)

@@ -15,7 +15,23 @@ final class TestbedViewModel {
     /// picker list (e.g. to put a newer model first for visibility) would
     /// have silently changed the real default too. Now resolves by
     /// `defaultModelID` explicitly, matching its documented intent.
-    var selectedModel: ModelInfo = ModelCatalog.all.first(where: { $0.id == ModelCatalog.defaultModelID }) ?? ModelCatalog.all[0]
+    var selectedModel: ModelInfo = TestbedViewModel.resolveInitialModel()
+
+    /// Supports `--model <model_id>` as a launch argument so a physical-device
+    /// profiling session (docs/INSTRUMENTS_RUNBOOK.md) can be scripted
+    /// end-to-end via `devicectl device process launch -- --auto-benchmark
+    /// --model axiom_lora_v1` instead of requiring someone to tap the model
+    /// picker by hand before each `--auto-benchmark` run.
+    private static func resolveInitialModel() -> ModelInfo {
+        let args = ProcessInfo.processInfo.arguments
+        if let flagIndex = args.firstIndex(of: "--model"), flagIndex + 1 < args.count {
+            let requestedID = args[flagIndex + 1]
+            if let match = ModelCatalog.all.first(where: { $0.id == requestedID }) {
+                return match
+            }
+        }
+        return ModelCatalog.all.first(where: { $0.id == ModelCatalog.defaultModelID }) ?? ModelCatalog.all[0]
+    }
     var result: InferenceResult?
     var isRunning = false
 
