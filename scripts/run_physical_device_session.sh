@@ -92,11 +92,20 @@ fi
 echo "  UDID: $DEVICE_UDID"
 
 # ── 2. Build + install Release ───────────────────────────────────────
+# -allowProvisioningUpdates: without this, a CLI build embeds whatever
+# provisioning profile is already on disk even if it's expired (free/
+# personal Apple ID profiles expire every ~7 days) -- Xcode's GUI Run
+# button silently renews it first, but `xcodebuild` alone doesn't. This
+# flag makes xcodebuild do the same renewal-via-developer-portal step
+# CLI-only, which is what a real first run against this hardware needed
+# (install failed with MIInstallerErrorDomain error 13, "provisioning
+# profile has expired," without it).
 echo -e "\n[2/7] Building Release and installing on device..."
 xcodebuild -project "$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj" \
     -scheme AXIOMMobile -sdk iphoneos -configuration Release \
     -destination "platform=iOS,id=$DEVICE_UDID" \
-    build 2>&1 | tail -10
+    -allowProvisioningUpdates \
+    build 2>&1 | tail -15
 xcrun devicectl device install app --device "$DEVICE_UDID" \
     "$REPO_ROOT/app/AXIOMMobile/build/Release-iphoneos/AXIOMMobile.app" 2>&1 | tail -5
 
