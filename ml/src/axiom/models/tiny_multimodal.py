@@ -44,6 +44,20 @@ IMAGE_FEATURE_DIM = 64
 FUSION_DIM = IMAGE_FEATURE_DIM + TEXT_FEATURE_DIM  # 128
 
 
+def _default_device() -> torch.device:
+    """Prefer Apple Silicon GPU (MPS) when available, else CPU.
+
+    Training previously ran unconditionally on CPU with no device
+    management anywhere in this module, which is what made a full
+    selection-strategy sweep thermally unworkable on a laptop. MPS runs
+    the same conv-net workload at a much lower sustained power/thermal
+    envelope than pegging all CPU cores in an eager-mode SGD loop.
+    """
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
+
+
 class ImageEncoder(nn.Module):
     """3-layer CNN reducing 128x128x3 -> 64-dim vector."""
 
@@ -129,6 +143,7 @@ class TinyMultimodalBaseline(ReasoningModel):
         self._idx_to_label: dict[int, str] = {}
         self._is_trained = False
         self._image_root = image_root
+        self._device = _default_device()
 
     def _build_net(self, num_classes: int) -> nn.Module:
         """Construct the network. Overridden by subclasses to swap architecture
@@ -215,10 +230,13 @@ class TinyMultimodalBaseline(ReasoningModel):
 
         # Initialize network (subclasses override _build_net to swap architecture
         # while reusing this training loop, vocab building, and checkpointing)
-        self._net = self._build_net(num_classes)
+        self._net = self._build_net(num_classes).to(self._device)
 
         # Prepare training data
         images, char_ids, labels = self._prepare_batch(train_rows)
+        images = images.to(self._device)
+        char_ids = char_ids.to(self._device)
+        labels = labels.to(self._device)
 
         # Simple training loop — SGD, cross-entropy, configurable epochs
         # Filter to trainable params only: no-op for TinyMultimodalNet (everything
@@ -228,13 +246,17 @@ class TinyMultimodalBaseline(ReasoningModel):
 
         if class_weighted:
             # Inverse-frequency weights capped at 10× to avoid extreme gradients
-            # from singleton classes.
-            class_counts = torch.zeros(num_classes)
-            for lbl in labels:
-                class_counts[lbl] += 1
+            # from singleton classes. Built and immediately moved to the
+            # training device -- nn.CrossEntropyLoss(weight=...) requires the
+            # weight tensor to live on the same device as its inputs, and
+            # bincount(labels) would otherwise stay wherever `labels` already
+            # is (MPS), which .clamp()/.min() etc. all still work on, but
+            # keeping this explicit and device-agnostic is safer than relying
+            # on that.
+            class_counts = torch.bincount(labels.cpu(), minlength=num_classes).float()
             raw_weights = 1.0 / class_counts.clamp(min=1)
             raw_weights = raw_weights / raw_weights.min()  # normalize so min weight = 1
-            raw_weights = raw_weights.clamp(max=10.0)
+            raw_weights = raw_weights.clamp(max=10.0).to(self._device)
             criterion = nn.CrossEntropyLoss(weight=raw_weights)
         else:
             criterion = nn.CrossEntropyLoss()
@@ -246,9 +268,11 @@ class TinyMultimodalBaseline(ReasoningModel):
         epoch_losses: list[float] = []
 
         for epoch in range(num_epochs):
-            # Deterministic shuffle
+            # Deterministic shuffle. randperm's generator must be CPU (MPS
+            # doesn't support a Generator argument), so shuffle on CPU and
+            # move the resulting index tensor to the training device.
             gen = torch.Generator().manual_seed(seed + epoch)
-            perm = torch.randperm(n, generator=gen)
+            perm = torch.randperm(n, generator=gen).to(self._device)
 
             epoch_loss = 0.0
             num_batches = 0
@@ -304,8 +328,10 @@ class TinyMultimodalBaseline(ReasoningModel):
             raise RuntimeError("TinyMultimodalBaseline.predict_one() called before train().")
 
         loader = self._ensure_image_loader()
-        img = loader.load_and_preprocess(row["image_filename"]).unsqueeze(0)
-        char_id = torch.tensor([encode_question(row["question"])], dtype=torch.long)
+        img = loader.load_and_preprocess(row["image_filename"]).unsqueeze(0).to(self._device)
+        char_id = torch.tensor(
+            [encode_question(row["question"])], dtype=torch.long, device=self._device
+        )
 
         with torch.no_grad():
             logits = self._net(img, char_id)
@@ -321,9 +347,13 @@ class TinyMultimodalBaseline(ReasoningModel):
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
 
-        # Save model weights
+        # Save model weights. Always as CPU tensors: an MPS-trained
+        # checkpoint must still load correctly on a machine without MPS
+        # (or with a different Apple Silicon setup), and torch.load with
+        # weights_only=True doesn't remap devices at load time.
         weights_path = output_path / "model.pt"
-        torch.save(self._net.state_dict(), weights_path)
+        cpu_state = {k: v.detach().cpu() for k, v in self._net.state_dict().items()}
+        torch.save(cpu_state, weights_path)
 
         # Save label vocabulary
         vocab_path = output_path / "label_vocab.json"
@@ -374,10 +404,14 @@ class TinyMultimodalBaseline(ReasoningModel):
         example_image = torch.randn(1, 3, IMAGE_SIZE, IMAGE_SIZE)
         example_text = torch.randint(0, VOCAB_SIZE, (1, MAX_CHAR_LEN))
 
-        # Trace the model
+        # Trace on CPU regardless of the training device: torch.jit.trace ->
+        # coremltools.convert is the well-tested path on CPU tensors; MPS
+        # tracing isn't part of this project's verified export contract.
+        self._net = self._net.to("cpu")
         self._net.eval()
         with torch.no_grad():
             traced = torch.jit.trace(self._net, (example_image, example_text))
+        self._net = self._net.to(self._device)
 
         # Convert to Core ML
         mlmodel = ct.convert(
@@ -450,6 +484,7 @@ class TinyMultimodalBaseline(ReasoningModel):
         model._net.load_state_dict(
             torch.load(checkpoint_path / "model.pt", weights_only=True)
         )
+        model._net = model._net.to(model._device)
         model._net.eval()
         model._is_trained = True
 
