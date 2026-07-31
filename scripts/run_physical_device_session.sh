@@ -134,26 +134,19 @@ run_traced_benchmark() {
     local output="$2"
     local time_limit="$3"
 
-    echo "  Launching --auto-benchmark --model $MODEL_ID ..."
-    xcrun devicectl device process launch --device "$DEVICE_UDID" \
-        "$BUNDLE_ID" -- --auto-benchmark --model "$MODEL_ID" \
-        > "$TRACE_DIR/launch_${template// /_}.log" 2>&1 &
-    LAUNCH_PID=$!
-    sleep 2  # let the process actually start before attaching
-
-    # Find the running process id on-device for xctrace --attach
-    PID="$(xcrun devicectl device info processes --device "$DEVICE_UDID" 2>/dev/null \
-        | grep "$BUNDLE_ID" | awk '{print $1}' | head -1 || true)"
-    if [[ -z "$PID" ]]; then
-        echo "  WARNING: could not resolve on-device PID for $BUNDLE_ID -- attach manually in Instruments if this fails."
-    fi
-
-    echo "  Recording $template for ${time_limit}..."
+    # First real hardware run showed the devicectl-launch-then-PID-lookup
+    # dance (previous version of this function) is a fragile two-step
+    # race -- devicectl's own docs say its text-table output isn't a
+    # supported interface for scripts at all ("JSON output ... is the
+    # ONLY supported interface"), which is what made the naive grep/awk
+    # PID lookup unreliable. xctrace can launch the app itself and
+    # attach atomically via --launch, avoiding PID lookup entirely --
+    # the architecturally correct way to do this, not a workaround.
+    echo "  Recording $template for ${time_limit} (xctrace launches the app directly)..."
     xcrun xctrace record --template "$template" --device "$DEVICE_UDID" \
-        ${PID:+--attach "$PID"} --output "$TRACE_DIR/$output" --time-limit "$time_limit" \
+        --output "$TRACE_DIR/$output" --time-limit "$time_limit" \
+        --launch -- "$BUNDLE_ID" --auto-benchmark --model "$MODEL_ID" \
         || echo "  WARNING: xctrace record failed for $template -- capture manually via Instruments GUI (Product > Profile) as a fallback."
-
-    wait "$LAUNCH_PID" 2>/dev/null || true
 }
 
 # ── 3. Time Profiler ─────────────────────────────────────────────────
