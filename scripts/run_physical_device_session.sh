@@ -145,6 +145,18 @@ run_traced_benchmark() {
     # PID lookup unreliable. xctrace can launch the app itself and
     # attach atomically via --launch, avoiding PID lookup entirely --
     # the architecturally correct way to do this, not a workaround.
+    #
+    # xctrace pre-creates the .trace output bundle before validating the
+    # template name, so a failed attempt (e.g. a typo'd template) leaves
+    # a real, empty .trace directory behind -- confirmed on the first
+    # hardware run: a bad template name left a 0-byte trace bundle that
+    # then made the corrected re-run fail with "Trace file already
+    # exists," a second, avoidable manual cleanup step. Clear any empty
+    # leftover before recording so a fixed re-run just works.
+    if [[ -d "$TRACE_DIR/$output" ]] && [[ -z "$(ls -A "$TRACE_DIR/$output" 2>/dev/null)" ]]; then
+        rmdir "$TRACE_DIR/$output"
+    fi
+
     echo "  Recording $template for ${time_limit} (xctrace launches the app directly)..."
     xcrun xctrace record --template "$template" --device "$DEVICE_UDID" \
         --output "$TRACE_DIR/$output" --time-limit "$time_limit" \
