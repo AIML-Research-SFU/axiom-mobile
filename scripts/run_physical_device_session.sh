@@ -106,8 +106,23 @@ xcodebuild -project "$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj" \
     -destination "platform=iOS,id=$DEVICE_UDID" \
     -allowProvisioningUpdates \
     build 2>&1 | tail -15
+
+# Do NOT assume the build output lives under the repo -- this project
+# uses Xcode's default DerivedData location, not a custom build dir. A
+# hardcoded "$REPO_ROOT/app/AXIOMMobile/build/..." guess silently found
+# a real but *stale* (April) app bundle with a long-expired embedded
+# profile sitting at that exact path on the first real run against this
+# hardware, and devicectl happily installed that instead of the fresh
+# build -- same error, wrong cause, wasted a retry. Ask xcodebuild
+# itself where the real product is.
+BUILT_PRODUCTS_DIR="$(xcodebuild -showBuildSettings \
+    -project "$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj" \
+    -scheme AXIOMMobile -sdk iphoneos -configuration Release \
+    2>&1 | grep -m1 "BUILT_PRODUCTS_DIR" | awk '{print $NF}')"
+APP_PATH="$BUILT_PRODUCTS_DIR/AXIOMMobile.app"
+echo "  Installing fresh build from: $APP_PATH"
 xcrun devicectl device install app --device "$DEVICE_UDID" \
-    "$REPO_ROOT/app/AXIOMMobile/build/Release-iphoneos/AXIOMMobile.app" 2>&1 | tail -5
+    "$APP_PATH" 2>&1 | tail -5
 
 SESSION_STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 SESSION_NAME="atx-${MODEL_ID}-${SESSION_STAMP}"
