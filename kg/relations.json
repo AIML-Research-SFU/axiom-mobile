@@ -1,11 +1,11 @@
 {
   "_description": "Relations for kg/entities.json. Regenerate with ml/scripts/build_kg.py -- do not hand-edit.",
-  "_relation_count": 1009,
+  "_relation_count": 1087,
   "_predicate_counts": {
-    "grounds_example": 751,
-    "has_attribute": 39,
-    "has_screen": 19,
-    "has_value": 200
+    "grounds_example": 797,
+    "has_attribute": 41,
+    "has_screen": 21,
+    "has_value": 228
   },
   "relations": [
     {
@@ -32,6 +32,11 @@
       "subject": "app:clock",
       "predicate": "has_screen",
       "object": "screen:clock:world_clock"
+    },
+    {
+      "subject": "app:contacts_sample_fixture",
+      "predicate": "has_screen",
+      "object": "screen:contacts_sample_fixture:default"
     },
     {
       "subject": "app:control_center",
@@ -62,6 +67,11 @@
       "subject": "app:maps",
       "predicate": "has_screen",
       "object": "screen:maps:default_view"
+    },
+    {
+      "subject": "app:safari_synthetic_page",
+      "predicate": "has_screen",
+      "object": "screen:safari_synthetic_page:default"
     },
     {
       "subject": "app:settings",
@@ -601,7 +611,112 @@
     {
       "subject": "attr:other",
       "predicate": "has_value",
+      "object": "answer:$143"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$18"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$199"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$23"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$267"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$27"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$312"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$34"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$340"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$410"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$5"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$55"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$61"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$78"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:$92"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
       "object": "answer:01:07.09"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:1"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:11"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:12"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:15"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:2"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:3"
     },
     {
       "subject": "attr:other",
@@ -611,7 +726,42 @@
     {
       "subject": "attr:other",
       "predicate": "has_value",
+      "object": "answer:6"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:7"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:9"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:delivered"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
       "object": "answer:off"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:pending"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:processing"
+    },
+    {
+      "subject": "attr:other",
+      "predicate": "has_value",
+      "object": "answer:shipped"
     },
     {
       "subject": "attr:other",
@@ -1182,6 +1332,16 @@
       "subject": "screen:clock:world_clock",
       "predicate": "has_attribute",
       "object": "attr:time"
+    },
+    {
+      "subject": "screen:contacts_sample_fixture:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_798"
+    },
+    {
+      "subject": "screen:contacts_sample_fixture:default",
+      "predicate": "has_attribute",
+      "object": "attr:other"
     },
     {
       "subject": "screen:control_center:airdrop",
@@ -3117,6 +3277,236 @@
       "subject": "screen:maps:default_view",
       "predicate": "has_attribute",
       "object": "attr:time"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_753"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_754"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_755"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_756"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_757"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_758"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_759"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_760"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_761"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_762"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_763"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_764"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_765"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_766"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_767"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_768"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_769"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_770"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_771"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_772"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_773"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_774"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_775"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_776"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_777"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_778"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_779"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_780"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_781"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_782"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_783"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_784"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_785"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_786"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_787"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_788"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_789"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_790"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_791"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_792"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_793"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_794"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_795"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_796"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "grounds_example",
+      "object": "example:ex_797"
+    },
+    {
+      "subject": "screen:safari_synthetic_page:default",
+      "predicate": "has_attribute",
+      "object": "attr:other"
     },
     {
       "subject": "screen:settings:airplane_mode",

@@ -1,14 +1,89 @@
 {
   "_description": "Compact KG extracted programmatically from dataset v3's notes/question/answer fields. Regenerate with ml/scripts/build_kg.py -- do not hand-edit.",
   "_source_dataset": "data/manifests (pool+val+test)",
-  "_entity_count": 235,
+  "_entity_count": 264,
   "_type_counts": {
-    "AnswerValue": 187,
-    "App": 9,
+    "AnswerValue": 212,
+    "App": 11,
     "Attribute": 20,
-    "Screen": 19
+    "Screen": 21
   },
   "entities": [
+    {
+      "id": "answer:$143",
+      "type": "AnswerValue",
+      "label": "$143"
+    },
+    {
+      "id": "answer:$18",
+      "type": "AnswerValue",
+      "label": "$18"
+    },
+    {
+      "id": "answer:$199",
+      "type": "AnswerValue",
+      "label": "$199"
+    },
+    {
+      "id": "answer:$23",
+      "type": "AnswerValue",
+      "label": "$23"
+    },
+    {
+      "id": "answer:$267",
+      "type": "AnswerValue",
+      "label": "$267"
+    },
+    {
+      "id": "answer:$27",
+      "type": "AnswerValue",
+      "label": "$27"
+    },
+    {
+      "id": "answer:$312",
+      "type": "AnswerValue",
+      "label": "$312"
+    },
+    {
+      "id": "answer:$34",
+      "type": "AnswerValue",
+      "label": "$34"
+    },
+    {
+      "id": "answer:$340",
+      "type": "AnswerValue",
+      "label": "$340"
+    },
+    {
+      "id": "answer:$410",
+      "type": "AnswerValue",
+      "label": "$410"
+    },
+    {
+      "id": "answer:$5",
+      "type": "AnswerValue",
+      "label": "$5"
+    },
+    {
+      "id": "answer:$55",
+      "type": "AnswerValue",
+      "label": "$55"
+    },
+    {
+      "id": "answer:$61",
+      "type": "AnswerValue",
+      "label": "$61"
+    },
+    {
+      "id": "answer:$78",
+      "type": "AnswerValue",
+      "label": "$78"
+    },
+    {
+      "id": "answer:$92",
+      "type": "AnswerValue",
+      "label": "$92"
+    },
     {
       "id": "answer:01:07.09",
       "type": "AnswerValue",
@@ -65,6 +140,11 @@
       "label": "10:55"
     },
     {
+      "id": "answer:11",
+      "type": "AnswerValue",
+      "label": "11"
+    },
+    {
       "id": "answer:11%",
       "type": "AnswerValue",
       "label": "11%"
@@ -110,6 +190,11 @@
       "label": "11:55"
     },
     {
+      "id": "answer:12",
+      "type": "AnswerValue",
+      "label": "12"
+    },
+    {
       "id": "answer:12%",
       "type": "AnswerValue",
       "label": "12%"
@@ -148,6 +233,11 @@
       "id": "answer:13%",
       "type": "AnswerValue",
       "label": "13%"
+    },
+    {
+      "id": "answer:15",
+      "type": "AnswerValue",
+      "label": "15"
     },
     {
       "id": "answer:15%",
@@ -515,6 +605,11 @@
       "label": "5\u00b0"
     },
     {
+      "id": "answer:6",
+      "type": "AnswerValue",
+      "label": "6"
+    },
+    {
       "id": "answer:6%",
       "type": "AnswerValue",
       "label": "6%"
@@ -593,6 +688,11 @@
       "id": "answer:6:55",
       "type": "AnswerValue",
       "label": "6:55"
+    },
+    {
+      "id": "answer:7",
+      "type": "AnswerValue",
+      "label": "7"
     },
     {
       "id": "answer:7%",
@@ -760,6 +860,11 @@
       "label": "8:45"
     },
     {
+      "id": "answer:9",
+      "type": "AnswerValue",
+      "label": "9"
+    },
+    {
       "id": "answer:9%",
       "type": "AnswerValue",
       "label": "9%"
@@ -865,6 +970,11 @@
       "label": "Basic"
     },
     {
+      "id": "answer:delivered",
+      "type": "AnswerValue",
+      "label": "Delivered"
+    },
+    {
       "id": "answer:eduroam",
       "type": "AnswerValue",
       "label": "eduroam"
@@ -900,6 +1010,16 @@
       "label": "Paris"
     },
     {
+      "id": "answer:pending",
+      "type": "AnswerValue",
+      "label": "Pending"
+    },
+    {
+      "id": "answer:processing",
+      "type": "AnswerValue",
+      "label": "Processing"
+    },
+    {
       "id": "answer:rain",
       "type": "AnswerValue",
       "label": "Rain"
@@ -913,6 +1033,11 @@
       "id": "answer:scientific",
       "type": "AnswerValue",
       "label": "Scientific"
+    },
+    {
+      "id": "answer:shipped",
+      "type": "AnswerValue",
+      "label": "Shipped"
     },
     {
       "id": "answer:sun_mar_15",
@@ -960,6 +1085,11 @@
       "label": "Clock"
     },
     {
+      "id": "app:contacts_sample_fixture",
+      "type": "App",
+      "label": "Contacts sample fixture"
+    },
+    {
       "id": "app:control_center",
       "type": "App",
       "label": "Control Center"
@@ -973,6 +1103,11 @@
       "id": "app:maps",
       "type": "App",
       "label": "Maps"
+    },
+    {
+      "id": "app:safari_synthetic_page",
+      "type": "App",
+      "label": "Safari synthetic page"
     },
     {
       "id": "app:settings",
@@ -1115,6 +1250,11 @@
       "label": "Clock / World Clock"
     },
     {
+      "id": "screen:contacts_sample_fixture:default",
+      "type": "Screen",
+      "label": "Contacts sample fixture / default"
+    },
+    {
       "id": "screen:control_center:airdrop",
       "type": "Screen",
       "label": "Control Center / AirDrop"
@@ -1143,6 +1283,11 @@
       "id": "screen:maps:default_view",
       "type": "Screen",
       "label": "Maps / default view"
+    },
+    {
+      "id": "screen:safari_synthetic_page:default",
+      "type": "Screen",
+      "label": "Safari synthetic page / default"
     },
     {
       "id": "screen:settings:airplane_mode",
