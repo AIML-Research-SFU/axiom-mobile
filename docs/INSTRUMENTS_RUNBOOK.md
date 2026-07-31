@@ -125,7 +125,7 @@ Run these Instruments templates **in separate traces** (combining them adds over
 |----------|-----------------|-------------|
 | **Time Profiler** | CPU time per function, thread utilization | Every session — primary latency analysis |
 | **Allocations** | Memory allocations, peak heap size, leaks | Every session — validates < 500MB constraint |
-| **Energy Log** | CPU/GPU/networking energy impact | Physical device only — validates < 5% battery/hr |
+| **Power Profiler** (named "Energy Log" in older Xcode; confirmed via `xcrun xctrace list templates` — no template literally named "Energy Log" exists in Xcode 26.6) | CPU/GPU/networking energy impact | Physical device only — validates < 5% battery/hr |
 | **System Trace** | Thread scheduling, IPC, syscalls | Only when investigating unexpected latency spikes |
 
 ### Step-by-step: Time Profiler session

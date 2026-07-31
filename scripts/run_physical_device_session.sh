@@ -3,7 +3,10 @@
 # AXIOM-Mobile — Physical-Device Profiling Session Driver
 #
 # Consolidates docs/INSTRUMENTS_RUNBOOK.md's Time Profiler / Allocations /
-# Energy Log workflow into one script, run per model. Energy and memory
+# Power Profiler (this Xcode version's name for what the runbook and
+# older Xcode versions call "Energy Log" -- confirmed via
+# `xcrun xctrace list templates`, no template literally named "Energy
+# Log" exists here) workflow into one script, run per model. Energy and memory
 # have never been measured for any model in any semester (see
 # paper/PAPER_DRAFT_v4.md Section 7.3) -- this is the one step in the
 # whole correction plan that genuinely requires a physical device in
@@ -157,9 +160,9 @@ run_traced_benchmark "Time Profiler" "time_profiler.trace" "45s"
 echo -e "\n[4/7] Allocations trace..."
 run_traced_benchmark "Allocations" "allocations.trace" "45s"
 
-# ── 5. Energy Log (physical device only) ─────────────────────────────
-echo -e "\n[5/7] Energy Log trace (physical device only -- the one number that has never been measured)..."
-run_traced_benchmark "Energy Log" "energy_log.trace" "45s"
+# ── 5. Power Profiler / "Energy Log" (physical device only) ──────────
+echo -e "\n[5/7] Power Profiler trace (physical device only -- the one number that has never been measured)..."
+run_traced_benchmark "Power Profiler" "energy_log.trace" "45s"
 
 # ── 6. Pull the app's CSV/meta export ────────────────────────────────
 echo -e "\n[6/7] Pulling exported CSV + metadata from device..."
