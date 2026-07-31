@@ -168,7 +168,7 @@ Quality gap narrower than v4 showed, but still the binding failure.
 - v4's three headline conclusions were built on incomplete investigation, not false claims -- each was disclosed plainly, which is exactly what made re-checking them possible
 - Disclosing a limitation is not the same as closing it. This project's honesty norm had started substituting for remediation.
 - The architecture comparison still excludes the 52 manual examples and hasn't been run on the literal committed split
-- KG v1 hasn't been rebuilt against the 46 new v4 examples yet
+- KG v1 has been rebuilt against v4, but the sweep (this deck) ran against the pre-rebuild KG -- not yet re-swept
 
 ---
 
@@ -186,7 +186,7 @@ Quality gap narrower than v4 showed, but still the binding failure.
 ## Next Steps
 
 - Run the physical-device Instruments session -- the one remaining non-automatable gap
-- Rebuild KG v1 against dataset v4's new examples
+- Re-run the KG-guided sweep against the now-rebuilt v4 KG (264 entities, up from 235) -- built, not yet re-swept
 - Re-run the architecture comparison on the full committed split, manual examples included
 - More seeds on the trainable-model sweep if the budget allows
 - Investigate *why* pretrained backbones help less than hoped -- unfreeze more of the backbone, try a higher LoRA rank, or a UI/document-pretrained backbone instead of ImageNet

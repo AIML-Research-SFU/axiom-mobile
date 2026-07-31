@@ -1,30 +1,33 @@
 # AXIOM-Mobile Knowledge Graph (KG v1)
 
-Last updated: 2026-07-29 (Phase 9)
+Last updated: 2026-07-31 (rebuilt against dataset v4)
 
 ## Status
 
-**Populated.** Was blocked since Phase 1 — see the "before" state this
-replaces at the bottom of this file. Built programmatically from the
-dataset's own `notes`/`question`/`answer` fields, the same
-zero-manual-labeling principle the auto-exact scenario pipeline already
-uses for screenshots. No separate entity curation effort was done or is
-needed; the KG is a derived artifact, regenerated from the dataset, not
-hand-maintained.
+**Populated, rebuilt against dataset v4.** Was blocked since Phase 1 — see
+the "before" state this replaces at the bottom of this file. Built
+programmatically from the dataset's own `notes`/`question`/`answer`
+fields, the same zero-manual-labeling principle the auto-exact scenario
+pipeline already uses for screenshots. No separate entity curation effort
+was done or is needed; the KG is a derived artifact, regenerated from the
+dataset, not hand-maintained. Rebuilding it is a single command
+(`python3 ml/scripts/build_kg.py`) with no manual step, so it's re-run
+after every dataset version rather than left stale — done here for the
+v0.5.0 Safari/Contacts additions (Section 4.1 of `paper/PAPER_DRAFT_v5.md`).
 
 ## What's in it
 
 | File | Contents |
 |---|---|
-| `kg/entities.json` | 235 entities: 9 App, 19 Screen, 20 Attribute, 187 AnswerValue |
-| `kg/relations.json` | 1,009 relations across 4 predicate types |
+| `kg/entities.json` | 264 entities: 11 App, 21 Screen, 20 Attribute, 212 AnswerValue |
+| `kg/relations.json` | 1,087 relations across 4 predicate types |
 
 **Honesty note on scale:** the original proposal guessed "~1000 entities"
-before anyone had seen the real data. The actual dataset (751 examples, 9
-distinct apps/screens on the iOS Simulator) produces 235 entities. That's
-the real number, not a padded one — see `docs/SPEC.md`'s original
-estimate for context, and treat it as superseded by what the data
-actually contains.
+before anyone had seen the real data. Dataset v3 (751 examples, 9 apps)
+produced 235 entities; dataset v4 (797 examples, 11 apps -- Safari and
+Contacts added) produces 264. Both are the real numbers, not padded ones
+— see `docs/SPEC.md`'s original estimate for context, and treat it as
+superseded by what the data actually contains.
 
 ### Entity types
 

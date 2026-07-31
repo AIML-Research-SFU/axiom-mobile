@@ -3,7 +3,10 @@
 # AXIOM-Mobile — Physical-Device Profiling Session Driver
 #
 # Consolidates docs/INSTRUMENTS_RUNBOOK.md's Time Profiler / Allocations /
-# Energy Log workflow into one script, run per model. Energy and memory
+# Power Profiler (this Xcode version's name for what the runbook and
+# older Xcode versions call "Energy Log" -- confirmed via
+# `xcrun xctrace list templates`, no template literally named "Energy
+# Log" exists here) workflow into one script, run per model. Energy and memory
 # have never been measured for any model in any semester (see
 # paper/PAPER_DRAFT_v4.md Section 7.3) -- this is the one step in the
 # whole correction plan that genuinely requires a physical device in
@@ -26,17 +29,21 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+XCODEPROJ="$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj"
 BUNDLE_ID="com.arieljtyson.AXIOMMobile"
 ITERATIONS=50
 MODEL_ID=""
+DEVICE_UDID_OVERRIDE=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --model) MODEL_ID="$2"; shift 2 ;;
         --bundle-id) BUNDLE_ID="$2"; shift 2 ;;
+        --udid) DEVICE_UDID_OVERRIDE="$2"; shift 2 ;;
         -h|--help)
-            echo "Usage: $0 --model <model_id> [--bundle-id <id>]"
+            echo "Usage: $0 --model <model_id> [--bundle-id <id>] [--udid <device_udid>]"
             echo "  Ready-to-profile models (real CoreML app integration): tiny_multimodal_v1, axiom_lora_v1"
+            echo "  --udid: disambiguate when multiple physical devices are known to Xcode"
             exit 0
             ;;
         *) echo "Unknown argument: $1"; exit 1 ;;
@@ -53,25 +60,72 @@ echo "  Physical-Device Profiling Session — $MODEL_ID"
 echo "================================================================"
 
 # ── 1. Verify device ─────────────────────────────────────────────────
+# `xcodebuild -showdestinations` is the source of truth here, not
+# `xctrace list devices`: it explicitly tags each destination with
+# `platform:iOS,` (real device) vs `platform:iOS Simulator,`, and flags
+# devices that can't actually build this scheme with an `error:` field
+# (e.g. an iOS version below the deployment target) -- both distinctions
+# `xctrace`'s plain device list doesn't reliably make (simulator entries
+# don't all contain the word "Simulator" in their name, and it has no
+# concept of build compatibility at all). Excludes the generic "Any iOS
+# Device" placeholder destination, which has no real UDID.
 echo -e "\n[1/7] Verifying physical device..."
-DEVICE_LINE="$(xcrun xctrace list devices 2>&1 | grep -v "Simulator" | grep -iE "iPhone|iPad" | head -1 || true)"
-if [[ -z "$DEVICE_LINE" ]]; then
-    echo "ERROR: No physical device found. Connect via USB, unlock it, and trust this Mac."
-    echo "  xcrun xctrace list devices"
-    exit 1
+if [[ -n "$DEVICE_UDID_OVERRIDE" ]]; then
+    DEVICE_UDID="$DEVICE_UDID_OVERRIDE"
+    echo "  Using --udid override: $DEVICE_UDID"
+else
+    CANDIDATES="$(xcodebuild -showdestinations -project "$XCODEPROJ" -scheme AXIOMMobile 2>&1 \
+        | grep "platform:iOS," | grep -v "dvtdevice-" | grep -v "error:")"
+    CANDIDATE_COUNT="$(echo "$CANDIDATES" | grep -c "id:" || true)"
+
+    if [[ "$CANDIDATE_COUNT" -eq 0 ]]; then
+        echo "ERROR: No compatible physical device found."
+        echo "Full destination list (look for your device and any 'error:' explaining why it's excluded):"
+        xcodebuild -showdestinations -project "$XCODEPROJ" -scheme AXIOMMobile 2>&1 | grep "platform:iOS,"
+        exit 1
+    elif [[ "$CANDIDATE_COUNT" -gt 1 ]]; then
+        echo "ERROR: Multiple compatible devices found -- re-run with --udid to pick one:"
+        echo "$CANDIDATES"
+        exit 1
+    fi
+
+    DEVICE_UDID="$(echo "$CANDIDATES" | grep -oE "id:[0-9A-Fa-f-]+" | head -1 | cut -d: -f2)"
+    echo "  Found: $(echo "$CANDIDATES" | grep -oE "name:[^,}]+" | head -1 | cut -d: -f2)"
 fi
-DEVICE_UDID="$(echo "$DEVICE_LINE" | grep -oE "\([0-9A-Fa-f-]{25,}\)" | tr -d '()')"
-echo "  Found: $DEVICE_LINE"
 echo "  UDID: $DEVICE_UDID"
 
 # ── 2. Build + install Release ───────────────────────────────────────
+# -allowProvisioningUpdates: without this, a CLI build embeds whatever
+# provisioning profile is already on disk even if it's expired (free/
+# personal Apple ID profiles expire every ~7 days) -- Xcode's GUI Run
+# button silently renews it first, but `xcodebuild` alone doesn't. This
+# flag makes xcodebuild do the same renewal-via-developer-portal step
+# CLI-only, which is what a real first run against this hardware needed
+# (install failed with MIInstallerErrorDomain error 13, "provisioning
+# profile has expired," without it).
 echo -e "\n[2/7] Building Release and installing on device..."
 xcodebuild -project "$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj" \
     -scheme AXIOMMobile -sdk iphoneos -configuration Release \
     -destination "platform=iOS,id=$DEVICE_UDID" \
-    build 2>&1 | tail -10
+    -allowProvisioningUpdates \
+    build 2>&1 | tail -15
+
+# Do NOT assume the build output lives under the repo -- this project
+# uses Xcode's default DerivedData location, not a custom build dir. A
+# hardcoded "$REPO_ROOT/app/AXIOMMobile/build/..." guess silently found
+# a real but *stale* (April) app bundle with a long-expired embedded
+# profile sitting at that exact path on the first real run against this
+# hardware, and devicectl happily installed that instead of the fresh
+# build -- same error, wrong cause, wasted a retry. Ask xcodebuild
+# itself where the real product is.
+BUILT_PRODUCTS_DIR="$(xcodebuild -showBuildSettings \
+    -project "$REPO_ROOT/app/AXIOMMobile/AXIOMMobile.xcodeproj" \
+    -scheme AXIOMMobile -sdk iphoneos -configuration Release \
+    2>&1 | grep -m1 "BUILT_PRODUCTS_DIR" | awk '{print $NF}')"
+APP_PATH="$BUILT_PRODUCTS_DIR/AXIOMMobile.app"
+echo "  Installing fresh build from: $APP_PATH"
 xcrun devicectl device install app --device "$DEVICE_UDID" \
-    "$REPO_ROOT/app/AXIOMMobile/build/Release-iphoneos/AXIOMMobile.app" 2>&1 | tail -5
+    "$APP_PATH" 2>&1 | tail -5
 
 SESSION_STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 SESSION_NAME="atx-${MODEL_ID}-${SESSION_STAMP}"
@@ -83,26 +137,31 @@ run_traced_benchmark() {
     local output="$2"
     local time_limit="$3"
 
-    echo "  Launching --auto-benchmark --model $MODEL_ID ..."
-    xcrun devicectl device process launch --device "$DEVICE_UDID" \
-        "$BUNDLE_ID" -- --auto-benchmark --model "$MODEL_ID" \
-        > "$TRACE_DIR/launch_${template// /_}.log" 2>&1 &
-    LAUNCH_PID=$!
-    sleep 2  # let the process actually start before attaching
-
-    # Find the running process id on-device for xctrace --attach
-    PID="$(xcrun devicectl device info processes --device "$DEVICE_UDID" 2>/dev/null \
-        | grep "$BUNDLE_ID" | awk '{print $1}' | head -1 || true)"
-    if [[ -z "$PID" ]]; then
-        echo "  WARNING: could not resolve on-device PID for $BUNDLE_ID -- attach manually in Instruments if this fails."
+    # First real hardware run showed the devicectl-launch-then-PID-lookup
+    # dance (previous version of this function) is a fragile two-step
+    # race -- devicectl's own docs say its text-table output isn't a
+    # supported interface for scripts at all ("JSON output ... is the
+    # ONLY supported interface"), which is what made the naive grep/awk
+    # PID lookup unreliable. xctrace can launch the app itself and
+    # attach atomically via --launch, avoiding PID lookup entirely --
+    # the architecturally correct way to do this, not a workaround.
+    #
+    # xctrace pre-creates the .trace output bundle before validating the
+    # template name, so a failed attempt (e.g. a typo'd template) leaves
+    # a real, empty .trace directory behind -- confirmed on the first
+    # hardware run: a bad template name left a 0-byte trace bundle that
+    # then made the corrected re-run fail with "Trace file already
+    # exists," a second, avoidable manual cleanup step. Clear any empty
+    # leftover before recording so a fixed re-run just works.
+    if [[ -d "$TRACE_DIR/$output" ]] && [[ -z "$(ls -A "$TRACE_DIR/$output" 2>/dev/null)" ]]; then
+        rmdir "$TRACE_DIR/$output"
     fi
 
-    echo "  Recording $template for ${time_limit}..."
+    echo "  Recording $template for ${time_limit} (xctrace launches the app directly)..."
     xcrun xctrace record --template "$template" --device "$DEVICE_UDID" \
-        ${PID:+--attach "$PID"} --output "$TRACE_DIR/$output" --time-limit "$time_limit" \
+        --output "$TRACE_DIR/$output" --time-limit "$time_limit" \
+        --launch -- "$BUNDLE_ID" --auto-benchmark --model "$MODEL_ID" \
         || echo "  WARNING: xctrace record failed for $template -- capture manually via Instruments GUI (Product > Profile) as a fallback."
-
-    wait "$LAUNCH_PID" 2>/dev/null || true
 }
 
 # ── 3. Time Profiler ─────────────────────────────────────────────────
@@ -113,9 +172,9 @@ run_traced_benchmark "Time Profiler" "time_profiler.trace" "45s"
 echo -e "\n[4/7] Allocations trace..."
 run_traced_benchmark "Allocations" "allocations.trace" "45s"
 
-# ── 5. Energy Log (physical device only) ─────────────────────────────
-echo -e "\n[5/7] Energy Log trace (physical device only -- the one number that has never been measured)..."
-run_traced_benchmark "Energy Log" "energy_log.trace" "45s"
+# ── 5. Power Profiler / "Energy Log" (physical device only) ──────────
+echo -e "\n[5/7] Power Profiler trace (physical device only -- the one number that has never been measured)..."
+run_traced_benchmark "Power Profiler" "energy_log.trace" "45s"
 
 # ── 6. Pull the app's CSV/meta export ────────────────────────────────
 echo -e "\n[6/7] Pulling exported CSV + metadata from device..."

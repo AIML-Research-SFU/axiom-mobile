@@ -74,7 +74,7 @@ Dataset management, a model harness (`train()`, `predict()`, `export_coreml()`),
 
 ### 3.3 Knowledge Graph
 
-A compact KG (`kg/entities.json`, `kg/relations.json`, 235 entities, 1,009 relations) extracted programmatically from the dataset's own fields, unchanged from v4. Built from dataset v3; not yet rebuilt against dataset v4's 46 new examples (Section 4.3).
+A compact KG (`kg/entities.json`, `kg/relations.json`) extracted programmatically from the dataset's own fields -- a single command (`ml/scripts/build_kg.py`), no manual curation, re-run after every dataset version rather than left stale. Rebuilt against dataset v4 for this draft: 264 entities (11 App, 21 Screen, 20 Attribute, 212 AnswerValue; up from v3's 235/9/19/20/187), 1,087 relations (up from 1,009) -- the new Safari and Contacts apps/screens from Section 4.1 are correctly reflected, verified by re-running the KG-guided selector against the full v4 pool.
 
 ---
 
@@ -114,7 +114,7 @@ This gap is closed for the auto-generated majority of the dataset (699 of 751 im
 ### 4.3 Limitations
 
 - **Scale.** 797 examples remains well below typical VQA benchmarks.
-- **KG staleness.** The knowledge graph (Section 3.3) was built from dataset v3 and has not been rebuilt against the 46 new v4 examples; KG-guided selection cannot yet prioritize coverage of the new Safari/Contacts content.
+- **KG-guided selection strategy** (used in Section 6.2's sweep) was run against the dataset-v3 KG, not the v4 rebuild described in Section 3.3 -- the rebuild landed after that sweep completed. A re-run against the v4 KG, now available, has not yet been performed; the sweep's qualitative finding (KG-guided strongest at practical budgets) is not expected to change from 29 additional Screen/Attribute regions, but this is not yet verified.
 - **Annotator agreement.** Not implemented. The auto-generated majority of the dataset is grounded in deterministic, machine-set or machine-rendered state, not subjective human judgment, so inter-annotator kappa remains a weak signal for this portion specifically.
 - **Manual-example exclusion.** The 52 hand-captured examples are excluded from all trainable-model experiments reported in this draft (Section 4.2); results should be read as evidence about the auto-generated 93% of the dataset specifically.
 
@@ -254,9 +254,9 @@ The 70% EM target is not met by any model. The best-known result under a fair, m
 
 Section 5.4's comparison excludes the 52 manually-captured examples and was not run against the literal committed dataset v4 split (Section 4.2/4.3) -- a same-recipe run against the full committed data, manual examples included, is open work.
 
-### 9.3 KG Staleness
+### 9.3 KG-Guided Sweep Ran Against the Pre-Rebuild KG
 
-The knowledge graph has not been rebuilt against dataset v4's new examples (Section 4.3); KG-guided selection in Section 6.2 operates over dataset-v3-derived KG regions only.
+The knowledge graph has since been rebuilt against dataset v4 (Section 3.3), but the Section 6.2 sweep ran before that rebuild, against dataset-v3-derived KG regions. The 29.7% test EM at budget=150 (Section 6.2) reflects KG-guided selection with no visibility into the 46 new Safari/Contacts examples. Whether re-running against the v4 KG changes this result is not yet verified.
 
 ### 9.4 Statistical Limitations
 
