@@ -1,0 +1,37 @@
+{
+  "session_id": "atx-physical-20260731",
+  "device": "AT-X (iPhone 15 Pro Max, A17 Pro), iOS 26.6",
+  "date_utc": "2026-07-31",
+  "purpose": "First-ever energy and memory measurement for this project, any model, any semester (see paper/PAPER_DRAFT_v5.md Section 7.2). Closes the last outstanding gap in the effectiveness scorecard.",
+  "method": {
+    "tooling": "xcrun xctrace record --template <Time Profiler|Allocations|Power Profiler> --device <UDID> --launch -- <bundle-id> --auto-benchmark --model <model_id>",
+    "iterations": 50,
+    "build": "Release, iOS 26.6 deployment",
+    "note_on_process": "First real hardware run for this project's scripts/run_physical_device_session.sh, which surfaced and fixed five real bugs in sequence (device-detection false-positive on a simulator, expired provisioning profile not renewed by plain xcodebuild, install path pointing at a stale April build instead of the fresh one, a fragile devicectl-launch+PID-lookup race replaced with xctrace's atomic --launch, and 'Energy Log' being renamed 'Power Profiler' in this Xcode version) -- all committed to the repo as part of the fix, not just worked around ad hoc for this one session."
+  },
+  "power_profiler_methodology_note": "First attempt for each model was captured while the device was USB-tethered to the Mac (required for xctrace to attach) and therefore actively charging -- confirmed via the 'Charger Connected' track showing active for the full recording, and an uninformative exact 0.0%/hr average power reading as a direct symptom. Re-captured for both models over a Wi-Fi-paired connection with the USB cable physically disconnected, which produced real, non-zero, sub-5%/hr readings for both models. The charging-condition traces are not used for the reported numbers below.",
+  "results": {
+    "tiny_multimodal_v1": {
+      "peak_memory_mib": 65.89,
+      "peak_memory_source": "Allocations instrument, 'Current Bytes' track peak (NOT the Statistics table's 'Total Bytes' column, which is a lifetime cumulative sum across the whole recording including freed memory and would overstate peak footprint by ~10x)",
+      "avg_power_pct_per_hr": 5.2,
+      "avg_power_threshold_status": "FAIL (target: < 5%/hr) -- narrow, not padded to pass",
+      "thermal_state": "Nominal (no throttling)",
+      "avg_display_brightness_pct": 17,
+      "recording_duration_s": 47.66,
+      "caveat": "Avg power blends ~5-10s of active inference (visible as a sharp CPU/power spike at recording start) with ~37s of near-idle time afterward -- a 'typical session' rate, not a pure continuous-active-inference rate, which would likely be higher."
+    },
+    "axiom_lora_v1": {
+      "peak_memory_mib": 58.49,
+      "peak_memory_source": "Allocations instrument, 'Current Bytes' track peak, same methodology as above",
+      "avg_power_pct_per_hr": 4.8,
+      "avg_power_threshold_status": "PASS (target: < 5%/hr) -- narrow",
+      "thermal_state": "Nominal (no throttling)",
+      "avg_display_brightness_pct": 17,
+      "recording_duration_s": 47.63,
+      "caveat": "Same blended-average caveat as tiny_multimodal_v1. A brief ~1s instantaneous peak of 32.8%/hr is visible in the trace during the active-inference burst, well above the 4.8%/hr session average."
+    }
+  },
+  "honest_finding": "Neither model comfortably passes the < 5%/hr energy threshold -- tiny_multimodal_v1 fails narrowly (5.2%), axiom_lora_v1 passes narrowly (4.8%). Both are close enough to the boundary that the 'pass/fail' label is more a function of measurement noise at these small margins than a clear separation between the models. Both pass memory (<500MB target) and latency comfortably, by wide margins established in earlier sessions.",
+  "not_measured": "axiom_lora_text_v1 has no on-device Swift/CoreML integration in this pass (Python-side train/export/accuracy-gate only, per paper/PAPER_DRAFT_v5.md Section 5.3), so it cannot be profiled on-device this way."
+}

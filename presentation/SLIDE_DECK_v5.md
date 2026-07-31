@@ -155,11 +155,11 @@ Energy and memory: still unmeasured, any model, any semester -- the one gap that
 | EM >= 70% | 70% | 37.1% (`axiom_lora_text_v1`, 5-seed) | FAIL |
 | Latency p50 <= 400 ms | 400 ms | 14.0-14.5 ms (physical) | PASS |
 | Latency p95 <= 600 ms | 600 ms | 22.0-26.2 ms | PASS |
-| Energy < 5%/hr | 5%/hr | -- | UNAVAILABLE |
-| Memory < 500 MB | 500 MB | -- | UNAVAILABLE |
+| Energy < 5%/hr | 5%/hr | 4.8-5.2%/hr (physical, both models) | **SPLIT** |
+| Memory < 500 MB | 500 MB | 58.5-65.9 MiB peak (physical, both models) | PASS |
 | Size < 100 MB | 100 MB | 106 KB (`tiny_multimodal_v1`) | PASS |
 
-Quality gap narrower than v4 showed, but still the binding failure.
+Quality gap narrower than v4 showed, but still the binding failure. Energy and memory measured for the first time this project's history -- memory passes with a wide margin, energy is a genuine narrow split (`axiom_lora_v1` 4.8%/hr passes, `tiny_multimodal_v1` 5.2%/hr fails), not padded to a clean answer either way.
 
 ---
 
@@ -169,6 +169,7 @@ Quality gap narrower than v4 showed, but still the binding failure.
 - Disclosing a limitation is not the same as closing it. This project's honesty norm had started substituting for remediation.
 - The architecture comparison still excludes the 52 manual examples and hasn't been run on the literal committed split
 - KG v1 has been rebuilt against v4, but the sweep (this deck) ran against the pre-rebuild KG -- not yet re-swept
+- The first energy reading for each model was invalid (device charging over USB during recording, an uninformative flat 0.0%/hr) -- caught by checking the "Charger Connected" track before trusting the number, not after
 
 ---
 
@@ -179,13 +180,14 @@ Quality gap narrower than v4 showed, but still the binding failure.
 3. Fixed the actual cause of the sweep-blocking "overheating" (no GPU usage, anywhere) and ran the real trainable-model sweep
 4. Dataset v4: genuinely new content sources, not another status-bar variant
 5. Closed the Drive-sync gap for 93% of the dataset
-6. Physical-device profiling reduced to a single short session, ready to run
+6. Energy and memory measured for the first time, ever -- memory passes comfortably, energy is a genuine narrow split between the two models
 
 ---
 
 ## Next Steps
 
-- Run the physical-device Instruments session -- the one remaining non-automatable gap
+- Physical-device Instruments session: **done** -- energy and memory measured for the first time, ever, after fixing 5 real bugs the session surfaced (device detection, provisioning renewal, stale build path, PID-lookup race, wrong template name)
+- Profile `axiom_lora_text_v1` on-device once it has real Swift/tokenizer integration (Python-only in this pass)
 - Re-run the KG-guided sweep against the now-rebuilt v4 KG (264 entities, up from 235) -- built, not yet re-swept
 - Re-run the architecture comparison on the full committed split, manual examples included
 - More seeds on the trainable-model sweep if the budget allows
